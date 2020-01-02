@@ -1,0 +1,162 @@
+$mainFont: 'PT Sans', sans-serif;
+$paragraphFont: Arial, Helvetica, sans-serif;
+
+.navbar{
+    background-color: #FFFFFF !important;
+
+    .navbar-brand{
+        font-family: 'PT Sans', sans-serif;
+        font-weight: bold;
+        font-size: 21px;
+    }
+    
+    .navbar-nav{
+        a{
+            color: black !important;
+        }
+
+        .active{
+            text-decoration: underline;
+        }
+
+        a:not(:last-child){
+            font-size: 16px;
+            margin-right: 59px;
+        }
+
+        i::before{
+            color: #FFA502;
+            font-size: 18px;
+            padding-top: 2px;
+            line-height: 1.2;
+        }
+    } 
+}
+
+// Home Header 
+ 
+// TODO Code From https://startbootstrap.com/snippets/video-header/
+.homeHeader {
+    position: relative;
+    background-color: black;
+    height: 550px;
+    min-height: 25rem;
+    width: 100%;
+    overflow: hidden;
+    font-family: 'PT Sans', sans-serif;
+    font-weight: bold;
+
+    video{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: 0;
+        -ms-transform: translateX(-50%) translateY(-50%);
+        -moz-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+    }
+
+    .container{
+        position: relative;
+        z-index: 2;
+    }
+
+    .overlay{
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: black;
+        opacity: 0.7;
+        z-index: 1;
+    }
+
+    h1{
+        font-family: 'PT Sans', sans-serif;
+        font-weight: bold;
+        font-size: 48px;
+    }
+
+    .center{
+        margin-right: auto;
+        margin-left: auto;
+        width: 456px;
+    }
+
+    .headerTitle{
+        margin-top: 126px;
+    }
+
+    .makerDropdown{
+        background-color: #D8D8D8;
+        height: 42px;
+        border: 0px;
+        -webkit-appearance: none;
+        width: 150px;
+        text-indent: 10px;
+        letter-spacing: 0.4px;
+        color: black;
+        float: right;
+        margin-top: 137px;
+        font-weight: bold;
+    }
+
+    .submitButton{
+        background-color: #FFA502;
+        text-align: center;
+        width: 151px;
+        margin-top: 137px;
+        height: 42px;
+        padding-top: 9px;
+        border-radius: 4px;
+    }
+}
+
+@media (pointer: coarse) and (hover: none) {
+    header {
+      background: url('public/images/videoStill.png') black no-repeat center center scroll;
+    }
+
+    header video {
+      display: none;
+    }
+}
+
+
+
+// Secondary Headers
+.secondaryHeader{
+    background-color: #262626;
+    padding: 10px 0px 40px 0px;
+
+    h1,h2{
+        color: white;
+        font-family: 'PT Sans', sans-serif;
+        font-weight: bold;
+        font-size: 36px;
+        padding-top: 42px;
+    }
+
+    h2{
+        text-align: right;
+    }
+
+    a{
+        background-color: #0097E6;
+        width: 220px;
+        height: 54px;
+        float: right;
+        color: white;
+        text-align: center;
+        margin-top: 35px;
+        padding-top: 15px;
+        font-family: $mainFont;
+        font-weight: bold;
+    }
+}

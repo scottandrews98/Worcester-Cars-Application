@@ -1,1 +1,21 @@
-//
+@import "node_modules/bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css?family=PT+Sans&display=swap');
+@import "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
+
+// Sass website elements
+@import "nav.scss";
+@import "home.scss";
+@import "footer.scss";
+@import "pages.scss";
+@import "mobile.scss";
+
+
+// Global styles
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container{
+    max-width: 1024px;
+}
