@@ -82,11 +82,11 @@
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <div class="navbar-nav ml-auto">
-                        <a href="/index.html" class="nav-item nav-link">Home</a>
-                        <a href="/about.html" class="nav-item nav-link">About</a>
-                        <a href="/cars.html" class="nav-item nav-link">Cars</a>
-                        <a href="/contact.html" class="nav-item nav-link">Contact</a>
-                        <a href="/login.html" class="nav-item nav-link"><i class="fas fa-user" aria-hidden="true"></i></a>
+                        <a href="/index" class="nav-item nav-link">Home</a>
+                        <a href="/about" class="nav-item nav-link">About</a>
+                        <a href="/cars" class="nav-item nav-link">Cars</a>
+                        <a href="/contact" class="nav-item nav-link">Contact</a>
+                        <a href="/login" class="nav-item nav-link"><i class="fas fa-user" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -104,16 +104,16 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm">
-                        <a href="/index.html">Home</a>
+                        <a href="/index">Home</a>
                     </div>
                     <div class="col-sm">
-                        <a href="/about.html">About</a>
+                        <a href="/about">About</a>
                     </div>
                     <div class="col-sm">
-                        <a href="/cars.html">Cars</a>
+                        <a href="/cars">Cars</a>
                     </div>
                     <div class="col-sm">
-                        <a href="/contact.html">Contact Us</a>
+                        <a href="/contact">Contact Us</a>
                     </div>
                 </div>
             </div>

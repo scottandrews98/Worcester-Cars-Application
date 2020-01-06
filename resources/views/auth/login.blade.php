@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<!-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -69,5 +69,48 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
+
+
+
+<!-- Header Section -->
+    <header class="secondaryHeader">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <h1>Sign In</h1>
+                </div> 
+            </div>
+        </div>
+    </header>
+
+    <section class="signIn">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <input type="email" placeholder="Email" name="email" required>
+
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
+                        <input type="password" placeholder="Password" name="password" required>
+
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
+                        <button type="submit"><a>Sign In</a></button>
+                        <button><a href="/register">Register</a></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection
