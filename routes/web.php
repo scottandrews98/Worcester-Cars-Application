@@ -22,3 +22,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/about', 'AboutController@index')->name('about');
 Route::get('/cars', 'CarsController@index')->name('cars');
 Route::get('/contact', 'ContactController@index')->name('contact');
+
+
+// Logged In Required Pages
+Route::get('/user', 'LoggedIn\LoggedInUserController@index')->name('user');
+Route::get('/admin', 'LoggedIn\LoggedInAdminController@index')->name('admin');
