@@ -87,7 +87,7 @@
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <div class="navbar-nav ml-auto">
-                        <a href="/index" class="nav-item nav-link">Home</a>
+                        <a href="/" class="nav-item nav-link">Home</a>
                         <a href="/about" class="nav-item nav-link">About</a>
                         <a href="/cars" class="nav-item nav-link">Cars</a>
                         <a href="/contact" class="nav-item nav-link">Contact</a>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['title' => 'About'])
 
 @section('content')
     <header class="secondaryHeader">
