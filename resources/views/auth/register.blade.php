@@ -95,7 +95,7 @@
                     @csrf
                     <input type="text" placeholder="Name" name="name" required>
                     <input type="email" placeholder="Email" name="email" required>
-                    <input type="number" placeholder="Phone" required>
+                    <input type="number" placeholder="Phone" name="number" required>
                     <input type="password" placeholder="Password" name="password" required>
                     <input type="password" placeholder="Confirm Password" name="password_confirmation" required>
 
