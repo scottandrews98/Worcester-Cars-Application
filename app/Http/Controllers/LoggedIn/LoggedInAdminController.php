@@ -4,6 +4,7 @@ namespace App\Http\Controllers\LoggedIn;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class LoggedInAdminController extends Controller
 {
@@ -24,6 +25,12 @@ class LoggedInAdminController extends Controller
      */
     public function index()
     {
-        return view('loggedInPages.admin');
+
+        $allMakes = DB::select('SELECT manufacturerName FROM manufacturer');
+        $allFuelType = DB::select('SELECT fuelTypeName FROM fuelType');
+        $allTransmissionType = DB::select('SELECT transmissionType FROM transmission');
+        $allCarShapes = DB::select('SELECT bodyTypeName FROM bodyType');
+
+        return view('loggedInPages.admin', compact('allMakes', 'allFuelType', 'allTransmissionType', 'allCarShapes'));
     }
 }

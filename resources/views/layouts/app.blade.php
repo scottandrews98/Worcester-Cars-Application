@@ -14,9 +14,6 @@
             {{ config('app.name') }}
     </title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -91,7 +88,27 @@
                         <a href="/about" class="nav-item nav-link">About</a>
                         <a href="/cars" class="nav-item nav-link">Cars</a>
                         <a href="/contact" class="nav-item nav-link">Contact</a>
-                        <a href="/login" class="nav-item nav-link"><i class="fas fa-user" aria-hidden="true"></i></a>
+                        <!-- <a href="/login" class="nav-item nav-link"><i class="fas fa-user" aria-hidden="true"></i></a> -->
+
+                        <div class="dropdown">
+                            <a href="#" class="nav-item nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-user" aria-hidden="true"></i></a>
+                            <ul class="dropdown-menu">
+
+                                @guest
+                                    <li><a href="/login">Sign In</a></li>
+                                    <li><a href="/register">Register</a></li>
+                                @else
+                                    @if (Auth::user()->userLevel_id == 1)
+                                        <li><a href="/admin">Current Cars / Add</a></li>
+                                    @endif
+                                    @if (Auth::user()->userLevel_id == 2)
+                                        <li><a href="/user">Saved Cars</a></li>
+                                    @endif
+                                    <li><a href="{{ url('/logout') }}">Logout</a></li>
+                                    <!-- <li><a href="#">Register</a></li> -->
+                                @endguest
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -125,4 +142,6 @@
         </footer>
     </div>
 </body>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </html>

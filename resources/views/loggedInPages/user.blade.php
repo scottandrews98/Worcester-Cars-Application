@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Account'])
+@extends('layouts.app', ['title' => 'Saved Cars'])
 
 @section('content')
     <!-- Header Section -->

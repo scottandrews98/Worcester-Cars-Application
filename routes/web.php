@@ -27,3 +27,4 @@ Route::get('/contact', 'ContactController@index')->name('contact');
 // Logged In Required Pages
 Route::get('/user', 'LoggedIn\LoggedInUserController@index')->name('user');
 Route::get('/admin', 'LoggedIn\LoggedInAdminController@index')->name('admin');
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');

@@ -1,11 +1,11 @@
-@extends('layouts.app', ['title' => ''])
+@extends('layouts.app', ['title' => 'Home'])
 
 @section('content')
     <!-- Header Section -->
     <header class="homeHeader">
         <div class="overlay"></div>
         <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-            <source src="assets/videos/homeBackground.mp4" type="video/mp4">
+            <source src="{{ asset('video/homeBackground.mp4') }}" type="video/mp4">
         </video>
         <div class="container h-100 align-items-center">
             <div class="row headerTitle">
