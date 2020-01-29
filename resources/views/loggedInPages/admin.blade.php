@@ -107,7 +107,7 @@
                 </div>
                 <div role="tabpanel" class="tab-pane" id="gallery">
                     <div class="row">
-                        <form class="adminAddNew" action="POST">
+                        <form class="adminAddNew" id="addNew" action="POST">
                             @csrf
                             <input type="text" placeholder="Name Of Car" name="name">
 
@@ -149,14 +149,16 @@
                             <textarea cols="40" rows="5" placeholder="Car Description" name="description"></textarea>
 
                             <!-- Car Pictures Section -->
-                            <div class="row imageRow">
-                                <img src="assets/images/bmwFront.jpg" class="img-responsive" alt="BMW Front grill">
+                            <div class="row imageRow" id="imageRow">
+                               
+
+                                <!-- <img src="assets/images/bmwFront.jpg" class="img-responsive" id="carImage1" alt="BMW Front grill"> -->
                                 <div class="addNewImage">
                                     <i class="fas fa-plus" id="addNewImage2"></i>
                                 </div>
                             </div>
 
-                            <input id='fileid' type='file' hidden/>
+                            <input class="fileid" type="file" name="file1" accept="image/*" hidden/>
 
                             <button type="submit" href="#">Add Car</button>
                         </form>
