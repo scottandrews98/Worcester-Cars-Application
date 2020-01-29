@@ -33,4 +33,27 @@ class LoggedInAdminController extends Controller
 
         return view('loggedInPages.admin', compact('allMakes', 'allFuelType', 'allTransmissionType', 'allCarShapes'));
     }
+
+    public function store(Request $request)
+    {
+
+        $validatedData = $request->validate([
+            'code' => 'required',
+            'description' => 'required',
+            'title' => 'required|max:30',
+        ]);
+
+        // Grab id's of fueltypes and if not insert them and grab there id's
+        
+        $carsTable = array('name' => $request->input('name'), 'price' => $request->input('cost'), 'mileage' => $request->input('miles'), 'engineSize' => $request->input('engineSize'), 'topSpeed' => $request->input('topSpeed'), 'tax' => $request->input('taxCost'), 'mpg' => $request->input('mpg'), 'totalDoors' => $request->input('doors'), 'totalSeats' => $request->input('doors'), 'engineSize' => $request->input('engineSize'));
+        
+
+        //NewCar::create($request->all());
+
+        echo $request;
+
+        //return redirect('/admin');
+
+    }
+
 }

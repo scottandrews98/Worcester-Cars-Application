@@ -107,46 +107,48 @@
                 </div>
                 <div role="tabpanel" class="tab-pane" id="gallery">
                     <div class="row">
-                        <form class="adminAddNew" id="addNew" action="POST">
+                        <form class="adminAddNew" id="addNew" method="POST" action="/admin">
                             @csrf
-                            <input type="text" placeholder="Name Of Car" name="name">
+                            <input type="text" placeholder="Name Of Car" name="name" required>
+                            
+                            <input type="number" placeholder="Cost" name="cost" required>
 
-                            <input type="text" list="cars" placeholder="Make" name="make">
+                            <input type="text" list="cars" placeholder="Make" name="make" required>
                             <datalist id="cars">
                                 @foreach($allMakes as $make)
                                         <option>{{ $make -> manufacturerName }}</option>
                                 @endforeach
                             </datalist>
 
-                            <input type="number" placeholder="Total Miles" class="halfWidth" name="miles">
-                            <input type="text" list="fuel" placeholder="Fuel Type" class="halfWidthRight" name="fuelType">
+                            <input type="number" placeholder="Total Miles" class="halfWidth" name="miles" required>
+                            <input type="text" list="fuel" placeholder="Fuel Type" class="halfWidthRight" name="fuelType" required>
                             <datalist id="fuel">
                                 @foreach($allFuelType as $fuel)
                                         <option>{{ $fuel -> fuelTypeName }}</option>
                                 @endforeach
                             </datalist>
 
-                            <input type="text" placeholder="Engine Size" class="halfWidth" name="engineSize">
-                            <input type="number" placeholder="Miles Per Gallon" class="halfWidthRight" name="mpg">
-                            <input type="text" list="gearbox" placeholder="Gearbox" class="halfWidth" name="gearbox">
+                            <input type="text" placeholder="Engine Size" class="halfWidth" name="engineSize" required>
+                            <input type="number" placeholder="Miles Per Gallon" class="halfWidthRight" name="mpg" required>
+                            <input type="text" list="gearbox" placeholder="Gearbox" class="halfWidth" name="gearbox" required>
                             <datalist id="gearbox">
                                 @foreach($allTransmissionType as $transmission)
                                         <option>{{ $transmission -> transmissionType }}</option>
                                 @endforeach
                             </datalist>
 
-                            <input type="number" placeholder="Top Speed" class="halfWidthRight" name="topSpeed">
-                            <input type="number" placeholder="Tax Cost" class="halfWidth" name="taxCost">
-                            <input type="number" placeholder="Total Doors" class="halfWidthRight" name="doors">
-                            <input type="number" placeholder="Total Seats" class="halfWidth" name="seats">
-                            <input type="text" list="carShape" placeholder="Car Shape" class="halfWidthRight" name="bodyType">
+                            <input type="number" placeholder="Top Speed" class="halfWidthRight" name="topSpeed" required>
+                            <input type="number" placeholder="Tax Cost" class="halfWidth" name="taxCost" required>
+                            <input type="number" placeholder="Total Doors" class="halfWidthRight" name="doors" required>
+                            <input type="number" placeholder="Total Seats" class="halfWidth" name="seats" required>
+                            <input type="text" list="carShape" placeholder="Car Shape" class="halfWidthRight" name="bodyType" required>
                             <datalist id="carShape">
                                 @foreach($allCarShapes as $shape)
                                         <option>{{ $shape -> bodyTypeName }}</option>
                                 @endforeach
                             </datalist>
 
-                            <textarea cols="40" rows="5" placeholder="Car Description" name="description"></textarea>
+                            <textarea cols="40" rows="5" placeholder="Car Description" name="description" required></textarea>
 
                             <!-- Car Pictures Section -->
                             <div class="row imageRow" id="imageRow">
