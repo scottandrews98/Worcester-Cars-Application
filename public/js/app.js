@@ -37097,13 +37097,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // Waits for a click on an add new image button
 function openDialog() {
   document.getElementsByClassName('fileid')[totalImages].click();
+  document.getElementsByClassName('fileid')[totalImages].addEventListener("change", imageChange);
 }
 
 var totalImages = 0;
-document.getElementsByClassName('fileid')[totalImages].addEventListener("change", function () {
-  totalImages++;
+
+function imageChange() {
   document.getElementById('imageRow').insertAdjacentHTML('afterbegin', '<img src="" class="img-responsive" id="carImage1" alt="BMW Front grill"></img>');
-  document.getElementById('addNew').insertAdjacentHTML('afterbegin', '<input class="fileid" type="file" name="file' + totalImages + '" accept="image/*" hidden/>');
+  document.getElementById('addNew').insertAdjacentHTML('beforeend', '<input class="fileid" type="file" name="image[]" accept="image/*" hidden/>');
   var fileReader = new FileReader();
   var target = document.getElementById('carImage1');
 
@@ -37112,7 +37113,9 @@ document.getElementsByClassName('fileid')[totalImages].addEventListener("change"
   };
 
   fileReader.readAsDataURL(document.getElementsByClassName('fileid')[totalImages].files[0]);
-});
+  totalImages++;
+}
+
 window.addEventListener('load', function () {
   document.getElementById('addNewImage2').addEventListener('click', openDialog);
 });

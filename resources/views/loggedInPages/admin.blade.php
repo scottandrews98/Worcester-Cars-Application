@@ -107,7 +107,7 @@
                 </div>
                 <div role="tabpanel" class="tab-pane" id="gallery">
                     <div class="row">
-                        <form class="adminAddNew" id="addNew" method="POST" action="/admin">
+                        <form class="adminAddNew" id="addNew" method="POST" action="/admin" enctype="multipart/form-data">
                             @csrf
                             <input type="text" placeholder="Name Of Car" name="name" required>
                             
@@ -160,7 +160,7 @@
                                 </div>
                             </div>
 
-                            <input class="fileid" type="file" name="file1" accept="image/*" hidden/>
+                            <input class="fileid" type="file" name="image[]" accept="image/*" hidden/>
 
                             <button type="submit" href="#">Add Car</button>
                         </form>
