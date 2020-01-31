@@ -42,6 +42,7 @@ class CreateMainTables extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->longText('description');
             $table->double('price');
             $table->double('mileage');
             $table->string('engineSize');

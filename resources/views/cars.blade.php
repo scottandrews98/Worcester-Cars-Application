@@ -52,106 +52,108 @@
 
     <section class="cars">
         <div class="container">
-            <div class="topRow">
-                <div class="row">
-                    <div class="col-md-4">
-                        <img class="img-responsive" src="assets/images/bmwFront.jpg" alt="BMW Front grill" />
+            @foreach($allCars as $cars)
+                <div class="topRow">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img class="img-responsive" src="assets/images/bmwFront.jpg" alt="BMW Front grill" />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h3>{{ $cars -> name }}</h3>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4>£{{ $cars -> price }}</h4>
+                                </div>
+                            </div>
+                            <div class="row firstRow">
+                                <div class="col-md-4">
+                                    <div class="row individualStat">
+                                        <div class="col-sm-4">
+                                            <div class="iconContiner">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p>{{ $cars -> mileage }} Miles</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row individualStat">
+                                        <div class="col-sm-4">
+                                            <div class="iconContiner">
+                                                <i class="fas fa-cogs"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p>{{ $cars -> transmissionType }} </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row individualStat">
+                                        <div class="col-sm-4">
+                                            <div class="iconContiner">
+                                                <i class="fas fa-car"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p>{{ $cars -> engineSize }} Litre</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row secondRow">
+                                <div class="col-md-4">
+                                    <div class="row individualStat">
+                                        <div class="col-sm-4">
+                                            <div class="iconContiner">
+                                                <i class="fas fa-gas-pump"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p>{{ $cars -> fuelTypeName }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row individualStat">
+                                        <div class="col-sm-4">
+                                            <div class="iconContiner">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p>{{ $cars -> topSpeed }} MPH</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row individualStat">
+                                        <div class="col-sm-4">
+                                            <div class="iconContiner">
+                                                <i class="fas fa-road"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p>£{{ $cars -> tax }} Tax</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-8">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h3>BWM M3</h3>
-                            </div>
-                            <div class="col-sm-6">
-                                <h4>£20,000</h4>
-                            </div>
-                        </div>
-                        <div class="row firstRow">
-                            <div class="col-md-4">
-                                <div class="row individualStat">
-                                    <div class="col-sm-4">
-                                        <div class="iconContiner">
-                                            <i class="fas fa-tachometer-alt"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <p>8000 Miles</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="row individualStat">
-                                    <div class="col-sm-4">
-                                        <div class="iconContiner">
-                                            <i class="fas fa-cogs"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <p>Manual</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="row individualStat">
-                                    <div class="col-sm-4">
-                                        <div class="iconContiner">
-                                            <i class="fas fa-car"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <p>3 Litre</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row secondRow">
-                            <div class="col-md-4">
-                                <div class="row individualStat">
-                                    <div class="col-sm-4">
-                                        <div class="iconContiner">
-                                            <i class="fas fa-gas-pump"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <p>Petrol</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="row individualStat">
-                                    <div class="col-sm-4">
-                                        <div class="iconContiner">
-                                            <i class="fas fa-tachometer-alt"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <p>125 MPH</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="row individualStat">
-                                    <div class="col-sm-4">
-                                        <div class="iconContiner">
-                                            <i class="fas fa-road"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <p>£100 Tax</p>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <a href="/car/{{ $cars -> id }}" class="loadCarButton">
+                                <button class="loadCarButton">View Car</button>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <a href="individualCar.html" class="loadCarButton">
-                            <button class="loadCarButton">View Car</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </section>
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CarsController extends Controller
 {
@@ -23,6 +24,8 @@ class CarsController extends Controller
      */
     public function index()
     {
-        return view('cars');
+        $allCars = DB::select('SELECT * FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id');
+
+        return view('cars', compact('allCars'));
     }
 }

@@ -29,81 +29,23 @@
                     
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="desciption">
-                    <div class="row carsForSale">
-                        <div class="col-sm-6">
-                            <h5>BMW M3</h5>
+                    @foreach($allCars as $cars)
+                        <div class="row carsForSale">
+                            <div class="col-sm-6">
+                                <h5>{{ $cars -> name }}</h5>
+                            </div>
+                            <div class="col-sm-3">
+                                <button>
+                                    <a href="admin/edit/{{ $cars -> id }}">Edit</a>
+                                </button>
+                            </div>
+                            <div class="col-sm-3">
+                                <button id="secondButton">
+                                    <a href="admin/delete/{{ $cars -> id }}">Delete</a>
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-sm-3">
-                            <button>
-                                <a>Edit</a>
-                            </button>
-                        </div>
-                        <div class="col-sm-3">
-                            <button id="secondButton">
-                                <a>Delete</a>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="row carsForSale">
-                        <div class="col-sm-6">
-                            <h5>BMW M3</h5>
-                        </div>
-                        <div class="col-sm-3">
-                            <button>
-                                <a>Edit</a>
-                            </button>
-                        </div>
-                        <div class="col-sm-3">
-                            <button id="secondButton">
-                                <a>Delete</a>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="row carsForSale">
-                        <div class="col-sm-6">
-                            <h5>BMW M3</h5>
-                        </div>
-                        <div class="col-sm-3">
-                            <button>
-                                <a>Edit</a>
-                            </button>
-                        </div>
-                        <div class="col-sm-3">
-                            <button id="secondButton">
-                                <a>Delete</a>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="row carsForSale">
-                        <div class="col-sm-6">
-                            <h5>BMW M3</h5>
-                        </div>
-                        <div class="col-sm-3">
-                            <button>
-                                <a>Edit</a>
-                            </button>
-                        </div>
-                        <div class="col-sm-3">
-                            <button id="secondButton">
-                                <a>Delete</a>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="row carsForSale">
-                        <div class="col-sm-6">
-                            <h5>BMW M3</h5>
-                        </div>
-                        <div class="col-sm-3">
-                            <button>
-                                <a>Edit</a>
-                            </button>
-                        </div>
-                        <div class="col-sm-3">
-                            <button id="secondButton">
-                                <a>Delete</a>
-                            </button>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
                 <div role="tabpanel" class="tab-pane" id="gallery">
                     <div class="row">
