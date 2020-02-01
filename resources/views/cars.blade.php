@@ -52,11 +52,11 @@
 
     <section class="cars">
         <div class="container">
-            @foreach($allCars as $cars)
+            @foreach($allCars as $index => $cars)
                 <div class="topRow">
                     <div class="row">
                         <div class="col-md-4">
-                            <img class="img-responsive" src="assets/images/bmwFront.jpg" alt="BMW Front grill" />
+                            <img class="img-responsive" src="{{asset('carImages/').'/'.$allCarImages[$index]->image}}" alt="BMW Front grill" />
                         </div>
                         <div class="col-md-8">
                             <div class="row">

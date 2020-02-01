@@ -24,8 +24,10 @@ class CarsController extends Controller
      */
     public function index()
     {
-        $allCars = DB::select('SELECT * FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id');
+        $allCars = DB::select('SELECT cars.id, cars.name, cars.price, cars.mileage, transmission.transmissionType, cars.engineSize, fueltype.fuelTypeName, cars.topSpeed, cars.tax FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id');
 
-        return view('cars', compact('allCars'));
+        $allCarImages = DB::select('SELECT MIN(carImagesLink.id), ANY_VALUE(carImages.imageURL) as image FROM carImagesLink INNER JOIN carImages ON carImages_id = carImages.id');
+
+        return view('cars', compact('allCars', 'allCarImages'));
     }
 }
