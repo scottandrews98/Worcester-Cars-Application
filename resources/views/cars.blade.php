@@ -56,7 +56,7 @@
                 <div class="topRow">
                     <div class="row">
                         <div class="col-md-4">
-                            <img class="img-responsive" src="{{asset('carImages/').'/'.$allCarImages[$index]->image}}" alt="BMW Front grill" />
+                            <img class="img-responsive" src="{{asset('carImages/').'/'.$allCarImages[$index]->image}}" alt="{{$allCarImages[$index]->altText}}" />
                         </div>
                         <div class="col-md-8">
                             <div class="row">

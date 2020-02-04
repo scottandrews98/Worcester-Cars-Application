@@ -95,7 +95,6 @@
                             <!-- Car Pictures Section -->
                             <div class="row imageRow" id="imageRow">
                                
-
                                 <!-- <img src="assets/images/bmwFront.jpg" class="img-responsive" id="carImage1" alt="BMW Front grill"> -->
                                 <div class="addNewImage">
                                     <i class="fas fa-plus" id="addNewImage2"></i>

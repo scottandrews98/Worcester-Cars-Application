@@ -80,14 +80,16 @@ class LoggedInAdminController extends Controller
     
                 $update->move(public_path('carImages'), $photoName);
 
-                $carImagesTable = array('imageURL' => $photoName, 'imageAltText' => "");
+                $imageAltText = $request->input('altText')[$index];
+
+                $carImagesTable = array('imageURL' => $photoName, 'imageAltText' => $imageAltText);
                 DB::table('carImages')->insert($carImagesTable);
 
                 $lastCarImageID = DB::getPdo()->lastInsertId();
                 $carImagesLinkTable = array('cars_id' => $lastCarInsertID, 'carImages_id' => $lastCarImageID);
                 DB::table('carImagesLink')->insert($carImagesLinkTable);
 
-                $index ++;
+                $index++;
             }
         }
         
