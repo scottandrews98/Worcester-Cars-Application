@@ -23,6 +23,8 @@ Route::get('/about', 'AboutController@index')->name('about');
 Route::get('/cars', 'CarsController@index')->name('cars');
 Route::get('/contact', 'ContactController@index')->name('contact');
 
+// Individual Car
+Route::get('/car/{id}', 'CarController@index')->name('car');
 
 // Logged In Required Pages
 Route::get('/user', 'LoggedIn\LoggedInUserController@index')->name('user');
