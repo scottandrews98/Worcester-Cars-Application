@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+// Get rid of these after testing
+use Illuminate\Support\Facades\DB;
+use \Mailjet\Resources;
+
 class HomeController extends Controller
 {
     /**

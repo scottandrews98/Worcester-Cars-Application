@@ -70,6 +70,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'number' => $data['number'],
             'userLevel_id' => 2,
+            'consent_form_notifications' => 0,
             'password' => Hash::make($data['password']),
         ]);
     }

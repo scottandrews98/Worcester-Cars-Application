@@ -5,6 +5,7 @@ namespace App\Http\Controllers\LoggedIn;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use \Mailjet\Resources;
 
 class LoggedInAdminController extends Controller
 {
@@ -92,7 +93,35 @@ class LoggedInAdminController extends Controller
                 $index++;
             }
         }
-        
+
+        // Send Bulk Email To Registered Users Who Consented
+        // Get Users Who Consented From Database
+        $allConsentUsers = DB::select('SELECT email, name FROM users WHERE consent_form_notifications = 1');
+        $toMessage = [];
+
+        foreach($allConsentUsers as $consent){
+            $toMessage[] = [ 
+                'From' => [
+                    'Email' => "ands3_16@uni.worc.ac.uk",
+                    'Name' => "Worcester Cars"
+                ],
+                'To' => [
+                    [
+                        'Email' => $consent->email,  
+                        'Name' => $consent->name
+                    ]
+                ],
+                'Subject' => "New Car For Sale!",
+                'HTMLPart' => "<h3>Dear ".$consent->name.", We thought we would let you know we have a new ".$request->input('name')." for sale. <br /> <a href='http://127.0.0.1:8000/car/".$lastCarInsertID."'>Go check it out</a></h3><br />Thanks, Worcester Cars <br /> If you wish to unsubscribe from emails <a href='http://127.0.0.1:8000/login'>Please Visit This Link</a>"
+            ];
+        } 
+
+        $mj = new \Mailjet\Client('a513843cbd376e6de6e6c79f2efc51d7','9fe7604278c5c3473fe317a28daff371',true,['version' => 'v3.1']);
+        $body = [
+            'Messages' => $toMessage,
+        ];
+
+        $response = $mj->post(Resources::$Email, ['body' => $body]);
         return redirect('/admin');
     }
 
