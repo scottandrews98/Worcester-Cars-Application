@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use \Mailjet\Resources;
+use GuzzleHttp\Client;
 
 class LoggedInAdminController extends Controller
 {
@@ -26,7 +27,6 @@ class LoggedInAdminController extends Controller
      */
     public function index()
     {
-
         $allMakes = DB::select('SELECT manufacturerName FROM manufacturer');
         $allFuelType = DB::select('SELECT fuelTypeName FROM fuelType');
         $allTransmissionType = DB::select('SELECT transmissionType FROM transmission');
@@ -137,5 +137,21 @@ class LoggedInAdminController extends Controller
             return $resultArray[0]["id"];
         }
     }
+
+    // function compressImage($image){
+    //     $endpoint = "api.tinify.com/shrink";
+    //     $client = new \GuzzleHttp\Client();
+    //     $imagePath = "/carImages/15805784710.png";
+
+
+    //     $response = $client->request('POST', $endpoint, ['query' => [
+    //         'key2' => $value,
+    //     ]]);
+
+    //     // url will be: http://my.domain.com/test.php?key1=5&key2=ABC;
+
+    //     $statusCode = $response->getStatusCode();
+    //     $content = $response->getBody();
+    // }
 
 }

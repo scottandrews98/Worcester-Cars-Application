@@ -174,6 +174,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#gallery" role="tab" data-toggle="tab">Gallery</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#finance" role="tab" data-toggle="tab">Finance Calculator</a>
+                </li>
             </ul>
                     
             <div class="tab-content">
@@ -189,6 +192,33 @@
                                 <img src="{{asset('carImages/').'/'.$imageLoop->image}}" class="img-responsive" alt="{{$imageLoop->altText}}">
                             </a>
                         @endforeach
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="finance">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Price Of Car</label></br>
+                            <input type="number" value="{{$individualCar[0] -> price}}" id="price" readonly>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Deposit</label></br>
+                            <input type="number" value="" id="deposit">
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Repayment Term</label></br>
+                            <select id="repayment">
+                                <option value="12">12 Months</option>
+                                <option value="24">24 Months</option>
+                                <option value="36">36 Months</option>
+                                <option value="48">48 Months</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button id="calculate">Calculate</button>
+                            <h5 id="result"></h5>
+                        </div>
                     </div>
                 </div>
             </div>

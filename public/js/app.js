@@ -37606,6 +37606,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./imageUpload */ "./resources/js/imageUpload.js");
 
+__webpack_require__(/*! ./financeCalculator */ "./resources/js/financeCalculator.js");
+
 __webpack_require__(/*! lightbox2 */ "./node_modules/lightbox2/dist/js/lightbox.js"); // window.Vue = require('vue');
 // /**
 //  * The following block of code may be used to automatically register your
@@ -37679,6 +37681,33 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/financeCalculator.js":
+/*!*******************************************!*\
+  !*** ./resources/js/financeCalculator.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var elementExists = document.getElementById("finance");
+
+if (elementExists) {
+  document.getElementById("calculate").addEventListener("click", calculateFinance);
+}
+
+function calculateFinance() {
+  var price = document.getElementById("price").value;
+  var deposit = document.getElementById("deposit").value;
+  var repayment = document.getElementById("repayment").value;
+  var repaymentYears = repayment / 12;
+  var intrestRate = 3.6 / 100;
+  var amountBorrowed = price - deposit;
+  var intrestAmount = amountBorrowed * intrestRate * repaymentYears;
+  var figurePerMonth = (amountBorrowed + intrestAmount) / repayment;
+  document.getElementById("result").innerHTML = "£" + Math.round(figurePerMonth) + " Per Month At A Rate Of " + (intrestRate * 100).toFixed(2) + "%";
+}
 
 /***/ }),
 
