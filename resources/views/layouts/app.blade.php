@@ -102,12 +102,12 @@
                                 @else
                                     @if (Auth::user()->userLevel_id == 1)
                                         <li><a href="/admin">Current Cars / Add</a></li>
+                                        <li><a href="/settings">Settings</a></li>
                                     @endif
                                     @if (Auth::user()->userLevel_id == 2)
                                         <li><a href="/user">Saved Cars</a></li>
                                     @endif
-                                    <li><a href="{{ url('/logout') }}">Logout</a></li>
-                                    <!-- <li><a href="#">Register</a></li> -->
+                                    <li><a href="{{ url('/logout') }}">Sign Out</a></li>
                                 @endguest
                             </ul>
                         </div>

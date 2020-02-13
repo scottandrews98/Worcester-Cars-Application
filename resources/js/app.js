@@ -7,6 +7,7 @@
 require('./bootstrap');
 require('./imageUpload');
 require('./financeCalculator');
+require('./contactForm');
 require('lightbox2');
 
 // window.Vue = require('vue');

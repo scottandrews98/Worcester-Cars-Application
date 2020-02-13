@@ -16,6 +16,10 @@ class AddUserConsent extends Migration
         Schema::table('users', function($table) {
             $table->boolean('consent_form_notifications')->default(0);
         });
+
+        Schema::table('contactFormSubmissions', function($table) {
+            $table->timestamp('formSubmissionTime');
+        });
     }
 
     /**

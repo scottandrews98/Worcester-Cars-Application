@@ -33,3 +33,6 @@ Route::post('/admin', 'LoggedIn\LoggedInAdminController@store');
 Route::get('/admin', 'LoggedIn\LoggedInAdminController@index')->name('admin');
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+// Post Requests
+Route::post('/contact', 'ContactController@store');

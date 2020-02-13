@@ -22,12 +22,16 @@
                 </div>
                 <div class="col-md-6">
                     <form>
-                        <input type="text" placeholder="Name">
-                        <input type="text" placeholder="Email">
-                        <input type="text" placeholder="Phone">
-                        <textarea cols="40" rows="5" placeholder="Message"></textarea>
-                        <button type="submit">Submit</button>
+                        @csrf
+                        <input type="text" id="name" placeholder="Name">
+                        <input type="email" id="email" placeholder="Email">
+                        <input type="number" id="phone" placeholder="Phone">
+                        <textarea cols="40" rows="5" id="message" placeholder="Message"></textarea>
+                        <button type="button" id="submitContactForm">Submit</button>
                     </form>
+                    <div class="errorBox">
+                            <h4 id="errorMessage"></h4>
+                    </div>
                 </div>
             </div>
         </div>
