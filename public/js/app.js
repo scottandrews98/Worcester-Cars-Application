@@ -37610,6 +37610,8 @@ __webpack_require__(/*! ./financeCalculator */ "./resources/js/financeCalculator
 
 __webpack_require__(/*! ./contactForm */ "./resources/js/contactForm.js");
 
+__webpack_require__(/*! ./carLike */ "./resources/js/carLike.js");
+
 __webpack_require__(/*! lightbox2 */ "./node_modules/lightbox2/dist/js/lightbox.js"); // window.Vue = require('vue');
 // /**
 //  * The following block of code may be used to automatically register your
@@ -37683,6 +37685,39 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/carLike.js":
+/*!*********************************!*\
+  !*** ./resources/js/carLike.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var elementExists = document.getElementById("star");
+
+if (elementExists) {
+  document.getElementById("star").addEventListener("click", likeCar); // TODO Check here for car that has already been liked
+}
+
+function likeCar() {
+  // Function that is responsible for AJAX requesting to backend to like a car on behalf of a logged in user
+  var carID = document.getElementById("star").getAttribute('data-carID');
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText);
+    }
+  };
+
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+  xhttp.open("POST", "/car", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.setRequestHeader("X-CSRF-Token", CSRF_TOKEN);
+  xhttp.send("&carID=" + carID + "");
+}
 
 /***/ }),
 
@@ -37828,7 +37863,11 @@ function imageChange() {
 }
 
 window.addEventListener('load', function () {
-  document.getElementById('addNewImage2').addEventListener('click', openDialog);
+  var elementExists = document.getElementById("addNewImage2");
+
+  if (elementExists) {
+    document.getElementById('addNewImage2').addEventListener('click', openDialog);
+  }
 });
 
 /***/ }),
@@ -37851,9 +37890,9 @@ window.addEventListener('load', function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/scottandrews/Documents/Personal Projects/Worcester-Cars-Application/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/scottandrews/Documents/Personal Projects/Worcester-Cars-Application/node_modules/lightbox2/dist/js/lightbox.min.js */"./node_modules/lightbox2/dist/js/lightbox.min.js");
-module.exports = __webpack_require__(/*! /Users/scottandrews/Documents/Personal Projects/Worcester-Cars-Application/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/scottandrews/Documents/University Code/Worcester_Cars_Web_Application/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /Users/scottandrews/Documents/University Code/Worcester_Cars_Web_Application/node_modules/lightbox2/dist/js/lightbox.min.js */"./node_modules/lightbox2/dist/js/lightbox.min.js");
+module.exports = __webpack_require__(/*! /Users/scottandrews/Documents/University Code/Worcester_Cars_Web_Application/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

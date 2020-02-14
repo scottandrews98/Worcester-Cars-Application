@@ -15,6 +15,22 @@
         </div>
     </header>
 
+    <section class="shareIcons">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 floatRight">
+                    <!-- TODO place share icons and add car to favourites list if signed in -->
+                    <button class="shareButton" id="facebook"><i class="fas fa-facebook-square"></i></button>
+                    <button class="shareButton" id="twitter"><i class="fas fa-twitter-square"></i></button>
+
+                    @if (Auth::check())
+                        <button class="shareButton" data-carID="{{$individualCar[0] -> id}}" id="star"><i class="fas fa-star"></i></button>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="individualCars">
         <div class="container">
             <div class="row">
@@ -181,6 +197,7 @@
                     
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="desciption">
+                    <!-- TODO Add in accesbility zoom feature -->
                     <p>
                         {{$individualCar[0] -> description}}
                     </p>

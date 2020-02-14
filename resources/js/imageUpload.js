@@ -53,5 +53,9 @@ function imageChange(){
 }
 
 window.addEventListener('load',function(){
-    document.getElementById('addNewImage2').addEventListener('click', openDialog);
+    var elementExists = document.getElementById("addNewImage2");
+
+    if(elementExists){
+        document.getElementById('addNewImage2').addEventListener('click', openDialog);
+    }
 });

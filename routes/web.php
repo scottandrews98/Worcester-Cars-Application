@@ -36,3 +36,4 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 // Post Requests
 Route::post('/contact', 'ContactController@store');
+Route::post('/car', 'CarController@like');

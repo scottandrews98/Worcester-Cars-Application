@@ -8,6 +8,7 @@ require('./bootstrap');
 require('./imageUpload');
 require('./financeCalculator');
 require('./contactForm');
+require('./carLike');
 require('lightbox2');
 
 // window.Vue = require('vue');

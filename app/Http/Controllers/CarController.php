@@ -21,4 +21,30 @@ class CarController extends Controller
             redirect('/cars');
         }
     }
+
+    public function like(Request $request)
+    {
+        // An additional validator which makes sure form values match what is expected
+        $validatedData = $request->validate([
+            'carID' => 'required'
+        ]);
+
+        $userID = auth()->user()->id;
+        
+        $likedCar = DB::select('SELECT id FROM carsLiked WHERE cars_id = '.$request->input('carID').' AND users_id = '.$userID.'');
+        
+        if (count($likedCar) == 0){
+            // Means that the car has not been liked before
+            $likedCarsArray = array('cars_id' => $request->input('carID'), 'users_id' => $userID);
+            // Inserts array into the cars table in the database
+            $insert = DB::table('carsLiked')->insert($likedCarsArray);
+
+            return "Car Liked";
+        }else{
+            // Car has been liked by user before so delete row from database
+            DB::table('carsLiked')->where('id', $likedCar[0]->id)->delete();
+
+            return "Car Unliked";
+        }
+    }
 }
