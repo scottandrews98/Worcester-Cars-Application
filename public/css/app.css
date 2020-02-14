@@ -18050,8 +18050,27 @@ footer a:hover {
   padding-left: 10px;
 }
 
+.contact form a,
+.signIn form a {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  background-color: #0097E6;
+  border: 0px;
+  color: white;
+  height: 50px;
+  width: 100%;
+  padding-top: 12px;
+}
+
+.contact form a:hover,
+.signIn form a:hover {
+  text-decoration: underline;
+}
+
 .contact form button,
 .signIn form button {
+  text-decoration: none;
   background-color: #0097E6;
   border: 0px;
   color: white;

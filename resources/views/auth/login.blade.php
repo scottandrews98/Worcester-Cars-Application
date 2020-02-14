@@ -107,7 +107,8 @@
                         @enderror
 
                         <button type="submit"><a>Sign In</a></button>
-                        <button><a href="/register">Register</a></button>
+                        <!-- <button type="button"></button> -->
+                        <a href="/register">Register</a>
                     </form>
                 </div>
             </div>
