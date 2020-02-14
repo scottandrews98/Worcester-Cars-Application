@@ -99,7 +99,15 @@
                     <input type="password" placeholder="Password" name="password" required>
                     <input type="password" placeholder="Confirm Password" name="password_confirmation" required>
 
-                    <input type="checkbox" placeholder="Do You Wish To Revieve Email's Off Worcester Cars When A New Car Comes For Sale?" name="emailConsent"><label for="emailConsent">Do You Wish To Revieve Email's Off Worcester Cars When A New Car Comes For Sale? </label><br>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <input type="checkbox" placeholder="Do You Wish To Revieve Email's Off Worcester Cars When A New Car Comes For Sale?" name="emailConsent">  
+                        </div>
+                        <div class="col-sm-10">
+                            <label for="emailConsent">Do You Wish To Revieve Email's Off Worcester Cars When A New Car Comes For Sale? </label><br>
+                        </div>
+                    </div>
+    
                     <button type="submit"><a>Register</a></button>
                 </form>
             </div>
