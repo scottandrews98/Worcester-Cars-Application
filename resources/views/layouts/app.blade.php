@@ -143,5 +143,8 @@
             </div>
         </footer>
     </div>
+
+    <!-- Code From https://app.purechat.com/websites/d3a84b31-d6dc-42c5-a2c1-a0dae1c41e33/chatbox -->
+    <script type='text/javascript' data-cfasync='false'>window.purechatApi = { l: [], t: [], on: function () { this.l.push(arguments); } }; (function () { var done = false; var script = document.createElement('script'); script.async = true; script.type = 'text/javascript'; script.src = 'https://app.purechat.com/VisitorWidget/WidgetScript'; document.getElementsByTagName('HEAD').item(0).appendChild(script); script.onreadystatechange = script.onload = function (e) { if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) { var w = new PCWidget({c: 'd3a84b31-d6dc-42c5-a2c1-a0dae1c41e33', f: true }); done = true; } }; })();</script>
 </body>
 </html>
