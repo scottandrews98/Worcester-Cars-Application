@@ -9,7 +9,7 @@
                     <h1>Welcome Test</h1>
                 </div> 
                 <div class="col-sm">
-                    <a href="index.html">Sign Out</a>
+                    <a href="/logout">Sign Out</a>
                 </div> 
             </div>
         </div>

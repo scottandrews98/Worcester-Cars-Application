@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-// Get rid of these after testing
 use Illuminate\Support\Facades\DB;
-use \Mailjet\Resources;
+use Analytics;
+use Spatie\Analytics\Period;
 
 class HomeController extends Controller
 {
@@ -27,6 +26,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        //retrieve visitors and pageview data for the current day and the last seven days
+        $analyticsData = Analytics::fetchTotalVisitorsAndPageViews(Period::days(7));
+
+        //retrieve visitors and pageviews since the 6 months ago
+        //$analyticsData = Analytics::fetchVisitorsAndPageViews(Period::months(6));
+
+        var_dump($analyticsData);
+        //return view('home');
     }
 }
