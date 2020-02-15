@@ -4,24 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use \Mailjet\Resources;
+use GuzzleHttp\Client;
 
 class ContactController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //$this->middleware('auth');
-    }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
         return view('contact');
@@ -43,6 +31,38 @@ class ContactController extends Controller
 
         // Inserts array into the cars table in the database
         $insert = DB::table('contactFormSubmissions')->insert($contactTable);
+
+        // Send message via email to all site admins
+        $allConsentUsers = DB::select('SELECT email, name FROM users WHERE userLevel_id = 1');
+        $toMessage = [];
+
+        foreach($allConsentUsers as $consent){
+            $toMessage[] = [ 
+                'From' => [
+                    'Email' => "ands3_16@uni.worc.ac.uk",
+                    'Name' => "Worcester Cars"
+                ],
+                'To' => [
+                    [
+                        'Email' => $consent->email,  
+                        'Name' => $consent->name
+                    ]
+                ],
+                'ReplyTo' => [
+                    'Email' => $request->input('email'),
+                    'Name' => $request->input('name')
+                ],
+                'Subject' => "New Website Message",
+                'HTMLPart' => "Name:  ".$request->input('name')." <br />Email: ".$request->input('email')." <br />Phone Number:  ".$request->input('number')." <br />Message:  ".$request->input('message').""
+            ];
+        } 
+
+        $mj = new \Mailjet\Client('a513843cbd376e6de6e6c79f2efc51d7','9fe7604278c5c3473fe317a28daff371',true,['version' => 'v3.1']);
+        $body = [
+            'Messages' => $toMessage,
+        ];
+
+        $response = $mj->post(Resources::$Email, ['body' => $body]);
         
         if($insert){
             echo "Message Sent";

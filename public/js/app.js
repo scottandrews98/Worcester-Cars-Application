@@ -37839,9 +37839,11 @@ function loopClass(className, clickedID) {
       className[i].remove();
     }
   }
-}
+} //var totalImages = 0
 
-var totalImages = 0;
+
+var totalImages = document.querySelectorAll('.altText').length;
+console.log(totalImages);
 
 function imageChange() {
   // Adds to the page the image that has just been uploaded

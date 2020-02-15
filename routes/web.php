@@ -31,6 +31,7 @@ Route::get('/user', 'LoggedIn\LoggedInUserController@index')->name('user');
 
 Route::post('/admin', 'LoggedIn\LoggedInAdminController@store');
 Route::get('/admin', 'LoggedIn\LoggedInAdminController@index')->name('admin');
+Route::get('/admin/edit/{id}', 'LoggedIn\LoggedInAdminController@loadEdit')->name('editCar');
 Route::get('/settings', 'LoggedIn\SettingsController@index')->name('settings');
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');

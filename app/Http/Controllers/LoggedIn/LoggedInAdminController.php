@@ -155,4 +155,21 @@ class LoggedInAdminController extends Controller
     //     $content = $response->getBody();
     // }
 
+    public function loadEdit($id)
+    {   
+        if($id){
+            $selectedCar = DB::select('SELECT * FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id INNER JOIN bodyType ON cars.bodyType_id = bodyType.id INNER JOIN manufacturer ON cars.manufacturer_id = manufacturer.id WHERE cars.id = '.$id.'');
+
+            $allMakes = DB::select('SELECT manufacturerName FROM manufacturer');
+            $allFuelType = DB::select('SELECT fuelTypeName FROM fuelType');
+            $allTransmissionType = DB::select('SELECT transmissionType FROM transmission');
+            $allCarShapes = DB::select('SELECT bodyTypeName FROM bodyType');
+
+            $carImages = DB::select('SELECT carImages.imageURL as image, carImages.imageAltText as altText FROM carImagesLink INNER JOIN carImages ON carImages_id = carImages.id WHERE carImagesLink.cars_id = '.$id.'');
+
+            return view('loggedInPages.edit', compact('selectedCar', 'allMakes', 'allFuelType', 'allTransmissionType', 'allCarShapes', 'carImages'));
+        }else{
+            redirect('/admin');
+        }
+    }
 }
