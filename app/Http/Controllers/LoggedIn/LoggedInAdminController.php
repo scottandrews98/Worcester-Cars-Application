@@ -172,4 +172,13 @@ class LoggedInAdminController extends Controller
             redirect('/admin');
         }
     }
+
+    public function saveEdit($id, Request $request)
+    {
+        // Saves the eidited car information
+
+        // Can loop over posted images and if empty ignore tha
+
+        // Could also loop over alt text and if one alt text does not exist then assume that image got removed
+    }
 }

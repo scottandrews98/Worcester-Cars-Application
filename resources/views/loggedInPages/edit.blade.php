@@ -27,7 +27,7 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="edit">
                     <div class="row">
-                        <form class="adminAddNew" id="addNew" method="POST" action="/admin" enctype="multipart/form-data">
+                        <form class="adminAddNew" id="addNew" method="POST" action="/admin/edit/{{$selectedCar[0] -> id}}" enctype="multipart/form-data">
                             @csrf
                             <input type="text" placeholder="Name Of Car" name="name" value="{{$selectedCar[0] -> name}}" required>
                             
@@ -77,7 +77,7 @@
                             <!-- Car Pictures Section -->
                             <div class="row imageRow" id="imageRow">
                                 @foreach($carImages as $index => $imageLoop)
-                                    <img src="{{asset('carImages/').'/'.$imageLoop->image}}" class="img-responsive" id="carImage{{$index}}" alt="{{$imageLoop->altText}}">
+                                    <img src="{{asset('carImages/').'/'.$imageLoop->image}}" data-imageID="{{$index}}" class="img-responsive imgUploaded" id="carImage1" alt="{{$imageLoop->altText}}">
                                 @endforeach
                                
                                 <!-- <img src="assets/images/bmwFront.jpg" class="img-responsive" id="carImage1" alt="BMW Front grill"> -->
@@ -85,8 +85,12 @@
                                     <i class="fas fa-plus" id="addNewImage2"></i>
                                 </div>
                             </div>
+                            <!-- https://stackoverflow.com/questions/19721123/how-to-populate-input-type-file-value-from-database-in-php -->
 
-                            <input class="fileid" type="file" name="image[]" accept="image/*" hidden/>
+                            <input class="fileid" type="file" name="image[]" accept="image/*" hidden/> 
+                            @foreach($carImages as $index => $imageLoop)
+                                <input class="fileid" type="file" name="image[]" data-imageID="{{$index}}" accept="image/*" hidden/>
+                            @endforeach
 
                             <button type="submit" href="#">Update Car</button>
                         </form>

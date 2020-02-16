@@ -8,8 +8,6 @@ function openDialog() {
 function removeImage(){
     var clickedID = this.getAttribute('data-imageID');
 
-    console.log(clickedID);
-
     loopClass('imgUploaded', clickedID);
     loopClass('fileid', clickedID); 
     loopClass('altText', clickedID); 
@@ -29,11 +27,11 @@ function loopClass(className, clickedID){
 
 //var totalImages = 0
 var totalImages = document.querySelectorAll('.altText').length;
-console.log(totalImages);
+
 
 function imageChange(){
     // Adds to the page the image that has just been uploaded
-    document.getElementById('imageRow').insertAdjacentHTML('afterbegin' ,'<img src="" class="img-responsive imgUploaded" id="carImage1" data-imageID="'+totalImages+'" alt="BMW Front grill"></img>');
+    document.getElementById('imageRow').insertAdjacentHTML('afterbegin' ,'<img src="" class="img-responsive imgUploaded" id="carImage1" data-imageID="'+totalImages+'"></img>');
     // Adds to the page a hidden input type file field that contains the path on the user's local machine for the image that has just been selected
     document.getElementById('addNew').insertAdjacentHTML('beforeend' ,'<input class="fileid" type="file" name="image[]" data-imageID="'+totalImages+'" accept="image/*" hidden/>');
 
@@ -57,6 +55,35 @@ window.addEventListener('load',function(){
     var elementExists = document.getElementById("addNewImage2");
 
     if(elementExists){
-        document.getElementById('addNewImage2').addEventListener('click', openDialog);
+        elementExists.addEventListener('click', openDialog);
+
+        if(document.getElementById('carImage1')){
+            //document.getElementById('carImage1').addEventListener('click', removeImage);
+            var existingImages = document.getElementsByClassName('imgUploaded');
+
+            for (var i = 0; i < existingImages.length; i++) {
+                existingImages[i].addEventListener('click', removeImage);
+            }
+        }
     }
 });
+
+
+
+// Code for removing images when editing 
+
+// Controller could loop over alt text boxes and see if any are missing by their 
+
+
+// function removeEditImage(){
+//     var clickedID = this.getAttribute('data-imageID');
+
+//     loopClass('imgUploaded', clickedID);
+//     loopClass('altText', clickedID); 
+
+//     if (!this.hasAttribute("data-alreadyUploaded")){
+//         loopClass('fileid', clickedID); 
+//     }
+
+//     totalImages --;
+// }
