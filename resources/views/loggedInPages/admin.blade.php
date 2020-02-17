@@ -49,7 +49,7 @@
                 </div>
                 <div role="tabpanel" class="tab-pane" id="gallery">
                     <div class="row">
-                        <form class="adminAddNew" id="addNew" method="POST" action="/admin" enctype="multipart/form-data">
+                        <form class="adminAddNew" id="addNew" method="POST" action="/admin/store/NULL" enctype="multipart/form-data">
                             @csrf
                             <input type="text" placeholder="Name Of Car" name="name" required>
                             

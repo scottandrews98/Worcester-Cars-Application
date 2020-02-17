@@ -12,6 +12,9 @@ function removeImage(){
     loopClass('fileid', clickedID); 
     loopClass('altText', clickedID); 
 
+    // Just for editing cars
+    loopClass('existingImage', clickedID); 
+
     totalImages --;
 }
 
@@ -73,17 +76,3 @@ window.addEventListener('load',function(){
 // Code for removing images when editing 
 
 // Controller could loop over alt text boxes and see if any are missing by their 
-
-
-// function removeEditImage(){
-//     var clickedID = this.getAttribute('data-imageID');
-
-//     loopClass('imgUploaded', clickedID);
-//     loopClass('altText', clickedID); 
-
-//     if (!this.hasAttribute("data-alreadyUploaded")){
-//         loopClass('fileid', clickedID); 
-//     }
-
-//     totalImages --;
-// }

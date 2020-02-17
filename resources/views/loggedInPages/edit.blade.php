@@ -27,7 +27,7 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="edit">
                     <div class="row">
-                        <form class="adminAddNew" id="addNew" method="POST" action="/admin/edit/{{$selectedCar[0] -> id}}" enctype="multipart/form-data">
+                        <form class="adminAddNew" id="addNew" method="POST" action="/admin/edit/{{$selectedCarID[0] -> id}}" enctype="multipart/form-data">
                             @csrf
                             <input type="text" placeholder="Name Of Car" name="name" value="{{$selectedCar[0] -> name}}" required>
                             
@@ -71,7 +71,7 @@
                             <textarea cols="40" rows="5" placeholder="Car Description" name="description" required>{{$selectedCar[0] -> description}}</textarea>
 
                             @foreach($carImages as $index => $imageLoop)
-                                <input type="text" class="altText" data-imageID="{{$index}}" placeholder="Alt Text For Image Number {{$index}}" value="{{$imageLoop->altText}}" name="altText[]" required>
+                                <input type="text" class="altText" data-imageID="{{$index}}" placeholder="Alt Text For Image Number {{$index}}" value="{{$imageLoop->altText}}" name="altTextExisting[]" required>
                             @endforeach
 
                             <!-- Car Pictures Section -->
@@ -90,6 +90,8 @@
                             <input class="fileid" type="file" name="image[]" accept="image/*" hidden/> 
                             @foreach($carImages as $index => $imageLoop)
                                 <input class="fileid" type="file" name="image[]" data-imageID="{{$index}}" accept="image/*" hidden/>
+
+                                <input class="existingImage" type="text" name="existingImage[]" data-imageID="{{$index}}" value="{{$imageLoop->id}}" hidden/>
                             @endforeach
 
                             <button type="submit" href="#">Update Car</button>

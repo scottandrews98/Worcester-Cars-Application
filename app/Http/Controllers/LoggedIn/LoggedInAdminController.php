@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use \Mailjet\Resources;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\File;
 
 class LoggedInAdminController extends Controller
 {
@@ -38,9 +39,8 @@ class LoggedInAdminController extends Controller
         return view('loggedInPages.admin', compact('allMakes', 'allFuelType', 'allTransmissionType', 'allCarShapes', 'allCars'));
     }
 
-    public function store(Request $request)
+    public function store($type, $id, Request $request)
     {
-
         // An additional validator which makes sure form values match what is expected
         $validatedData = $request->validate([
             'name' => 'required',
@@ -70,60 +70,87 @@ class LoggedInAdminController extends Controller
         $carsTable = array('name' => $request->input('name'), 'description' => $request->input('description'), 'price' => $request->input('cost'), 'mileage' => $request->input('miles'), 'engineSize' => $request->input('engineSize'), 'topSpeed' => $request->input('topSpeed'), 'tax' => $request->input('taxCost'), 'mpg' => $request->input('mpg'), 'totalDoors' => $request->input('doors'), 'totalSeats' => $request->input('seats'), 'engineSize' => $request->input('engineSize'), 'fuelType_id' => $fuelTypeID, 'bodyType_id' => $bodyID, 'manufacturer_id' => $manufacturerID, 'transmission_id' => $transmissionID);
 
         // Inserts array into the cars table in the database
-        DB::table('cars')->insert($carsTable);
+        if($type == "store"){
+            DB::table('cars')->insert($carsTable);
+            $lastCarInsertID = DB::getPdo()->lastInsertId();
+        }else if($type == "edit"){
+            DB::table('cars')->where('id', $id)->update($carsTable);
+            $lastCarInsertID = $id;
+        }
 
-        $lastCarInsertID = DB::getPdo()->lastInsertId();
+        // Updates existing alt text
+        if($type == "edit"){
+            $index2 = 0;
+            $existingCarImages = DB::select('SELECT carImages.id FROM carImagesLink INNER JOIN carImages ON carImages_id = carImages.id WHERE carImagesLink.cars_id = '.$id.'');
+
+            foreach ($existingCarImages as $altTextID) {
+                $imageAltText = $request->input('altTextExisting')[$index2];
+
+                $carImagesTable = array('imageAltText' => $imageAltText);
+
+                DB::table('carImages')->where('id', $altTextID->id)->update($carImagesTable);
+                $index2++;
+            }
+        }
 
         // Image upload
         $index = 0;
         if($request->file('image')){
             foreach ($request->file('image') as $update) {
-                $photoName = time().$index.'.'.$update->getClientOriginalExtension();
+                // Checks to see if file input is empty
+                if($update != ""){
+                    $photoName = time().$index.'.'.$update->getClientOriginalExtension();
     
-                $update->move(public_path('carImages'), $photoName);
+                    $update->move(public_path('carImages'), $photoName);
 
-                $imageAltText = $request->input('altText')[$index];
+                    $imageAltText = $request->input('altText')[$index];
 
-                $carImagesTable = array('imageURL' => $photoName, 'imageAltText' => $imageAltText);
-                DB::table('carImages')->insert($carImagesTable);
+                    $carImagesTable = array('imageURL' => $photoName, 'imageAltText' => $imageAltText);
+                    DB::table('carImages')->insert($carImagesTable);
+    
+                    $lastCarImageID = DB::getPdo()->lastInsertId();
+                    $carImagesLinkTable = array('cars_id' => $lastCarInsertID, 'carImages_id' => $lastCarImageID);
+                    DB::table('carImagesLink')->insert($carImagesLinkTable);
 
-                $lastCarImageID = DB::getPdo()->lastInsertId();
-                $carImagesLinkTable = array('cars_id' => $lastCarInsertID, 'carImages_id' => $lastCarImageID);
-                DB::table('carImagesLink')->insert($carImagesLinkTable);
-
-                $index++;
+                    $index++;
+                }
             }
         }
 
         // Send Bulk Email To Registered Users Who Consented
         // Get Users Who Consented From Database
-        $allConsentUsers = DB::select('SELECT email, name FROM users WHERE consent_form_notifications = 1');
-        $toMessage = [];
 
-        foreach($allConsentUsers as $consent){
-            $toMessage[] = [ 
-                'From' => [
-                    'Email' => "ands3_16@uni.worc.ac.uk",
-                    'Name' => "Worcester Cars"
-                ],
-                'To' => [
-                    [
-                        'Email' => $consent->email,  
-                        'Name' => $consent->name
-                    ]
-                ],
-                'Subject' => "New Car For Sale!",
-                'HTMLPart' => "<h3>Dear ".$consent->name.", We thought we would let you know we have a new ".$request->input('name')." for sale. <br /> <a href='http://127.0.0.1:8000/car/".$lastCarInsertID."'>Go check it out</a></h3><br />Thanks, Worcester Cars <br /> If you wish to unsubscribe from emails <a href='http://127.0.0.1:8000/login'>Please Visit This Link</a>"
+        if($type == "store"){
+            $allConsentUsers = DB::select('SELECT email, name FROM users WHERE consent_form_notifications = 1');
+            $toMessage = [];
+
+            foreach($allConsentUsers as $consent){
+                $toMessage[] = [ 
+                    'From' => [
+                        'Email' => "ands3_16@uni.worc.ac.uk",
+                        'Name' => "Worcester Cars"
+                    ],
+                    'To' => [
+                        [
+                            'Email' => $consent->email,  
+                            'Name' => $consent->name
+                        ]
+                    ],
+                    'Subject' => "New Car For Sale!",
+                    'HTMLPart' => "<h3>Dear ".$consent->name.", We thought we would let you know we have a new ".$request->input('name')." for sale. <br /> <a href='http://127.0.0.1:8000/car/".$lastCarInsertID."'>Go check it out</a></h3><br />Thanks, Worcester Cars <br /> If you wish to unsubscribe from emails <a href='http://127.0.0.1:8000/login'>Please Visit This Link</a>"
+                ];
+            } 
+
+            $mj = new \Mailjet\Client('a513843cbd376e6de6e6c79f2efc51d7','9fe7604278c5c3473fe317a28daff371',true,['version' => 'v3.1']);
+            $body = [
+                'Messages' => $toMessage,
             ];
-        } 
 
-        $mj = new \Mailjet\Client('a513843cbd376e6de6e6c79f2efc51d7','9fe7604278c5c3473fe317a28daff371',true,['version' => 'v3.1']);
-        $body = [
-            'Messages' => $toMessage,
-        ];
-
-        $response = $mj->post(Resources::$Email, ['body' => $body]);
-        return redirect('/admin');
+            $response = $mj->post(Resources::$Email, ['body' => $body]);
+            return redirect('/admin');
+        }else{
+            return redirect('/admin');
+        }
     }
 
     public function elementCheck($tableName, $typeName, $typeValue){
@@ -159,15 +186,16 @@ class LoggedInAdminController extends Controller
     {   
         if($id){
             $selectedCar = DB::select('SELECT * FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id INNER JOIN bodyType ON cars.bodyType_id = bodyType.id INNER JOIN manufacturer ON cars.manufacturer_id = manufacturer.id WHERE cars.id = '.$id.'');
+            $selectedCarID = DB::select('SELECT * FROM cars WHERE cars.id = '.$id.'');
 
             $allMakes = DB::select('SELECT manufacturerName FROM manufacturer');
             $allFuelType = DB::select('SELECT fuelTypeName FROM fuelType');
             $allTransmissionType = DB::select('SELECT transmissionType FROM transmission');
             $allCarShapes = DB::select('SELECT bodyTypeName FROM bodyType');
 
-            $carImages = DB::select('SELECT carImages.imageURL as image, carImages.imageAltText as altText FROM carImagesLink INNER JOIN carImages ON carImages_id = carImages.id WHERE carImagesLink.cars_id = '.$id.'');
+            $carImages = DB::select('SELECT carImages.id, carImages.imageURL as image, carImages.imageAltText as altText FROM carImagesLink INNER JOIN carImages ON carImages_id = carImages.id WHERE carImagesLink.cars_id = '.$id.'');
 
-            return view('loggedInPages.edit', compact('selectedCar', 'allMakes', 'allFuelType', 'allTransmissionType', 'allCarShapes', 'carImages'));
+            return view('loggedInPages.edit', compact('selectedCar', 'selectedCarID', 'allMakes', 'allFuelType', 'allTransmissionType', 'allCarShapes', 'carImages'));
         }else{
             redirect('/admin');
         }
@@ -180,5 +208,31 @@ class LoggedInAdminController extends Controller
         // Can loop over posted images and if empty ignore tha
 
         // Could also loop over alt text and if one alt text does not exist then assume that image got removed
+
+        // Loops through images that havn't been removed and updates alt text values as well as any image that have been removed
+
+        if($request->input('existingImage')){
+            $remainingImages = "";
+
+            foreach ($request->input('existingImage') as $update) {
+                $remainingImages .= "AND carImages_id != ".$update." ";
+            }
+
+            $existingCarImages = DB::select('SELECT carImages_id, carImages.imageURL FROM carImagesLink INNER JOIN carImages ON carImages_id = carImages.id WHERE cars_id = '.$id.' '.$remainingImages.'');
+
+            foreach ($existingCarImages as $carImageRemoveID) {
+                // Loop through car images to be deleted 
+                DB::delete('DELETE FROM carImagesLink WHERE carImages_id = '.$carImageRemoveID->carImages_id.'');
+                DB::delete('DELETE FROM carImages WHERE id = '.$carImageRemoveID->carImages_id.'');
+
+                File::delete(''.public_path('carImages').'/'.$carImageRemoveID->imageURL.'');
+            }
+        }else{
+            // Remove all images associated with car
+        }
+
+        // Runs the store method above
+        store("edit",$id,$request);
+
     }
 }

@@ -56,6 +56,7 @@
                 <div class="topRow">
                     <div class="row">
                         <div class="col-md-4">
+                            <!-- TODO implement solution for car uploaded without any images like a waiting for image image -->
                             <img class="img-responsive" src="{{asset('carImages/').'/'.$allCarImages[$index]->image}}" alt="{{$allCarImages[$index]->altText}}" />
                         </div>
                         <div class="col-md-8">

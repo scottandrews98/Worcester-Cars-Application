@@ -29,7 +29,7 @@ Route::get('/car/{id}', 'CarController@index')->name('car');
 // Logged In Required Pages
 Route::get('/user', 'LoggedIn\LoggedInUserController@index')->name('user');
 
-Route::post('/admin', 'LoggedIn\LoggedInAdminController@store');
+Route::post('/admin/{type}/{id}', 'LoggedIn\LoggedInAdminController@store');
 Route::get('/admin', 'LoggedIn\LoggedInAdminController@index')->name('admin');
 Route::get('/admin/edit/{id}', 'LoggedIn\LoggedInAdminController@loadEdit')->name('editCar');
 Route::post('/admin/edit/{id}', 'LoggedIn\LoggedInAdminController@saveEdit');
