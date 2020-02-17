@@ -33,6 +33,7 @@ Route::post('/admin/{type}/{id}', 'LoggedIn\LoggedInAdminController@store');
 Route::get('/admin', 'LoggedIn\LoggedInAdminController@index')->name('admin');
 Route::get('/admin/edit/{id}', 'LoggedIn\LoggedInAdminController@loadEdit')->name('editCar');
 Route::post('/admin/edit/{id}', 'LoggedIn\LoggedInAdminController@saveEdit');
+Route::post('/admin/delete/{id}', 'LoggedIn\LoggedInAdminController@deleteCar');
 Route::get('/settings', 'LoggedIn\SettingsController@index')->name('settings');
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');

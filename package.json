@@ -25,6 +25,7 @@
         "@fortawesome/fontawesome-free": "^5.11.2"
     },
     "dependencies": {
-        "lightbox2": "^2.11.1"
+        "lightbox2": "^2.11.1",
+        "sweetalert2": "^9.7.2"
     }
 }

@@ -205,12 +205,6 @@ class LoggedInAdminController extends Controller
     {
         // Saves the eidited car information
 
-        // Can loop over posted images and if empty ignore tha
-
-        // Could also loop over alt text and if one alt text does not exist then assume that image got removed
-
-        // Loops through images that havn't been removed and updates alt text values as well as any image that have been removed
-
         if($request->input('existingImage')){
             $remainingImages = "";
 
@@ -229,10 +223,23 @@ class LoggedInAdminController extends Controller
             }
         }else{
             // Remove all images associated with car
+            $existingCarImages = DB::select('SELECT carImages_id, carImages.imageURL FROM carImagesLink INNER JOIN carImages ON carImages_id = carImages.id WHERE cars_id = '.$id.'');
+
+            foreach ($existingCarImages as $carImageRemoveID) {
+                // Loop through car images to be deleted 
+                DB::delete('DELETE FROM carImagesLink WHERE carImages_id = '.$carImageRemoveID->carImages_id.'');
+                DB::delete('DELETE FROM carImages WHERE id = '.$carImageRemoveID->carImages_id.'');
+
+                File::delete(''.public_path('carImages').'/'.$carImageRemoveID->imageURL.'');
+            }
         }
 
         // Runs the store method above
         store("edit",$id,$request);
+    }
 
+    // Deals with deleting cars and subsequent information from the database
+    public function deleteCar($id){
+        
     }
 }

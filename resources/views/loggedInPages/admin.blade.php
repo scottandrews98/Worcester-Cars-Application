@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <button id="secondButton">
-                                    <a href="admin/delete/{{ $cars -> id }}">Delete</a>
+                                    <a id="deleteCar" >Delete</a>
                                 </button>
                             </div>
                         </div>
