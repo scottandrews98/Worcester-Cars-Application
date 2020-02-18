@@ -20,10 +20,9 @@
                 <div class="col-sm centerSelect">
                     <select class="makerDropdown">
                         <option value="" disabled selected>Pick Manufacturer</option>
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
+                        @foreach($allManufacturers as $index => $allMakes)
+                            <option value="{{ $allMakes -> manufacturerName }}">{{ $allMakes -> manufacturerName }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="col-sm">
@@ -44,24 +43,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm">
-                    <h4>Mercedes</h4>
-                </div>
-                <div class="col-sm">
-                    <h4>Ford</h4>
-                </div>
-                <div class="col-sm">
-                    <h4>Vauxhall</h4>
-                </div>
-                <div class="col-sm">
-                    <h4>Peugeot</h4>
-                </div>
-                <div class="col-sm">
-                    <h4>Citroen</h4>
-                </div>
-                <div class="col-sm">
-                    <h4>Toyota</h4>
-                </div>
+                @foreach($topSixManufacturers as $index => $topMakes)
+                    <div class="col-sm">
+                        <h4>{{ $topMakes -> manufacturerName }}</h4>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
