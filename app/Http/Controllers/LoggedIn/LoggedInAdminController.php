@@ -223,23 +223,55 @@ class LoggedInAdminController extends Controller
             }
         }else{
             // Remove all images associated with car
-            $existingCarImages = DB::select('SELECT carImages_id, carImages.imageURL FROM carImagesLink INNER JOIN carImages ON carImages_id = carImages.id WHERE cars_id = '.$id.'');
-
-            foreach ($existingCarImages as $carImageRemoveID) {
-                // Loop through car images to be deleted 
-                DB::delete('DELETE FROM carImagesLink WHERE carImages_id = '.$carImageRemoveID->carImages_id.'');
-                DB::delete('DELETE FROM carImages WHERE id = '.$carImageRemoveID->carImages_id.'');
-
-                File::delete(''.public_path('carImages').'/'.$carImageRemoveID->imageURL.'');
-            }
+            self::deleteAllImages($id);
         }
 
         // Runs the store method above
         store("edit",$id,$request);
     }
 
+    public function deleteAllImages($id){
+        $existingCarImages = DB::select('SELECT carImages_id, carImages.imageURL FROM carImagesLink INNER JOIN carImages ON carImages_id = carImages.id WHERE cars_id = '.$id.'');
+
+        foreach ($existingCarImages as $carImageRemoveID) {
+            // Loop through car images to be deleted 
+            DB::delete('DELETE FROM carImagesLink WHERE carImages_id = '.$carImageRemoveID->carImages_id.'');
+            DB::delete('DELETE FROM carImages WHERE id = '.$carImageRemoveID->carImages_id.'');
+
+            File::delete(''.public_path('carImages').'/'.$carImageRemoveID->imageURL.'');
+        }
+    }
+
     // Deals with deleting cars and subsequent information from the database
-    public function deleteCar($id){
-        
+    public function deleteCar(Request $request){
+        $validatedData = $request->validate([
+            'carID' => 'required'
+        ]);
+
+        $getID = DB::select('SELECT fuelType_id, bodyType_id, manufacturer_id, transmission_id FROM cars WHERE id = '.$request->input('carID').'');
+
+        // Delete car link from carsLiked first
+        DB::delete('DELETE FROM carsLiked WHERE cars_id = '.$request->input('carID').'');
+        // Then delete all car images
+        self::deleteAllImages($request->input('carID'));
+        // Delete car with posted id 
+        DB::delete('DELETE FROM cars WHERE id = '.$request->input('carID').'');
+
+        // Check to make sure that this car was not the only car to support this type
+        self::reverseElementCheck($request->input('carID'), "fuelType", "fuelType_id", $getID);
+        self::reverseElementCheck($request->input('carID'), "bodyType", "bodyType_id", $getID);
+        self::reverseElementCheck($request->input('carID'), "manufacturer", "manufacturer_id", $getID);
+        self::reverseElementCheck($request->input('carID'), "transmission", "transmission_id", $getID);
+
+        return "Car Deleted";
+    }
+
+    public function reverseElementCheck($carID, $tableName, $typeName, $getID){
+        $typeTest = DB::select('SELECT '.$typeName.' FROM cars WHERE '.$typeName.' = "'.$getID[0]->$typeName.'"');
+
+        if(count($typeTest) < 1){
+            // Delete element from main table
+            DB::delete('DELETE FROM '.$tableName.' WHERE id = '.$getID[0]->$typeName.'');
+        }
     }
 }

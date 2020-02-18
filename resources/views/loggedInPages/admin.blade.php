@@ -40,7 +40,7 @@
                                 </button>
                             </div>
                             <div class="col-sm-3">
-                                <button id="secondButton">
+                                <button data-delete-id="{{ $cars -> id }}" id="secondButton">
                                     <a id="deleteCar" >Delete</a>
                                 </button>
                             </div>

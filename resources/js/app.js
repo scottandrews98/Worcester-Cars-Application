@@ -9,8 +9,9 @@ require('./imageUpload');
 require('./financeCalculator');
 require('./contactForm');
 require('./carLike');
+require('./deleteCar');
 require('lightbox2');
-var Swal = require('sweetalert2');
+
 
 // window.Vue = require('vue');
 
@@ -47,24 +48,3 @@ $(document).ready(function(){
         $(".searchBox").slideToggle();
     });
 });
-
-
-// Code for deleting a car
-
-function deleteCar(){
-    console.log("run");
-
-    Swal.fire({
-        title: 'Error!',
-        text: 'Do you want to continue',
-        icon: 'error',
-        confirmButtonText: 'Cool'
-    })
-}
-
-var elementExists = document.getElementById("deleteCar");
-
-if(elementExists){
-    document.getElementById("secondButton").addEventListener("click", deleteCar);
-    console.log("run");
-}
