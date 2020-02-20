@@ -23,6 +23,8 @@ class AboutController extends Controller
      */
     public function index()
     {
-        return view('about');
+        $aboutPageMeta = DB::select('SELECT aboutPageMeta FROM siteSettings');
+
+        return view('about', compact('aboutPageMeta'));
     }
 }

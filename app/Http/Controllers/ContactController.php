@@ -12,7 +12,9 @@ class ContactController extends Controller
 
     public function index()
     {
-        return view('contact');
+        $contactPageMeta = DB::select('SELECT contactPageMeta FROM siteSettings');
+
+        return view('contact', compact('contactPageMeta'));
     }
 
     public function store(Request $request)

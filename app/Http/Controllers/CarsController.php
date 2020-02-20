@@ -28,6 +28,8 @@ class CarsController extends Controller
 
         $allCarImages = DB::select('SELECT carImagesLink.cars_id, ANY_VALUE(carImages.imageURL) as image, ANY_VALUE(carImages.imageAltText) as altText FROM carImagesLink INNER JOIN carImages ON carImages_id = carImages.id GROUP BY carImagesLink.cars_id');
 
-        return view('cars', compact('allCars', 'allCarImages'));
+        $carsPageMeta = DB::select('SELECT carsPageMeta FROM siteSettings');
+
+        return view('cars', compact('allCars', 'allCarImages', 'carsPageMeta'));
     }
 }

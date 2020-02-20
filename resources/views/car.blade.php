@@ -1,4 +1,16 @@
-@extends('layouts.app', ['title' => 'Car'])
+@extends('layouts.app', ['title' => $individualCar[0] -> name])
+
+@section('metaDescription')
+<meta name="description" content="{{$individualCar[0] -> description}}" />
+@endsection
+
+@section('twitter')
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@WorcesterCars" />
+    <meta name="twitter:title" content="{{$individualCar[0] -> name}}" />
+    <meta name="twitter:description" content="{{$individualCar[0] -> description}}" />
+    <meta name="twitter:image" content="{{asset('carImages/').'/'.$individualCarFirstImage[0]->image}}" />
+@endsection
 
 @section('content')
     <!-- Header Section -->

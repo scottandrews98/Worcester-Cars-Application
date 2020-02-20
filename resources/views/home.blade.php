@@ -1,5 +1,9 @@
 @extends('layouts.app', ['title' => 'Home'])
 
+@section('metaDescription')
+<meta name="description" content="{{$homePageMeta[0] -> homePageMeta}}" />
+@endsection
+
 @section('content')
     <!-- Header Section -->
     <header class="homeHeader">

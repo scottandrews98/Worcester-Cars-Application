@@ -11,8 +11,14 @@
         @isset($title)
             {{ $title }} | 
         @endisset
-            {{ config('app.name') }}
+            {{ $siteTitle }}
     </title>
+
+    <!-- Meta Information For Page Description -->
+    @yield('metaDescription')
+
+    <!-- Meta Information For Twitter Cards -->
+    @yield('twitter')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
