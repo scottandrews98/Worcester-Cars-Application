@@ -1,7 +1,7 @@
 @extends('layouts.app', ['title' => 'Cars'])
 
 @section('metaDescription')
-<meta name="description" content="{{$carsPageMeta[0] -> carsPageMeta}}" />
+<meta name="description" content="{{$carsPageMeta[0] -> carsPageMeta ?? ''}}" />
 @endsection
 
 @section('content')

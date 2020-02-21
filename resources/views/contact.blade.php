@@ -1,7 +1,7 @@
 @extends('layouts.app', ['title' => 'Contact'])
 
 @section('metaDescription')
-<meta name="description" content="{{$contactPageMeta[0] -> contactPageMeta}}" />
+<meta name="description" content="{{$contactPageMeta[0] -> contactPageMeta ?? '' }}" />
 @endsection
 
 

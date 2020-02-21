@@ -87,16 +87,39 @@
     </div>
 </header>
 
+<section class="registerError">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                @error('password')
+                    <div class="card bg-warning">
+                        <div class="card-body">
+                            {{ $message }}
+                        </div>
+                    </div>
+                @enderror
+                @error('email')
+                    <div class="card bg-warning">
+                        <div class="card-body">
+                            {{ $message }}
+                        </div>
+                    </div>
+                @enderror
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="signIn">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
-                    <input type="text" placeholder="Name" name="name" required>
-                    <input type="email" placeholder="Email" name="email" required>
-                    <input type="number" placeholder="Phone" name="number" required>
-                    <input type="password" placeholder="Password" name="password" required>
+                    <input type="text" placeholder="Name" name="name" value="{{ old('name') }}" required>
+                    <input type="email" class="@error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}" required>
+                    <input type="number" placeholder="Phone" name="number" value="{{ old('number') }}" required>
+                    <input type="password" placeholder="Password (Must Be At Least 8 Characters)" class="@error('password') is-invalid @enderror" name="password" required>
                     <input type="password" placeholder="Confirm Password" name="password_confirmation" required>
 
                     <div class="row">

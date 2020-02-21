@@ -84,30 +84,42 @@
         </div>
     </header>
 
+    <section class="signinError">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    @error('email')
+                        <div class="card">
+                            <div class="card-body">
+                                {{ $message }}
+                            </div>
+                        </div>
+                    @enderror
+                    @error('password')
+                        <div class="card">
+                            <div class="card-body">
+                                {{ $message }}
+                            </div>
+                        </div>
+                    @enderror
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="signIn">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-                        <input type="email" placeholder="Email" name="email" required>
 
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <input class="@error('email') is-invalid @enderror" type="email" value="{{ old('email') }}" placeholder="Email" name="email" required>
 
-                        <input type="password" placeholder="Password" name="password" required>
-
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <input class="@error('password') is-invalid @enderror" type="password" placeholder="Password" name="password" required>
 
                         <button type="submit"><a>Sign In</a></button>
-                        <!-- <button type="button"></button> -->
+
                         <a href="/register">Register</a>
                     </form>
                 </div>

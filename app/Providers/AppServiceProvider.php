@@ -29,8 +29,10 @@ class AppServiceProvider extends ServiceProvider
         // Gets the latest site title from the table siteSettings
         $siteSettingsData = DB::select('SELECT siteTitle FROM siteSettings');
 
-        View::share('siteTitle', $siteSettingsData[0]->{'siteTitle'});
-
+        if(count($siteSettingsData) > 0){
+            View::share('siteTitle', $siteSettingsData[0]->{'siteTitle'});
+        }
+        
         Schema::defaultStringLength(191);
     }
 }
