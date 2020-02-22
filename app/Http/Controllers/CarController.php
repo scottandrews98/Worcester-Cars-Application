@@ -16,7 +16,7 @@ class CarController extends Controller
 
             $allImages = DB::select('SELECT carImages.imageURL as image, carImages.imageAltText as altText FROM carImagesLink INNER JOIN carImages ON carImages_id = carImages.id WHERE carImagesLink.cars_id = '.$id.'');
 
-            return view('car', compact('individualCar', 'individualCarFirstImage', 'allImages'));
+            return view('car', compact('individualCar', 'individualCarFirstImage', 'allImages'))->withId($id);
         }else{
             redirect('/cars');
         }

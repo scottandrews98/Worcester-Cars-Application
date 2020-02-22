@@ -36,7 +36,7 @@
                     <button class="shareButton" id="twitter"><i class="fas fa-twitter-square"></i></button>
 
                     @if (Auth::check())
-                        <button class="shareButton" data-carID="{{$individualCar[0] -> id}}" id="star"><i class="fas fa-star"></i></button>
+                        <button class="shareButton" data-carID="{{$id}}" id="star"><i class="fas fa-star"></i></button>
                     @endif
                 </div>
             </div>
