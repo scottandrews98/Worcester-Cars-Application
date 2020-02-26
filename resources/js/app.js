@@ -10,6 +10,7 @@ require('./financeCalculator');
 require('./contactForm');
 require('./carLike');
 require('./deleteCar');
+require('./deleteProfile');
 require('lightbox2');
 
 

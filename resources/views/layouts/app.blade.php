@@ -122,6 +122,7 @@
                                     @endif
                                     @if (Auth::user()->userLevel_id == 2)
                                         <li><a href="/user">Saved Cars</a></li>
+                                        <li><a href="/profile">Edit Profile</a></li>
                                     @endif
                                     <li><a href="{{ url('/logout') }}">Sign Out</a></li>
                                 @endguest

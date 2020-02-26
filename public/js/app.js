@@ -40662,6 +40662,8 @@ __webpack_require__(/*! ./carLike */ "./resources/js/carLike.js");
 
 __webpack_require__(/*! ./deleteCar */ "./resources/js/deleteCar.js");
 
+__webpack_require__(/*! ./deleteProfile */ "./resources/js/deleteProfile.js");
+
 __webpack_require__(/*! lightbox2 */ "./node_modules/lightbox2/dist/js/lightbox.js"); // window.Vue = require('vue');
 // /**
 //  * The following block of code may be used to automatically register your
@@ -40887,6 +40889,62 @@ function ajaxDeleteCar(id) {
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.setRequestHeader("X-CSRF-Token", CSRF_TOKEN);
   xhttp.send("&carID=" + id + "");
+}
+
+/***/ }),
+
+/***/ "./resources/js/deleteProfile.js":
+/*!***************************************!*\
+  !*** ./resources/js/deleteProfile.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Code for deleting a car
+var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+
+var elementExists = document.getElementById("deleteProfile");
+
+if (elementExists) {
+  elementExists.addEventListener("click", function () {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to undo this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete my account!'
+    }).then(function (result) {
+      if (result.value) {
+        ajaxDeleteProfile();
+        Swal.fire({
+          title: 'Account Deleted',
+          confirmButtonText: 'Account Deleted'
+        }).then(function (result2) {
+          if (result2.value) {
+            window.location.replace("/home");
+          }
+        });
+      }
+    });
+  });
+}
+
+function ajaxDeleteProfile() {
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText); // Remove From Screen
+    }
+  };
+
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+  xhttp.open("POST", "/profile/delete", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.setRequestHeader("X-CSRF-Token", CSRF_TOKEN);
+  xhttp.send();
 }
 
 /***/ }),

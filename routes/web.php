@@ -29,6 +29,7 @@ Route::get('/car/{id}', 'CarController@index')->name('car');
 
 // Logged In Required Pages
 Route::get('/user', 'LoggedIn\LoggedInUserController@index')->name('user');
+Route::get('/profile', 'LoggedIn\ProfileController@index')->name('profile');
 
 Route::post('/admin/{type}/{id}', 'LoggedIn\LoggedInAdminController@store');
 Route::get('/admin', 'LoggedIn\LoggedInAdminController@index')->name('admin');
@@ -43,3 +44,5 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::post('/contact', 'ContactController@store');
 Route::post('/car', 'CarController@like');
 Route::post('/settings', 'LoggedIn\SettingsController@saveSettings');
+Route::post('/profile', 'LoggedIn\ProfileController@updateProfile');
+Route::post('/profile/delete', 'LoggedIn\ProfileController@deleteProfile');

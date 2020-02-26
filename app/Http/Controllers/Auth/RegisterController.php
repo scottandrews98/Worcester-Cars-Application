@@ -65,12 +65,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if($data['emailConsent'] == "on"){
+            $consentValue = 1;
+        }else{
+            $consentValue = 0;
+        }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'number' => $data['number'],
             'userLevel_id' => 2,
-            'consent_form_notifications' => 0,
+            'consent_form_notifications' => $consentValue,
             'password' => Hash::make($data['password']),
         ]);
     }
