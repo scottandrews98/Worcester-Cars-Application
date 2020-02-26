@@ -25,6 +25,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#googleAnalytics" role="tab" data-toggle="tab">Google Analytics</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#userManagement" role="tab" data-toggle="tab">User Management</a>
+                </li>
             </ul>
                     
             <div class="tab-content">
@@ -63,8 +66,6 @@
                         </div>
                     </div>
                     
-                    
-
                     @foreach($mostVisitedPages as $pages)
                         <div class="row carsForSale">
                             <div class="col-sm-6">
@@ -79,6 +80,31 @@
                                 <button id="secondButton">
                                     URL: {{ $pages['url'] }}
                                 </button>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <div role="tabpanel" class="tab-pane" id="userManagement">
+                    @foreach($siteUserData as $users)
+                        <div class="row carsForSale">
+                            <div class="col-sm-6">
+                                <h5>{{ $users -> name }}</h5>
+                            </div>
+                            <div class="col-sm-3">
+                                <button>
+                                    @if($users -> userLevel_id == 2)
+                                        <a href="#" id="makeAdmin" data-user-id="{{ $users -> id }}">Make Admin</a>
+                                    @else
+                                        <a href="#" id="removeAdmin" data-user-id="{{ $users -> id }}">Remove Admin</a>
+                                    @endif
+                                </button>
+                            </div>
+                            <div class="col-sm-3">
+                                @if($users -> userLevel_id == 2)
+                                    <button id="secondButton">
+                                        <a href="/viewStared/{{ $users -> userLevel_id }}">View Stared Cars</a>
+                                    </button>
+                                @endif
                             </div>
                         </div>
                     @endforeach

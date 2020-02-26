@@ -40664,6 +40664,8 @@ __webpack_require__(/*! ./deleteCar */ "./resources/js/deleteCar.js");
 
 __webpack_require__(/*! ./deleteProfile */ "./resources/js/deleteProfile.js");
 
+__webpack_require__(/*! ./makeAndRemoveAdmins */ "./resources/js/makeAndRemoveAdmins.js");
+
 __webpack_require__(/*! lightbox2 */ "./node_modules/lightbox2/dist/js/lightbox.js"); // window.Vue = require('vue');
 // /**
 //  * The following block of code may be used to automatically register your
@@ -41048,6 +41050,63 @@ window.addEventListener('load', function () {
   }
 }); // Code for removing images when editing 
 // Controller could loop over alt text boxes and see if any are missing by their
+
+/***/ }),
+
+/***/ "./resources/js/makeAndRemoveAdmins.js":
+/*!*********************************************!*\
+  !*** ./resources/js/makeAndRemoveAdmins.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Code for deleting a car
+var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+
+var elementExists = document.getElementById("makeAdmin");
+
+if (elementExists) {
+  document.querySelectorAll('#makeAdmin').forEach(function (item) {
+    item.addEventListener("click", function () {
+      var _this = this;
+
+      var id = this.getAttribute('data-delete-id');
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to undo this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete this car!'
+      }).then(function (result) {
+        if (result.value) {
+          ajaxDeleteCar(id);
+
+          _this.parentNode.parentNode.parentNode.removeChild(_this.parentNode.parentNode);
+
+          Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+        }
+      });
+    });
+  });
+}
+
+function ajaxDeleteCar(id) {
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText); // Remove From Screen
+    }
+  };
+
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+  xhttp.open("POST", "/admin/delete", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.setRequestHeader("X-CSRF-Token", CSRF_TOKEN);
+  xhttp.send("&carID=" + id + "");
+}
 
 /***/ }),
 

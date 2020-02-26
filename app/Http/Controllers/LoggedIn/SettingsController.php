@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Analytics;
 use Spatie\Analytics\Period;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class SettingsController extends Controller
 {
@@ -21,6 +22,10 @@ class SettingsController extends Controller
         // Select data from database for site settings
         $siteSettingsData = DB::select('SELECT * FROM siteSettings');
 
+        // Select all the users on the website
+        $user = Auth::User();
+        $siteUserData = DB::select('SELECT * FROM users WHERE id != '.$user->id.'');
+
         //retrieve visitors and pageview data for the current day and the last seven days
         $totalVisitorsAndPageViews = Analytics::fetchTotalVisitorsAndPageViews(Period::days(7));
         $mostVisitedPages = Analytics::fetchMostVisitedPages(Period::days(7), $maxResults = 5);
@@ -34,12 +39,11 @@ class SettingsController extends Controller
         }
 
         if(count($siteSettingsData) == 0){
-            return view('loggedInPages.settings', compact('mostVisitedPages'))->withPageViews($totalPageViews)->withVisitors($totalVisitors);
+            return view('loggedInPages.settings', compact('mostVisitedPages', 'siteUserData'))->withPageViews($totalPageViews)->withVisitors($totalVisitors);
         }else{
             $lastUpdate = "(Last Updated At: " . date('d/m/Y H:i', strtotime($siteSettingsData[0]->{'updated_at'})) . ")";
-            //var_dump($lastUpdate);
 
-            return view('loggedInPages.settings', compact('mostVisitedPages', 'siteSettingsData'))->withPageViews($totalPageViews)->withVisitors($totalVisitors)->withLastUpdate($lastUpdate);
+            return view('loggedInPages.settings', compact('mostVisitedPages', 'siteUserData', 'siteSettingsData'))->withPageViews($totalPageViews)->withVisitors($totalVisitors)->withLastUpdate($lastUpdate);
         }
     }
 
@@ -60,5 +64,9 @@ class SettingsController extends Controller
         }
 
         return redirect('/settings');
+    }
+
+    public function makeAndRemoveAdmins(Request $request){
+        // Deal with making users admins and removing them depending on type
     }
 }

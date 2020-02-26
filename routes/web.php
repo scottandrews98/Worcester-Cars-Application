@@ -44,5 +44,6 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::post('/contact', 'ContactController@store');
 Route::post('/car', 'CarController@like');
 Route::post('/settings', 'LoggedIn\SettingsController@saveSettings');
+Route::post('/admin/makeAndRemoveAdmins', 'LoggedIn\SettingsController@makeAndRemoveAdmins');
 Route::post('/profile', 'LoggedIn\ProfileController@updateProfile');
 Route::post('/profile/delete', 'LoggedIn\ProfileController@deleteProfile');
