@@ -12,6 +12,7 @@ require('./carLike');
 require('./deleteCar');
 require('./deleteProfile');
 require('./makeAndRemoveAdmins');
+require('./search');
 require('lightbox2');
 
 

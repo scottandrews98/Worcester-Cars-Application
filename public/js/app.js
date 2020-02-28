@@ -40666,6 +40666,8 @@ __webpack_require__(/*! ./deleteProfile */ "./resources/js/deleteProfile.js");
 
 __webpack_require__(/*! ./makeAndRemoveAdmins */ "./resources/js/makeAndRemoveAdmins.js");
 
+__webpack_require__(/*! ./search */ "./resources/js/search.js");
+
 __webpack_require__(/*! lightbox2 */ "./node_modules/lightbox2/dist/js/lightbox.js"); // window.Vue = require('vue');
 // /**
 //  * The following block of code may be used to automatically register your
@@ -41068,12 +41070,10 @@ var elementExists = document.getElementById("makeAdmin");
 if (elementExists) {
   document.querySelectorAll('#makeAdmin').forEach(function (item) {
     item.addEventListener("click", function () {
-      var _this = this;
-
-      var id = this.getAttribute('data-delete-id');
+      var id = this.getAttribute('data-user-id');
       Swal.fire({
         title: 'Are you sure?',
-        text: "You won't be able to undo this!",
+        text: "This user will gain full admin rights",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -41081,31 +41081,72 @@ if (elementExists) {
         confirmButtonText: 'Yes, delete this car!'
       }).then(function (result) {
         if (result.value) {
-          ajaxDeleteCar(id);
-
-          _this.parentNode.parentNode.parentNode.removeChild(_this.parentNode.parentNode);
-
-          Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+          ajaxMakeAdmin(id, make);
+          Swal.fire('User Has Been Made An Admin', 'They will now be able to visit admin website sections', 'success');
         }
       });
     });
   });
 }
 
-function ajaxDeleteCar(id) {
+function ajaxMakeAdmin(id, type) {
   var xhttp = new XMLHttpRequest();
 
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      console.log(this.responseText); // Remove From Screen
+      console.log(this.responseText);
     }
   };
 
   var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-  xhttp.open("POST", "/admin/delete", true);
+  xhttp.open("POST", "/admin/makeAndRemoveAdmins", true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.setRequestHeader("X-CSRF-Token", CSRF_TOKEN);
-  xhttp.send("&carID=" + id + "");
+  xhttp.send("&userID=" + id + "&type=" + type + "");
+}
+
+/***/ }),
+
+/***/ "./resources/js/search.js":
+/*!********************************!*\
+  !*** ./resources/js/search.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// JavaScript code that sends and ajax request to the backend to produce 
+var elementExists = document.getElementById("searchForm");
+
+if (elementExists) {
+  document.getElementById("search").addEventListener("click", searchCars);
+}
+
+function searchCars() {
+  // Code to fetch the set form values
+  var manufacturers = document.getElementById('manufacturers').value;
+  var miles = document.getElementById('miles').value;
+  var fuel = document.getElementById('fuel').value;
+  var gearbox = document.getElementById('gearbox').value;
+  var mpg = document.getElementById('mpg').value;
+  var tax = document.getElementById('tax').value;
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function () {
+    // If AJAX response comes back without an error
+    if (this.readyState == 4 && this.status == 200) {
+      // Code to replace on screen cars with result
+      console.log(this.responseText);
+      var carRemove = document.getElementById('remove');
+      carRemove.parentNode.removeChild(carRemove);
+      document.getElementById("cars").innerHTML = this.responseText;
+    }
+  };
+
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+  xhttp.open("POST", "/cars", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.setRequestHeader("X-CSRF-Token", CSRF_TOKEN);
+  xhttp.send("&manufacturers=" + manufacturers + "&miles=" + miles + "&fuel=" + fuel + "&gearbox=" + gearbox + "&mpg=" + mpg + "&tax=" + tax + "");
 }
 
 /***/ }),
@@ -41128,9 +41169,9 @@ function ajaxDeleteCar(id) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/scottandrews/Documents/Personal Projects/Worcester-Cars-Application/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/scottandrews/Documents/Personal Projects/Worcester-Cars-Application/node_modules/lightbox2/dist/js/lightbox.min.js */"./node_modules/lightbox2/dist/js/lightbox.min.js");
-module.exports = __webpack_require__(/*! /Users/scottandrews/Documents/Personal Projects/Worcester-Cars-Application/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/scottandrews/Documents/University Code/Worcester_Cars_Web_Application/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /Users/scottandrews/Documents/University Code/Worcester_Cars_Web_Application/node_modules/lightbox2/dist/js/lightbox.min.js */"./node_modules/lightbox2/dist/js/lightbox.min.js");
+module.exports = __webpack_require__(/*! /Users/scottandrews/Documents/University Code/Worcester_Cars_Web_Application/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

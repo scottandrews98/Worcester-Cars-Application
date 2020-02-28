@@ -22,40 +22,55 @@
     <!-- Advanced Search Box Dropdown -->
     <section class="searchBox">
         <div class="container">   
-            <form>
+            <form id="searchForm">
                 <div class="row">
                     <div class="col-sm-4">
-                        <input type="text" placeholder="Name">
+                        <!-- <input type="text" list="manufacturers" placeholder="Manufacturers"> -->
+                        <select id="manufacturers" placeholder="Manufacturers">
+                            @foreach($allMakes as $make)
+                                    <option>{{ $make -> manufacturerName }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-sm-4">
-                        <input type="text" placeholder="Miles">
+                        <input id="miles" type="number" placeholder="Miles">
                     </div>
                     <div class="col-sm-4">
-                        <input type="text" placeholder="Fuel Type">
+                        <!-- <input type="text" list="fuel" placeholder="Fuel Type"> -->
+                        <select id="fuel">
+                            @foreach($allFuelType as $fuel)
+                                    <option>{{ $fuel -> fuelTypeName }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <input type="text" placeholder="Transmition">
+                        <!-- <input type="text" list="gearbox" placeholder="Transmition"> -->
+                        <select id="gearbox">
+                            @foreach($allTransmissionType as $transmission)
+                                    <option>{{ $transmission -> transmissionType }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-sm-4">
-                        <input type="text" placeholder="Engine Size">
+                        <input id="mpg" type="number" placeholder="Average Miles Per Gallon">
                     </div>
                     <div class="col-sm-4">
-                        <input type="text" placeholder="Tax Cost">
+                        <input id="tax" type="number" placeholder="Tax Cost">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <button><a>Search</a></button>
+                        <button type="button"><a href="#" id="search">Search</a></button>
                     </div>
                 </div>
             </form>
         </div>
     </section>
 
-    <section class="cars">
-        <div class="container">
+    <section class="cars" id="cars">
+        <div class="container" id="remove">
             @foreach($allCars as $index => $cars)
                 <div class="topRow">
                     <div class="row">
@@ -159,6 +174,11 @@
                     </div>
                 </div>
             @endforeach
+
+            <!-- TODO implement page 2 link here -->
+            <a href="/cars/2" class="loadCarButton">
+                <button class="loadCarButton">Next Page</button>
+            </a>
         </div>
     </section>
 @endsection

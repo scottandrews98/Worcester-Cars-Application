@@ -22,6 +22,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/about', 'AboutController@index')->name('about');
 Route::get('/cars', 'CarsController@index')->name('cars');
+Route::get('/cars/{pageCount}', 'CarsController@nextPage');
 Route::get('/contact', 'ContactController@index')->name('contact');
 
 // Individual Car
@@ -47,3 +48,4 @@ Route::post('/settings', 'LoggedIn\SettingsController@saveSettings');
 Route::post('/admin/makeAndRemoveAdmins', 'LoggedIn\SettingsController@makeAndRemoveAdmins');
 Route::post('/profile', 'LoggedIn\ProfileController@updateProfile');
 Route::post('/profile/delete', 'LoggedIn\ProfileController@deleteProfile');
+Route::post('/cars', 'CarsController@searchCars');
