@@ -39,7 +39,7 @@ Route::post('/admin/edit/{id}', 'LoggedIn\LoggedInAdminController@saveEdit');
 Route::post('/admin/delete', 'LoggedIn\LoggedInAdminController@deleteCar');
 Route::get('/settings', 'LoggedIn\SettingsController@index')->name('settings');
 Route::get('/viewStared/{id}', 'LoggedIn\SettingsController@loadStaredUser')->name('viewStared');
-Route::get('/viewProfile/{id}', 'LoggedIn\SettingsController@loadStaredUser')->name('viewStared');
+Route::get('/viewProfile/{id}', 'LoggedIn\SettingsController@loadUserProfile')->name('adminViewProfile');
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 

@@ -105,4 +105,9 @@ class SettingsController extends Controller
         return view('loggedInPages.staredUserCars', compact('likedCars', 'carImageURL', 'carAltText', 'userInformation'));
     }
 
+    public function loadUserProfile($id){
+        $userInformation = DB::select('SELECT * from users WHERE id = '.$id.'');
+
+        return view('loggedInPages.viewUserProfile', compact('userInformation'));
+    }
 }

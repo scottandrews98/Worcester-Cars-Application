@@ -210,9 +210,19 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="desciption">
                     <!-- TODO Add in accesbility zoom feature -->
-                    <p>
-                        {{$individualCar[0] -> description}}
-                    </p>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <p>
+                                {{$individualCar[0] -> description}}
+                            </p>
+                        </div>
+                        <div class="col-sm-1">
+                            <img src="{{ asset('images/zoom-in.png') }}" >
+                        </div>
+                    </div>
+                    
+                    
+
                 </div>
                 <div role="tabpanel" class="tab-pane" id="gallery">
                     <div class="row imageRow">
