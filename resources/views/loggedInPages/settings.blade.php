@@ -90,7 +90,12 @@
                             <div class="col-sm-6">
                                 <h5>{{ $users -> name }}</h5>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
+                                <button>
+                                    <a href="/viewProfile/{{ $users -> id }}">View Profile</a>
+                                </button>
+                            </div>
+                            <div class="col-sm-2">
                                 <button>
                                     @if($users -> userLevel_id == 2)
                                         <a href="#" id="makeAdmin" data-user-id="{{ $users -> id }}">Make Admin</a>
@@ -99,12 +104,10 @@
                                     @endif
                                 </button>
                             </div>
-                            <div class="col-sm-3">
-                                @if($users -> userLevel_id == 2)
-                                    <button id="secondButton">
-                                        <a href="/viewStared/{{ $users -> userLevel_id }}">View Stared Cars</a>
-                                    </button>
-                                @endif
+                            <div class="col-sm-2">
+                                <button id="secondButton" class="staredButton" data-stared-user-id="{{ $users -> id }}">
+                                    <a href="/viewStared/{{ $users -> id }}">View Stared Cars</a>
+                                </button>
                             </div>
                         </div>
                     @endforeach

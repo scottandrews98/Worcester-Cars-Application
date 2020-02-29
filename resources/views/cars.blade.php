@@ -76,7 +76,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <!-- TODO implement solution for car uploaded without any images like a waiting for image image -->
-                            <img class="img-responsive" src="{{asset('carImages/').'/'.$allCarImages[$index]->image}}" alt="{{$allCarImages[$index]->altText}}" />
+                            <img class="img-responsive" src="{{asset('carImages/').'/'.$carImageURL[$index]}}" alt="{{$carAltText[$index]}}" />
                         </div>
                         <div class="col-md-8">
                             <div class="row">
@@ -176,9 +176,11 @@
             @endforeach
 
             <!-- TODO implement page 2 link here -->
-            <a href="/cars/2" class="loadCarButton">
-                <button class="loadCarButton">Next Page</button>
-            </a>
+            
+                <a href="/cars/2" class="loadCarButton">
+                    <button class="loadCarButton">Next Page</button>
+                </a>
+            
         </div>
     </section>
 @endsection

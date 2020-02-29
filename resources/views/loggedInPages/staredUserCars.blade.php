@@ -6,10 +6,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm">
-                    <h1>Welcome Test</h1>
+                    <h1>{{ $userInformation[0] -> name }}</h1>
                 </div> 
                 <div class="col-sm">
-                    <a href="/logout">Sign Out</a>
+                    <a href="/settings">Back</a>
                 </div> 
             </div>
         </div>

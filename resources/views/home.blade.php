@@ -49,7 +49,7 @@
             <div class="row">
                 @foreach($topSixManufacturers as $index => $topMakes)
                     <div class="col-sm">
-                        <h4>{{ $topMakes -> manufacturerName }}</h4>
+                        <a href="/cars?brand={{ $topMakes -> manufacturerName }}"><h4>{{ $topMakes -> manufacturerName }}</h4></a>
                     </div>
                 @endforeach
             </div>

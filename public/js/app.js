@@ -41065,28 +41065,53 @@ window.addEventListener('load', function () {
 // Code for deleting a car
 var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 
-var elementExists = document.getElementById("makeAdmin");
+function refreshUsers() {
+  var makeAdmin = document.getElementById("makeAdmin");
+  var removeAdmin = document.getElementById("removeAdmin");
 
-if (elementExists) {
-  document.querySelectorAll('#makeAdmin').forEach(function (item) {
-    item.addEventListener("click", function () {
-      var id = this.getAttribute('data-user-id');
-      Swal.fire({
-        title: 'Are you sure?',
-        text: "This user will gain full admin rights",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete this car!'
-      }).then(function (result) {
-        if (result.value) {
-          ajaxMakeAdmin(id, make);
-          Swal.fire('User Has Been Made An Admin', 'They will now be able to visit admin website sections', 'success');
-        }
+  if (makeAdmin) {
+    document.querySelectorAll('#makeAdmin').forEach(function (item) {
+      item.addEventListener("click", function () {
+        var id = this.getAttribute('data-user-id');
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "This user will gain full admin rights",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, make this user an admin'
+        }).then(function (result) {
+          if (result.value) {
+            ajaxMakeAdmin(id, "make");
+            Swal.fire('User Has Been Made An Admin', 'They will now be able to visit admin website sections', 'success');
+          }
+        });
       });
     });
-  });
+  }
+
+  if (removeAdmin) {
+    document.querySelectorAll('#removeAdmin').forEach(function (item) {
+      item.addEventListener("click", function () {
+        var id = this.getAttribute('data-user-id');
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "This users admin rights will be removed",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, remove this user as an admin'
+        }).then(function (result) {
+          if (result.value) {
+            ajaxMakeAdmin(id, "remove");
+            Swal.fire('User Has Been Removed From Being An Admin', 'Their admin permissions have been revoked', 'success');
+          }
+        });
+      });
+    });
+  }
 }
 
 function ajaxMakeAdmin(id, type) {
@@ -41094,7 +41119,7 @@ function ajaxMakeAdmin(id, type) {
 
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      console.log(this.responseText);
+      changeSettingsInterface(id, type);
     }
   };
 
@@ -41103,7 +41128,41 @@ function ajaxMakeAdmin(id, type) {
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.setRequestHeader("X-CSRF-Token", CSRF_TOKEN);
   xhttp.send("&userID=" + id + "&type=" + type + "");
+} // Function to change the user interface screen layout when an admin has been made or removed
+
+
+function changeSettingsInterface(userID, type) {
+  var selectedButton = document.querySelectorAll('[data-user-id="' + userID + '"]');
+
+  if (type == "make") {
+    selectedButton[0].innerHTML = "Remove Admin";
+    selectedButton[0].id = "removeAdmin";
+  } else {
+    selectedButton[0].innerHTML = "Make Admin";
+    selectedButton[0].id = "makeAdmin";
+  }
+
+  showHideStared();
+  refreshUsers();
 }
+
+function showHideStared() {
+  // Loop through all stared cars buttons and decide if they should appear or be hidden
+  var selectedButton = document.querySelectorAll('.staredButton');
+  selectedButton.forEach(function (button) {
+    var userID = button.dataset.staredUserId;
+    var removeAddButton = document.querySelectorAll('[data-user-id="' + userID + '"]');
+
+    if (removeAddButton[0].id == "removeAdmin") {
+      button.style.display = "none";
+    } else {
+      button.style.display = "block";
+    }
+  });
+}
+
+showHideStared();
+refreshUsers();
 
 /***/ }),
 
@@ -41135,7 +41194,6 @@ function searchCars() {
     // If AJAX response comes back without an error
     if (this.readyState == 4 && this.status == 200) {
       // Code to replace on screen cars with result
-      console.log(this.responseText);
       var carRemove = document.getElementById('remove');
       carRemove.parentNode.removeChild(carRemove);
       document.getElementById("cars").innerHTML = this.responseText;
@@ -41169,9 +41227,9 @@ function searchCars() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/scottandrews/Documents/University Code/Worcester_Cars_Web_Application/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/scottandrews/Documents/University Code/Worcester_Cars_Web_Application/node_modules/lightbox2/dist/js/lightbox.min.js */"./node_modules/lightbox2/dist/js/lightbox.min.js");
-module.exports = __webpack_require__(/*! /Users/scottandrews/Documents/University Code/Worcester_Cars_Web_Application/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/scottandrews/Documents/Personal Projects/Worcester-Cars-Application/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /Users/scottandrews/Documents/Personal Projects/Worcester-Cars-Application/node_modules/lightbox2/dist/js/lightbox.min.js */"./node_modules/lightbox2/dist/js/lightbox.min.js");
+module.exports = __webpack_require__(/*! /Users/scottandrews/Documents/Personal Projects/Worcester-Cars-Application/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

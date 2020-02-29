@@ -12,11 +12,27 @@ class CarController extends Controller
         if($id){
             $individualCar = DB::select('SELECT * FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id INNER JOIN bodyType ON cars.bodyType_id = bodyType.id INNER JOIN manufacturer ON cars.manufacturer_id = manufacturer.id WHERE cars.id = '.$id.'');
 
-            $individualCarFirstImage = DB::select('SELECT carImagesLink.cars_id, carImages.imageURL as image, carImages.imageAltText as altText FROM carImagesLink INNER JOIN carImages ON carImages_id = carImages.id WHERE carImagesLink.cars_id = '.$id.'');
+            //$individualCarFirstImage = DB::select('SELECT carImagesLink.cars_id, carImages.imageURL as image, carImages.imageAltText as altText FROM carImagesLink INNER JOIN carImages ON carImages_id = carImages.id WHERE carImagesLink.cars_id = '.$id.'');
 
-            $allImages = DB::select('SELECT carImages.imageURL as image, carImages.imageAltText as altText FROM carImagesLink INNER JOIN carImages ON carImages_id = carImages.id WHERE carImagesLink.cars_id = '.$id.'');
+            //$allImages = DB::select('SELECT carImages.imageURL as image, carImages.imageAltText as altText FROM carImagesLink INNER JOIN carImages ON carImages_id = carImages.id WHERE carImagesLink.cars_id = '.$id.'');
 
-            return view('car', compact('individualCar', 'individualCarFirstImage', 'allImages'))->withId($id);
+            $carImageURL = array();
+            $carAltText = array();    
+
+            $allCarImages = DB::select('SELECT carImagesLink.cars_id, ANY_VALUE(carImages.imageURL) as image, ANY_VALUE(carImages.imageAltText) as altText FROM carImagesLink INNER JOIN carImages ON carImages_id = carImages.id WHERE carImagesLink.cars_id = '.$id.'');
+            
+            if(count($allCarImages) == 0){
+                array_push($carImageURL, "imageNotAvaliable.png");
+                array_push($carAltText, "No Image Currently Avaliable");
+            }else{
+                foreach($allCarImages as $images){
+                    array_push($carImageURL, $images->image);
+                    array_push($carAltText, $images->altText);
+                }
+            }
+            
+
+            return view('car', compact('individualCar', 'carImageURL', 'carAltText'))->withId($id);
         }else{
             redirect('/cars');
         }

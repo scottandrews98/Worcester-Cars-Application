@@ -9,7 +9,7 @@
     <meta name="twitter:site" content="@WorcesterCars" />
     <meta name="twitter:title" content="{{$individualCar[0] -> name}}" />
     <meta name="twitter:description" content="{{$individualCar[0] -> description}}" />
-    <meta name="twitter:image" content="{{asset('carImages/').'/'.$individualCarFirstImage[0]->image}}" />
+    <meta name="twitter:image" content="{{asset('carImages/').'/'.$carImageURL[0]}}" />
 @endsection
 
 @section('content')
@@ -47,7 +47,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <img class="img-responsive" src="{{asset('carImages/').'/'.$individualCarFirstImage[0]->image}}" alt="{{$individualCarFirstImage[0]->altText}}" />
+                    <img class="img-responsive" src="{{asset('carImages/').'/'.$carImageURL[0]}}" alt="{{$carAltText[0]}}" />
                 </div>
                 <div class="col-md-6">
                     <div class="row">
@@ -216,9 +216,9 @@
                 </div>
                 <div role="tabpanel" class="tab-pane" id="gallery">
                     <div class="row imageRow">
-                        @foreach($allImages as $index => $imageLoop)
-                            <a href="{{asset('carImages/').'/'.$imageLoop->image}}" data-lightbox="image-1">
-                                <img src="{{asset('carImages/').'/'.$imageLoop->image}}" class="img-responsive" alt="{{$imageLoop->altText}}">
+                        @foreach($carImageURL as $index => $imageLoop)
+                            <a href="{{asset('carImages/').'/'.$carImageURL[$index]}}" data-lightbox="image-1">
+                                <img src="{{asset('carImages/').'/'.$carImageURL[$index]}}" class="img-responsive" alt="{{$carAltText[$index]}}">
                             </a>
                         @endforeach
                     </div>
