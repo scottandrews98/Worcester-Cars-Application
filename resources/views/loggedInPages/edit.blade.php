@@ -94,7 +94,8 @@
                                 <input class="existingImage" type="text" name="existingImage[]" data-imageID="{{$index}}" value="{{$imageLoop->id}}" hidden/>
                             @endforeach
 
-                            <button type="submit" href="#">Update Car</button>
+                            <button type="button" id="update">Update Car</button>
+                            <button type="submit" id="hiddenSubmit" style="display: none"></button>
                         </form>
                     </div>
                 </div>

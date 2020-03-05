@@ -13,6 +13,8 @@ require('./deleteCar');
 require('./deleteProfile');
 require('./makeAndRemoveAdmins');
 require('./search');
+require('./addingOrUpdatingCar');
+require('./increaseTextSize');
 require('lightbox2');
 
 

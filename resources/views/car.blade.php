@@ -212,22 +212,20 @@
                     <!-- TODO Add in accesbility zoom feature -->
                     <div class="row">
                         <div class="col-sm-11">
-                            <p>
+                            <p id="carDescription">
                                 {{$individualCar[0] -> description}}
                             </p>
                         </div>
                         <div class="col-sm-1">
-                            <img src="{{ asset('images/zoom-in.png') }}" >
+                            <img id="increaseText" src="{{ asset('images/zoom-in.png') }}" >
+                            <img id="decreaseText" src="{{ asset('images/zoom-out.png') }}" >
                         </div>
                     </div>
-                    
-                    
-
                 </div>
                 <div role="tabpanel" class="tab-pane" id="gallery">
                     <div class="row imageRow">
                         @foreach($carImageURL as $index => $imageLoop)
-                            <a href="{{asset('carImages/').'/'.$carImageURL[$index]}}" data-lightbox="image-1">
+                            <a href="{{asset('carImages/').'/'.$carImageURL[$index]}}" data-lightbox="image-1"> 
                                 <img src="{{asset('carImages/').'/'.$carImageURL[$index]}}" class="img-responsive" alt="{{$carAltText[$index]}}">
                             </a>
                         @endforeach

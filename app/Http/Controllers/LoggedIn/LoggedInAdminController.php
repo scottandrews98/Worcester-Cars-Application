@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use \Mailjet\Resources;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image as Image;
 
 class LoggedInAdminController extends Controller
 {
@@ -58,6 +59,7 @@ class LoggedInAdminController extends Controller
             'make' => 'required',
             'gearbox' => 'required',
             'bodyType' => 'required',
+            'image.*' => 'mimes:jpeg,jpg,png,gif|max:20000',
         ]);
 
         // Grab id's of fueltypes and if not insert them and grab there id's
@@ -100,8 +102,11 @@ class LoggedInAdminController extends Controller
                 // Checks to see if file input is empty
                 if($update != ""){
                     $photoName = time().$index.'.'.$update->getClientOriginalExtension();
-    
+
                     $update->move(public_path('carImages'), $photoName);
+
+                    // Runs through image compression
+                    self::compressImage("carImages/".$photoName."");
 
                     $imageAltText = $request->input('altText')[$index];
 
@@ -147,7 +152,11 @@ class LoggedInAdminController extends Controller
             ];
 
             $response = $mj->post(Resources::$Email, ['body' => $body]);
-            return redirect('/admin');
+
+            // load the admin page after a new car has been added
+            return redirect()->route('admin')->withSuccess('New Car Added Successfully');
+        }else if($type == "edit"){
+            return redirect()->route('admin')->withSuccess('Car Updated Successfully');
         }else{
             return redirect('/admin');
         }
@@ -166,22 +175,19 @@ class LoggedInAdminController extends Controller
         }
     }
 
-    // function compressImage($image){
-    //     $endpoint = "api.tinify.com/shrink";
-    //     $client = new \GuzzleHttp\Client();
-    //     $imagePath = "/carImages/15805784710.png";
+    // Function responsible for compressing and resizing uploaded images
+    public function compressImage($image){
+        $img = Image::make($image);
 
+        $img->resize(500, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        
+        $img->save($image, 85);
+    }
 
-    //     $response = $client->request('POST', $endpoint, ['query' => [
-    //         'key2' => $value,
-    //     ]]);
-
-    //     // url will be: http://my.domain.com/test.php?key1=5&key2=ABC;
-
-    //     $statusCode = $response->getStatusCode();
-    //     $content = $response->getBody();
-    // }
-
+    // Function responsible for loading a car's information ready for editing
     public function loadEdit($id)
     {   
         if($id){
@@ -195,7 +201,7 @@ class LoggedInAdminController extends Controller
 
             $carImages = DB::select('SELECT carImages.id, carImages.imageURL as image, carImages.imageAltText as altText FROM carImagesLink INNER JOIN carImages ON carImages_id = carImages.id WHERE carImagesLink.cars_id = '.$id.'');
 
-            return view('loggedInPages.edit', compact('selectedCar', 'selectedCarID', 'allMakes', 'allFuelType', 'allTransmissionType', 'allCarShapes', 'carImages'));
+            return view('loggedInPages.edit', compact('selectedCar', 'selectedCarID', 'allMakes', 'allFuelType', 'allTransmissionType', 'allCarShapes', 'carImages') );
         }else{
             redirect('/admin');
         }
@@ -204,7 +210,6 @@ class LoggedInAdminController extends Controller
     public function saveEdit($id, Request $request)
     {
         // Saves the eidited car information
-
         if($request->input('existingImage')){
             $remainingImages = "";
 

@@ -15,6 +15,23 @@
         </div>
     </header>
 
+    <!-- Add or update confirmation message section -->
+    <section class="addOrUpdateError">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    @if(session()->has('success'))
+                        <div class="card">
+                            <div class="card-body bg-success">
+                                {{ session()->get('success') }}
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="individualCarInformation">
         <div class="container">
 
@@ -103,7 +120,8 @@
 
                             <input class="fileid" type="file" name="image[]" accept="image/*" hidden/>
 
-                            <button type="submit" href="#">Add Car</button>
+                            <button id="submit" type="button" href="#">Add Car</button>
+                            <button type="submit" id="hiddenSubmit" href="#" style="display: none"></button>
                         </form>
                     </div>
                 </div>

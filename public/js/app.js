@@ -40638,6 +40638,59 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/addingOrUpdatingCar.js":
+/*!*********************************************!*\
+  !*** ./resources/js/addingOrUpdatingCar.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Code for checking if an admin wants to add a new car
+var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+
+var elementExists = document.getElementById("submit");
+
+if (elementExists) {
+  elementExists.addEventListener("click", function () {
+    Swal.fire({
+      title: 'Are you sure you want to add a new car?',
+      text: "Make sure all fields are filled in!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, add a new car'
+    }).then(function (result) {
+      if (result.value) {
+        document.getElementById("hiddenSubmit").click();
+      }
+    });
+  });
+} // Code for checking to see if an admin wants to update a car
+
+
+var elementExists = document.getElementById("update");
+
+if (elementExists) {
+  elementExists.addEventListener("click", function () {
+    Swal.fire({
+      title: 'Are you sure you want to update this car?',
+      text: "Warning this cannot be reversed",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, update car information'
+    }).then(function (result) {
+      if (result.value) {
+        document.getElementById("hiddenSubmit").click();
+      }
+    });
+  });
+}
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -40667,6 +40720,10 @@ __webpack_require__(/*! ./deleteProfile */ "./resources/js/deleteProfile.js");
 __webpack_require__(/*! ./makeAndRemoveAdmins */ "./resources/js/makeAndRemoveAdmins.js");
 
 __webpack_require__(/*! ./search */ "./resources/js/search.js");
+
+__webpack_require__(/*! ./addingOrUpdatingCar */ "./resources/js/addingOrUpdatingCar.js");
+
+__webpack_require__(/*! ./increaseTextSize */ "./resources/js/increaseTextSize.js");
 
 __webpack_require__(/*! lightbox2 */ "./node_modules/lightbox2/dist/js/lightbox.js"); // window.Vue = require('vue');
 // /**
@@ -40985,9 +41042,11 @@ function calculateFinance() {
   !*** ./resources/js/imageUpload.js ***!
   \*************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-// Waits for a click on an add new image button
+var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js"); // Waits for a click on an add new image button
+
+
 function openDialog() {
   document.getElementsByClassName('fileid')[totalImages].click();
   document.getElementsByClassName('fileid')[totalImages].addEventListener("change", imageChange);
@@ -41017,22 +41076,33 @@ function loopClass(className, clickedID) {
 var totalImages = document.querySelectorAll('.altText').length;
 
 function imageChange() {
-  // Adds to the page the image that has just been uploaded
-  document.getElementById('imageRow').insertAdjacentHTML('afterbegin', '<img src="" class="img-responsive imgUploaded" id="carImage1" data-imageID="' + totalImages + '"></img>'); // Adds to the page a hidden input type file field that contains the path on the user's local machine for the image that has just been selected
+  // Checks image size to make sure it's smaller than 2mb. Size method returns image size in bytes
+  var size = document.getElementsByClassName('fileid')[totalImages].files[0].size;
 
-  document.getElementById('addNew').insertAdjacentHTML('beforeend', '<input class="fileid" type="file" name="image[]" data-imageID="' + totalImages + '" accept="image/*" hidden/>');
-  var fileReader = new FileReader();
-  var target = document.getElementById('carImage1');
+  if (size >= 2000000) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Image Too Large',
+      text: 'All images must be below 2mb.'
+    });
+  } else {
+    // Adds to the page the image that has just been uploaded
+    document.getElementById('imageRow').insertAdjacentHTML('afterbegin', '<img src="" class="img-responsive imgUploaded" id="carImage1" data-imageID="' + totalImages + '"></img>'); // Adds to the page a hidden input type file field that contains the path on the user's local machine for the image that has just been selected
 
-  fileReader.onload = function () {
-    target.src = this.result;
-  };
+    document.getElementById('addNew').insertAdjacentHTML('beforeend', '<input class="fileid" type="file" name="image[]" data-imageID="' + totalImages + '" accept="image/*" hidden/>');
+    var fileReader = new FileReader();
+    var target = document.getElementById('carImage1');
 
-  target.addEventListener('click', removeImage);
-  fileReader.readAsDataURL(document.getElementsByClassName('fileid')[totalImages].files[0]); // Adds to the page a text input box that will contain the alt text for the image that has just been uploaded
+    fileReader.onload = function () {
+      target.src = this.result;
+    };
 
-  document.getElementById('imageRow').insertAdjacentHTML('beforebegin', '<input type="text" class="altText" data-imageID="' + totalImages + '" placeholder="Alt Text For Image Number ' + totalImages + '" name="altText[]" required>');
-  totalImages++;
+    target.addEventListener('click', removeImage);
+    fileReader.readAsDataURL(document.getElementsByClassName('fileid')[totalImages].files[0]); // Adds to the page a text input box that will contain the alt text for the image that has just been uploaded
+
+    document.getElementById('imageRow').insertAdjacentHTML('beforebegin', '<input type="text" class="altText" data-imageID="' + totalImages + '" placeholder="Alt Text For Image Number ' + totalImages + '" name="altText[]" required>');
+    totalImages++;
+  }
 }
 
 window.addEventListener('load', function () {
@@ -41052,6 +41122,41 @@ window.addEventListener('load', function () {
   }
 }); // Code for removing images when editing 
 // Controller could loop over alt text boxes and see if any are missing by their
+
+/***/ }),
+
+/***/ "./resources/js/increaseTextSize.js":
+/*!******************************************!*\
+  !*** ./resources/js/increaseTextSize.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// Code for increasing the size of the text for the car descriptions
+var elementExists = document.getElementById("increaseText");
+
+if (elementExists) {
+  if (localStorage.getItem("size") == "large") {
+    document.getElementById("carDescription").style.fontSize = "25px";
+    document.getElementById("increaseText").style.display = "none";
+  } else {
+    document.getElementById("decreaseText").style.display = "none";
+  }
+
+  elementExists.addEventListener("click", function () {
+    document.getElementById("carDescription").style.fontSize = "25px"; // Set local storage to remember if large is set
+
+    localStorage.setItem("size", "large");
+    document.getElementById("decreaseText").style.display = "inline-block";
+    document.getElementById("increaseText").style.display = "none";
+  });
+  document.getElementById("decreaseText").addEventListener("click", function () {
+    localStorage.removeItem("size");
+    document.getElementById("carDescription").style.fontSize = "16px";
+    document.getElementById("increaseText").style.display = "inline-block";
+    document.getElementById("decreaseText").style.display = "none";
+  });
+}
 
 /***/ }),
 
