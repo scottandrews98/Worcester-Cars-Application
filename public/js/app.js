@@ -41285,6 +41285,7 @@ var nextPage = "";
 if (elementExists) {
   document.getElementById("search").addEventListener("click", function () {
     nextPage = "";
+    document.getElementById("pageNumber").value = Number(0);
     var response = calculatePage();
     searchCars(response);
   });
@@ -41308,12 +41309,10 @@ function calculatePage() {
     document.getElementById("pageNumber").value = Number(pageNumberInitial) + 1;
   } else if (nextPage == "subtract") {
     document.getElementById("pageNumber").value = Number(pageNumberInitial) - 1;
-    console.log("runs");
   } else {
     document.getElementById("pageNumber").value = Number(pageNumberInitial);
   }
 
-  console.log(document.getElementById("pageNumber").value);
   return Number(document.getElementById("pageNumber").value);
 }
 
@@ -41382,9 +41381,9 @@ function searchCars(pageNumber) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/scottandrews/Documents/University Code/Worcester_Cars_Web_Application/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/scottandrews/Documents/University Code/Worcester_Cars_Web_Application/node_modules/lightbox2/dist/js/lightbox.min.js */"./node_modules/lightbox2/dist/js/lightbox.min.js");
-module.exports = __webpack_require__(/*! /Users/scottandrews/Documents/University Code/Worcester_Cars_Web_Application/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/scottandrews/Documents/Personal Projects/Worcester-Cars-Application/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /Users/scottandrews/Documents/Personal Projects/Worcester-Cars-Application/node_modules/lightbox2/dist/js/lightbox.min.js */"./node_modules/lightbox2/dist/js/lightbox.min.js");
+module.exports = __webpack_require__(/*! /Users/scottandrews/Documents/Personal Projects/Worcester-Cars-Application/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

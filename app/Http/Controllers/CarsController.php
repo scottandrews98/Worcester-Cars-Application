@@ -138,9 +138,16 @@ class CarsController extends Controller
             }
         }
 
+        $carsCount = count(DB::select($searchQueryString));
+
+        if($offset + 4 > $carsCount){
+            $hideNext = true;
+        }else{
+            $hideNext = false;
+        }
+
         $searchQueryString .= " LIMIT 3 OFFSET ".$offset."";
         
-
         $carsSearch = DB::select($searchQueryString);
         $carImageURL = array();
         $carAltText = array();
@@ -156,29 +163,7 @@ class CarsController extends Controller
                 array_push($carAltText, $allCarImages[0]->altText);
             }
         }
-
-        //return $searchQueryString;
-        return view('layouts.carsSearch', compact('carsSearch', 'carImageURL', 'carAltText'))->withPageNumber($newPageNumber)->withQuery($searchQueryString);
+        
+        return view('layouts.carsSearch', compact('carsSearch', 'carImageURL', 'carAltText'))->withPageNumber($newPageNumber)->withHideNext($hideNext);
     }
-
-    // public function nextPage($pageCount){
-    //     // Function that loads the next 8 cars 
-
-    //     // Calculate starting limit number
-    //     $finishingNumber = 8 * $pageCount;
-    //     // https://www.w3schools.com/php/php_mysql_select_limit.asp
-
-    //     $allCars = DB::select('SELECT cars.id, cars.name, cars.price, cars.mileage, transmission.transmissionType, cars.engineSize, fueltype.fuelTypeName, cars.topSpeed, cars.tax FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id LIMIT 8 OFFSET '.$finishingNumber.'');
-
-    //     $allCarImages = DB::select('SELECT carImagesLink.cars_id, ANY_VALUE(carImages.imageURL) as image, ANY_VALUE(carImages.imageAltText) as altText FROM carImagesLink INNER JOIN carImages ON carImages_id = carImages.id GROUP BY carImagesLink.cars_id LIMIT 8 OFFSET '.$finishingNumber.'');
-
-    //     $carsPageMeta = DB::select('SELECT carsPageMeta FROM siteSettings');
-
-    //     $allMakes = DB::select('SELECT manufacturerName FROM manufacturer');
-    //     $allFuelType = DB::select('SELECT fuelTypeName FROM fuelType');
-    //     $allTransmissionType = DB::select('SELECT transmissionType FROM transmission');
-    //     $allCarShapes = DB::select('SELECT bodyTypeName FROM bodyType');
-
-    //     return view('cars', compact('allCars', 'allCarImages', 'carsPageMeta', 'allMakes', 'allFuelType', 'allTransmissionType', 'allCarShapes'));
-    // }
 }

@@ -6,6 +6,7 @@ var nextPage = "";
 if(elementExists){
     document.getElementById("search").addEventListener("click", function(){
         nextPage = "";
+        document.getElementById("pageNumber").value = Number(0);
         let response = calculatePage();
         searchCars(response)
     });
@@ -30,11 +31,9 @@ function calculatePage(){
         document.getElementById("pageNumber").value = Number(pageNumberInitial) + 1;
     }else if(nextPage == "subtract"){
         document.getElementById("pageNumber").value = Number(pageNumberInitial) - 1;
-        console.log("runs");
     }else{
         document.getElementById("pageNumber").value = Number(pageNumberInitial);
     }
-    console.log(document.getElementById("pageNumber").value);
     return Number(document.getElementById("pageNumber").value);
 }
 
