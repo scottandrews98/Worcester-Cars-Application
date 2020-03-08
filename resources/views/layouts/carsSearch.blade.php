@@ -104,6 +104,19 @@
             </div>
         </div>
     @endforeach
+
+    <input hidden value="{{ $pageNumber }}" id="pageNumber">
+    <a id="nextPage" class="loadCarButton">
+        <button class="loadCarButton">Next Page</button>
+    </a>
+
+    @if($pageNumber > 0)
+        <a id="lastPage" class="loadCarButton">
+            <button class="loadCarButton">Previous Page</button>
+        </a>
+    @endif
+
+    {{ $query }}
 </div>
 
 <!-- TODO Add in remove search parameters button -->

@@ -22,7 +22,6 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/about', 'AboutController@index')->name('about');
 Route::get('/cars', 'CarsController@index')->name('cars');
-Route::get('/cars/{pageCount}', 'CarsController@nextPage');
 Route::get('/contact', 'ContactController@index')->name('contact');
 
 // Individual Car

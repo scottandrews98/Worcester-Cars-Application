@@ -10,7 +10,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1>Cars</h1>
+                    <h1 id="mainCarsHeading">Cars{{ $brand }}</h1>
                 </div> 
                 <div class="col-sm-6">
                     <a href="#" id="advancedSearch">Advanced Search</a>
@@ -27,6 +27,7 @@
                     <div class="col-sm-4">
                         <!-- <input type="text" list="manufacturers" placeholder="Manufacturers"> -->
                         <select id="manufacturers" placeholder="Manufacturers">
+                            <option>All Makes</option>
                             @foreach($allMakes as $make)
                                     <option>{{ $make -> manufacturerName }}</option>
                             @endforeach
@@ -38,6 +39,7 @@
                     <div class="col-sm-4">
                         <!-- <input type="text" list="fuel" placeholder="Fuel Type"> -->
                         <select id="fuel">
+                            <option>Any Fuel Type</option>
                             @foreach($allFuelType as $fuel)
                                     <option>{{ $fuel -> fuelTypeName }}</option>
                             @endforeach
@@ -48,6 +50,7 @@
                     <div class="col-sm-4">
                         <!-- <input type="text" list="gearbox" placeholder="Transmition"> -->
                         <select id="gearbox">
+                            <option>All Transmission Types</option>
                             @foreach($allTransmissionType as $transmission)
                                     <option>{{ $transmission -> transmissionType }}</option>
                             @endforeach
@@ -68,6 +71,14 @@
             </form>
         </div>
     </section>
+
+    <div class="container">
+        <select id="orderBy">
+            <option>Lowest Price</option>
+            <option>Highest Price</option>
+            <option>Lowest Miles</option>
+        </select>
+    </div>
 
     <section class="cars" id="cars">
         <div class="container" id="remove">
@@ -175,11 +186,10 @@
                 </div>
             @endforeach
 
-            <!-- TODO implement page 2 link here -->
-            
-                <a href="/cars/2" class="loadCarButton">
-                    <button class="loadCarButton">Next Page</button>
-                </a>
+            <input hidden value="0" id="pageNumber">
+            <a id="nextPage" class="loadCarButton">
+                <button class="loadCarButton">Next Page</button>
+            </a>
             
         </div>
     </section>

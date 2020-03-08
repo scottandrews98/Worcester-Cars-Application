@@ -41280,9 +41280,15 @@ refreshUsers();
 
 // JavaScript code that sends and ajax request to the backend to produce 
 var elementExists = document.getElementById("searchForm");
+var nextPage = "";
 
 if (elementExists) {
   document.getElementById("search").addEventListener("click", searchCars);
+  document.getElementById("orderBy").addEventListener("change", searchCars);
+  document.getElementById("nextPage").addEventListener("click", function () {
+    nextPage = true;
+    searchCars();
+  });
 }
 
 function searchCars() {
@@ -41292,7 +41298,20 @@ function searchCars() {
   var fuel = document.getElementById('fuel').value;
   var gearbox = document.getElementById('gearbox').value;
   var mpg = document.getElementById('mpg').value;
-  var tax = document.getElementById('tax').value;
+  var tax = document.getElementById('tax').value; // Code to get the current order dropdown
+
+  var changeSelectBox = document.getElementById("orderBy");
+  var chosenValue = changeSelectBox.options[changeSelectBox.selectedIndex].value; // Code to get the current page and if previous or next has been clicked
+
+  var pageNumber = document.getElementById("pageNumber").value;
+
+  if (nextPage == true) {
+    document.getElementById("pageNumber").value = Number(pageNumber) + 1;
+  } else {
+    document.getElementById("pageNumber").value = Number(pageNumber) - 1;
+  }
+
+  pageNumber = document.getElementById("pageNumber").value;
   var xhttp = new XMLHttpRequest();
 
   xhttp.onreadystatechange = function () {
@@ -41302,6 +41321,20 @@ function searchCars() {
       var carRemove = document.getElementById('remove');
       carRemove.parentNode.removeChild(carRemove);
       document.getElementById("cars").innerHTML = this.responseText;
+      document.getElementById("mainCarsHeading").innerHTML = "Cars";
+
+      if (document.getElementById("lastPage")) {
+        document.getElementById("lastPage").addEventListener("click", function () {
+          nextPage = false;
+          searchCars();
+        });
+      }
+
+      document.getElementById("nextPage").addEventListener("click", function () {
+        nextPage = true;
+        searchCars();
+        console.log("addedListner");
+      });
     }
   };
 
@@ -41309,7 +41342,7 @@ function searchCars() {
   xhttp.open("POST", "/cars", true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.setRequestHeader("X-CSRF-Token", CSRF_TOKEN);
-  xhttp.send("&manufacturers=" + manufacturers + "&miles=" + miles + "&fuel=" + fuel + "&gearbox=" + gearbox + "&mpg=" + mpg + "&tax=" + tax + "");
+  xhttp.send("&manufacturers=" + manufacturers + "&miles=" + miles + "&fuel=" + fuel + "&gearbox=" + gearbox + "&mpg=" + mpg + "&tax=" + tax + "&chosenValue=" + chosenValue + "&pageNumber=" + pageNumber + "&pagingDirection=" + nextPage + "");
 }
 
 /***/ }),
