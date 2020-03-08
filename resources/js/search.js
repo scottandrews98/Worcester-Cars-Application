@@ -4,16 +4,42 @@ var elementExists = document.getElementById("searchForm");
 var nextPage = "";
 
 if(elementExists){
-    document.getElementById("search").addEventListener("click", searchCars);
-    document.getElementById("orderBy").addEventListener("change", searchCars);
+    document.getElementById("search").addEventListener("click", function(){
+        nextPage = "";
+        let response = calculatePage();
+        searchCars(response)
+    });
+    document.getElementById("orderBy").addEventListener("change", function(){
+        nextPage = "";
+        let response = calculatePage();
+        searchCars(response)
+    });
 
     document.getElementById("nextPage").addEventListener("click", function(){
-        nextPage = true;
-        searchCars();
+        nextPage = "add";
+        let response = calculatePage();
+        searchCars(response);
     });
 }
 
-function searchCars(){
+function calculatePage(){
+    // Code to get the current page and if previous or next has been clicked
+    var pageNumberInitial = document.getElementById("pageNumber").value;
+
+    if(nextPage == "add"){
+        document.getElementById("pageNumber").value = Number(pageNumberInitial) + 1;
+    }else if(nextPage == "subtract"){
+        document.getElementById("pageNumber").value = Number(pageNumberInitial) - 1;
+        console.log("runs");
+    }else{
+        document.getElementById("pageNumber").value = Number(pageNumberInitial);
+    }
+    console.log(document.getElementById("pageNumber").value);
+    return Number(document.getElementById("pageNumber").value);
+}
+
+
+function searchCars(pageNumber){
     // Code to fetch the set form values
     let manufacturers = document.getElementById('manufacturers').value;
     let miles = document.getElementById('miles').value;
@@ -25,17 +51,6 @@ function searchCars(){
     // Code to get the current order dropdown
     let changeSelectBox = document.getElementById("orderBy");
     let chosenValue = changeSelectBox.options[changeSelectBox.selectedIndex].value;
-
-    // Code to get the current page and if previous or next has been clicked
-    var pageNumber = document.getElementById("pageNumber").value;
-
-    if(nextPage == true){
-        document.getElementById("pageNumber").value = Number(pageNumber) + 1;
-    }else{
-        document.getElementById("pageNumber").value = Number(pageNumber) - 1;
-    }
-
-    pageNumber = document.getElementById("pageNumber").value;
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -49,15 +64,16 @@ function searchCars(){
 
             if(document.getElementById("lastPage")){
                 document.getElementById("lastPage").addEventListener("click", function(){
-                    nextPage = false;
-                    searchCars();
+                    nextPage = "subtract";
+                    let response = calculatePage();
+                    searchCars(response);
                 });    
             }
             
             document.getElementById("nextPage").addEventListener("click", function(){
-                nextPage = true;
-                searchCars();
-                console.log("addedListner");
+                nextPage = "add";
+                let response = calculatePage();
+                searchCars(response);
             });
         }
     };

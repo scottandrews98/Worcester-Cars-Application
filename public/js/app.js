@@ -41283,15 +41283,41 @@ var elementExists = document.getElementById("searchForm");
 var nextPage = "";
 
 if (elementExists) {
-  document.getElementById("search").addEventListener("click", searchCars);
-  document.getElementById("orderBy").addEventListener("change", searchCars);
+  document.getElementById("search").addEventListener("click", function () {
+    nextPage = "";
+    var response = calculatePage();
+    searchCars(response);
+  });
+  document.getElementById("orderBy").addEventListener("change", function () {
+    nextPage = "";
+    var response = calculatePage();
+    searchCars(response);
+  });
   document.getElementById("nextPage").addEventListener("click", function () {
-    nextPage = true;
-    searchCars();
+    nextPage = "add";
+    var response = calculatePage();
+    searchCars(response);
   });
 }
 
-function searchCars() {
+function calculatePage() {
+  // Code to get the current page and if previous or next has been clicked
+  var pageNumberInitial = document.getElementById("pageNumber").value;
+
+  if (nextPage == "add") {
+    document.getElementById("pageNumber").value = Number(pageNumberInitial) + 1;
+  } else if (nextPage == "subtract") {
+    document.getElementById("pageNumber").value = Number(pageNumberInitial) - 1;
+    console.log("runs");
+  } else {
+    document.getElementById("pageNumber").value = Number(pageNumberInitial);
+  }
+
+  console.log(document.getElementById("pageNumber").value);
+  return Number(document.getElementById("pageNumber").value);
+}
+
+function searchCars(pageNumber) {
   // Code to fetch the set form values
   var manufacturers = document.getElementById('manufacturers').value;
   var miles = document.getElementById('miles').value;
@@ -41301,17 +41327,7 @@ function searchCars() {
   var tax = document.getElementById('tax').value; // Code to get the current order dropdown
 
   var changeSelectBox = document.getElementById("orderBy");
-  var chosenValue = changeSelectBox.options[changeSelectBox.selectedIndex].value; // Code to get the current page and if previous or next has been clicked
-
-  var pageNumber = document.getElementById("pageNumber").value;
-
-  if (nextPage == true) {
-    document.getElementById("pageNumber").value = Number(pageNumber) + 1;
-  } else {
-    document.getElementById("pageNumber").value = Number(pageNumber) - 1;
-  }
-
-  pageNumber = document.getElementById("pageNumber").value;
+  var chosenValue = changeSelectBox.options[changeSelectBox.selectedIndex].value;
   var xhttp = new XMLHttpRequest();
 
   xhttp.onreadystatechange = function () {
@@ -41325,15 +41341,16 @@ function searchCars() {
 
       if (document.getElementById("lastPage")) {
         document.getElementById("lastPage").addEventListener("click", function () {
-          nextPage = false;
-          searchCars();
+          nextPage = "subtract";
+          var response = calculatePage();
+          searchCars(response);
         });
       }
 
       document.getElementById("nextPage").addEventListener("click", function () {
-        nextPage = true;
-        searchCars();
-        console.log("addedListner");
+        nextPage = "add";
+        var response = calculatePage();
+        searchCars(response);
       });
     }
   };
@@ -41365,9 +41382,9 @@ function searchCars() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/scottandrews/Documents/Personal Projects/Worcester-Cars-Application/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/scottandrews/Documents/Personal Projects/Worcester-Cars-Application/node_modules/lightbox2/dist/js/lightbox.min.js */"./node_modules/lightbox2/dist/js/lightbox.min.js");
-module.exports = __webpack_require__(/*! /Users/scottandrews/Documents/Personal Projects/Worcester-Cars-Application/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/scottandrews/Documents/University Code/Worcester_Cars_Web_Application/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /Users/scottandrews/Documents/University Code/Worcester_Cars_Web_Application/node_modules/lightbox2/dist/js/lightbox.min.js */"./node_modules/lightbox2/dist/js/lightbox.min.js");
+module.exports = __webpack_require__(/*! /Users/scottandrews/Documents/University Code/Worcester_Cars_Web_Application/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
