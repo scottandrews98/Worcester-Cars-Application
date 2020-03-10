@@ -235,6 +235,7 @@
                 </div>
                 <div role="tabpanel" class="tab-pane" id="finance">
                     <div class="row">
+                        <input hidden value="{{$interestRate[0] -> interestRate}}" id="interestRate">
                         <div class="col-sm-4">
                             <label>Price Of Car</label></br>
                             <input type="number" value="{{$individualCar[0] -> price}}" id="price" readonly>

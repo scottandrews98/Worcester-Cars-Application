@@ -14,6 +14,8 @@ class CarController extends Controller
             
             $allCarNames = DB::select('SELECT id, name FROM cars WHERE id <> '.$id.'');
 
+            $interestRate = DB::select('SELECT interestRate FROM siteSettings LIMIT 1');
+
             $carImageURL = array();
             $carAltText = array();    
 
@@ -30,7 +32,7 @@ class CarController extends Controller
             }
             
 
-            return view('car', compact('individualCar', 'carImageURL', 'carAltText', 'allCarNames'))->withId($id);
+            return view('car', compact('individualCar', 'carImageURL', 'carAltText', 'allCarNames', 'interestRate'))->withId($id);
         }else{
             redirect('/cars');
         }

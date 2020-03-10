@@ -41069,12 +41069,25 @@ function calculateFinance() {
   var price = document.getElementById("price").value;
   var deposit = document.getElementById("deposit").value;
   var repayment = document.getElementById("repayment").value;
+  var interestRateDatabase = document.getElementById("interestRate").value;
+  var interestRate = 3.6;
+
+  if (interestRateDatabase == "") {
+    intrestRate = 3.6 / 100;
+  } else {
+    intrestRate = interestRateDatabase / 100;
+  }
+
   var repaymentYears = repayment / 12;
-  var intrestRate = 3.6 / 100;
   var amountBorrowed = price - deposit;
   var intrestAmount = amountBorrowed * intrestRate * repaymentYears;
   var figurePerMonth = (amountBorrowed + intrestAmount) / repayment;
-  document.getElementById("result").innerHTML = "£" + Math.round(figurePerMonth) + " Per Month At A Rate Of " + (intrestRate * 100).toFixed(2) + "%";
+
+  if (figurePerMonth < 0) {
+    document.getElementById("result").innerHTML = "Error, Negative Figure. Please Update";
+  } else {
+    document.getElementById("result").innerHTML = "£" + Math.round(figurePerMonth) + " Per Month At A Rate Of " + (intrestRate * 100).toFixed(2) + "%";
+  }
 }
 
 /***/ }),
