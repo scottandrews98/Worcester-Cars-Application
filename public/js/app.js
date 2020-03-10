@@ -40725,6 +40725,8 @@ __webpack_require__(/*! ./addingOrUpdatingCar */ "./resources/js/addingOrUpdatin
 
 __webpack_require__(/*! ./increaseTextSize */ "./resources/js/increaseTextSize.js");
 
+__webpack_require__(/*! ./compareCars */ "./resources/js/compareCars.js");
+
 __webpack_require__(/*! lightbox2 */ "./node_modules/lightbox2/dist/js/lightbox.js"); // window.Vue = require('vue');
 // /**
 //  * The following block of code may be used to automatically register your
@@ -40830,6 +40832,46 @@ function likeCar() {
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.setRequestHeader("X-CSRF-Token", CSRF_TOKEN);
   xhttp.send("&carID=" + carID + "");
+}
+
+/***/ }),
+
+/***/ "./resources/js/compareCars.js":
+/*!*************************************!*\
+  !*** ./resources/js/compareCars.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// Compare car details to selected car
+var elementExists = document.getElementById("compareCars");
+
+if (elementExists) {
+  document.getElementById("compareCars").addEventListener("change", compareCars);
+}
+
+function compareCars() {
+  var carSelectBox = document.getElementById("compareCars");
+  var chosenValue = carSelectBox.options[carSelectBox.selectedIndex].value;
+  var existingID = document.getElementById("existingID").value;
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function () {
+    // If AJAX response comes back without an error
+    if (this.readyState == 4 && this.status == 200) {
+      // Code to replace on screen compare with result
+      var compareRemove = document.getElementById('remove');
+      compareRemove.parentNode.removeChild(compareRemove); //document.getElementById("compare").innerHTML = this.responseText;
+
+      document.getElementById("compare").insertAdjacentHTML('beforeend', this.responseText);
+    }
+  };
+
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+  xhttp.open("POST", "/getCompareDetails", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.setRequestHeader("X-CSRF-Token", CSRF_TOKEN);
+  xhttp.send("&id=" + chosenValue + "&existingID=" + existingID + "");
 }
 
 /***/ }),

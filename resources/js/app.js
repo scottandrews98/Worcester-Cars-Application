@@ -15,6 +15,7 @@ require('./makeAndRemoveAdmins');
 require('./search');
 require('./addingOrUpdatingCar');
 require('./increaseTextSize');
+require('./compareCars');
 require('lightbox2');
 
 

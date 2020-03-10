@@ -205,11 +205,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#finance" role="tab" data-toggle="tab">Finance Calculator</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#compare" role="tab" data-toggle="tab">Compare Cars</a>
+                </li>
             </ul>
                     
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="desciption">
-                    <!-- TODO Add in accesbility zoom feature -->
                     <div class="row">
                         <div class="col-sm-11">
                             <p id="carDescription">
@@ -255,6 +257,23 @@
                         <div class="col-sm-12">
                             <button id="calculate">Calculate</button>
                             <h5 id="result"></h5>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="compare">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input id="existingID" hidden value="{{ $id }}">
+                            <select id="compareCars">
+                                <option>Select Car To Compare To</option>
+                                @foreach($allCarNames as $carNamed)
+                                    <option value="{{ $carNamed -> id }}">{{ $carNamed -> name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" id="remove">
+                        <div class="removeMe">
                         </div>
                     </div>
                 </div>

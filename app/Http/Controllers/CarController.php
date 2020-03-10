@@ -11,10 +11,8 @@ class CarController extends Controller
     {
         if($id){
             $individualCar = DB::select('SELECT * FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id INNER JOIN bodyType ON cars.bodyType_id = bodyType.id INNER JOIN manufacturer ON cars.manufacturer_id = manufacturer.id WHERE cars.id = '.$id.'');
-
-            //$individualCarFirstImage = DB::select('SELECT carImagesLink.cars_id, carImages.imageURL as image, carImages.imageAltText as altText FROM carImagesLink INNER JOIN carImages ON carImages_id = carImages.id WHERE carImagesLink.cars_id = '.$id.'');
-
-            //$allImages = DB::select('SELECT carImages.imageURL as image, carImages.imageAltText as altText FROM carImagesLink INNER JOIN carImages ON carImages_id = carImages.id WHERE carImagesLink.cars_id = '.$id.'');
+            
+            $allCarNames = DB::select('SELECT id, name FROM cars WHERE id <> '.$id.'');
 
             $carImageURL = array();
             $carAltText = array();    
@@ -32,7 +30,7 @@ class CarController extends Controller
             }
             
 
-            return view('car', compact('individualCar', 'carImageURL', 'carAltText'))->withId($id);
+            return view('car', compact('individualCar', 'carImageURL', 'carAltText', 'allCarNames'))->withId($id);
         }else{
             redirect('/cars');
         }
@@ -62,5 +60,12 @@ class CarController extends Controller
 
             return "Car Unliked";
         }
+    }
+
+    public function getCompareDetails(Request $request)
+    {
+        $compareDetails = DB::select('SELECT * FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id INNER JOIN bodyType ON cars.bodyType_id = bodyType.id INNER JOIN manufacturer ON cars.manufacturer_id = manufacturer.id WHERE cars.id IN ('.$request->input('id').','.$request->input('existingID').') ORDER BY FIELD(cars.id, '.$request->input('existingID').') DESC');
+        
+        return view('layouts.compare', compact('compareDetails'))->withNewID($request->input('id'));
     }
 }
