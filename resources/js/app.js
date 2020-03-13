@@ -16,6 +16,7 @@ require('./search');
 require('./addingOrUpdatingCar');
 require('./increaseTextSize');
 require('./compareCars');
+require('./cookieConsent');
 require('lightbox2');
 
 

@@ -40727,6 +40727,8 @@ __webpack_require__(/*! ./increaseTextSize */ "./resources/js/increaseTextSize.j
 
 __webpack_require__(/*! ./compareCars */ "./resources/js/compareCars.js");
 
+__webpack_require__(/*! ./cookieConsent */ "./resources/js/cookieConsent.js");
+
 __webpack_require__(/*! lightbox2 */ "./node_modules/lightbox2/dist/js/lightbox.js"); // window.Vue = require('vue');
 // /**
 //  * The following block of code may be used to automatically register your
@@ -40933,6 +40935,30 @@ function ValidateEmail(email) {
   } else {
     return false;
   }
+}
+
+/***/ }),
+
+/***/ "./resources/js/cookieConsent.js":
+/*!***************************************!*\
+  !*** ./resources/js/cookieConsent.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var elementExists = document.getElementById("acceptCookies");
+
+if (elementExists) {
+  document.getElementById("acceptCookies").addEventListener("click", acceptCookies);
+
+  if (localStorage.getItem("cookieConsent") == "true") {
+    document.getElementById("cookieBanner").style.display = "none";
+  }
+}
+
+function acceptCookies() {
+  localStorage.setItem("cookieConsent", "true");
+  document.getElementById("cookieBanner").style.display = "none";
 }
 
 /***/ }),
@@ -41436,9 +41462,9 @@ function searchCars(pageNumber) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/scottandrews/Documents/Personal Projects/Worcester-Cars-Application/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/scottandrews/Documents/Personal Projects/Worcester-Cars-Application/node_modules/lightbox2/dist/js/lightbox.min.js */"./node_modules/lightbox2/dist/js/lightbox.min.js");
-module.exports = __webpack_require__(/*! /Users/scottandrews/Documents/Personal Projects/Worcester-Cars-Application/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/scottandrews/Documents/University Code/Worcester_Cars_Web_Application/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /Users/scottandrews/Documents/University Code/Worcester_Cars_Web_Application/node_modules/lightbox2/dist/js/lightbox.min.js */"./node_modules/lightbox2/dist/js/lightbox.min.js");
+module.exports = __webpack_require__(/*! /Users/scottandrews/Documents/University Code/Worcester_Cars_Web_Application/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

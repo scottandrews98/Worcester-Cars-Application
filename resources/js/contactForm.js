@@ -21,9 +21,7 @@ function submitContactForm(){
         document.getElementById("errorMessage").innerHTML = "Please Enter A Value For Your Message";
     }else{
         sendRequest(name, phone, message);
-    }
-
-    
+    }   
 }
 
 function sendRequest(name, phone, message){
