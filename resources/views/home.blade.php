@@ -19,22 +19,24 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="row">
-                <div class="col-sm centerSelect">
-                    <select class="makerDropdown">
-                        <option value="" disabled selected>Pick Manufacturer</option>
-                        @foreach($allManufacturers as $index => $allMakes)
-                            <option value="{{ $allMakes -> manufacturerName }}">{{ $allMakes -> manufacturerName }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-sm">
-                    <div class="submitButton">
-                        <p>Search</p>
+
+            <form action="/cars" method="GET">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <select class="makerDropdown" name="brand">
+                            <option value="" disabled selected>Pick Manufacturer</option>
+                            @foreach($allManufacturers as $index => $allMakes)
+                                <option value="{{ $allMakes -> manufacturerName }}">{{ $allMakes -> manufacturerName }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <button type="submit" class="submitButton">
+                            <p>Search</p>
+                        </button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </header>
 
