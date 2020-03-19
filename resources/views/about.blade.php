@@ -26,7 +26,7 @@
                     </p>
                 </div>
                 <div class="col-md-6">
-                    <img class="img-responsive" src="assets/images/bmwFront.jpg" alt="BMW Front grill" />
+                    <img class="img-responsive" src="{{ URL::to('/') }}/images/bmwFront.jpg" alt="BMW Front grill" />
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <img class="img-responsive" src="assets/images/bmwBack.jpg" alt="BMW Front grill" />
+                    <img class="img-responsive" src="{{ URL::to('/') }}/images/bmwBack.jpg" alt="BMW Front grill" />
                 </div>
                 <div class="col-md-6">
                     <div class="textAlignRight">

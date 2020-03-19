@@ -1,7 +1,7 @@
 <div id="remove">
     <!-- Price Row -->
-    <div class="row carsForSale">
-        <div class="col-sm-6">
+    <div class="row compare">
+        <div class="col-sm-8">
             <h5>Total Price</h5>
         </div>
         <div class="col-sm-2">
@@ -17,8 +17,8 @@
     </div>
 
     <!-- Miles Row -->
-    <div class="row carsForSale">
-        <div class="col-sm-6">
+    <div class="row compare">
+        <div class="col-sm-8">
             <h5>Total Miles</h5>
         </div>
         <div class="col-sm-2">
@@ -34,8 +34,8 @@
     </div>
 
     <!-- MPG Row -->
-    <div class="row carsForSale">
-        <div class="col-sm-6">
+    <div class="row compare">
+        <div class="col-sm-8">
             <h5>Miles Per Gallon</h5>
         </div>
         <div class="col-sm-2">
@@ -51,8 +51,8 @@
     </div>
 
     <!-- Tax Cost -->
-    <div class="row carsForSale">
-        <div class="col-sm-6">
+    <div class="row compare">
+        <div class="col-sm-8">
             <h5>Tax Cost Per Year</h5>
         </div>
         <div class="col-sm-2">
@@ -68,8 +68,8 @@
     </div>
 
     <!-- Total Seats -->
-    <div class="row carsForSale">
-        <div class="col-sm-6">
+    <div class="row compare">
+        <div class="col-sm-8">
             <h5>Total Seats</h5>
         </div>
         <div class="col-sm-2">
@@ -87,7 +87,7 @@
     <!-- Button To View Compared Car -->
     <div class="row">
         <div class="col-sm-12">
-            <button>
+            <button class="linkCar">
                 <a href="/car/{{ $newID }}" target="_blank">View Compared Car</a>
             </button>
         </div>

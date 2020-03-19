@@ -17249,6 +17249,24 @@ readers do not read off random characters that represent icons */
   font-weight: 900;
 }
 
+/*!
+ * Font Awesome Free 5.12.0 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+
+@font-face {
+  font-family: "Font Awesome 5 Brands";
+  font-style: normal;
+  font-weight: normal;
+  font-display: auto;
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.eot?088a34f78f530102fd9661173b4a4f26);
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.eot?088a34f78f530102fd9661173b4a4f26) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.woff2?822d94f19fe57477865209e1242a3c63) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.woff?f4920c94c0861c537f72ba36590f6362) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.ttf?273dc9bf9778fd37fa61357645d46a28) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.svg?d72293118cda50ec50c39957d9d836d0) format("svg");
+}
+
+.fab {
+  font-family: "Font Awesome 5 Brands";
+}
+
 body.lb-disable-scrolling {
   overflow: hidden;
 }
@@ -19231,6 +19249,10 @@ body.swal2-toast-column .swal2-toast .swal2-validation-message {
   color: black !important;
 }
 
+.navbar .navbar-nav a:hover {
+  text-decoration: underline;
+}
+
 .navbar .navbar-nav .active {
   text-decoration: underline;
 }
@@ -19448,6 +19470,7 @@ body.swal2-toast-column .swal2-toast .swal2-validation-message {
   margin-right: auto;
   font-family: "PT Sans", sans-serif;
   font-weight: bold;
+  border: none;
 }
 
 .blackWedge {
@@ -19597,6 +19620,13 @@ footer a:hover {
   color: #6E6E6E;
 }
 
+.searchBox form select {
+  width: 100%;
+  height: 50px;
+  border: 4px solid #0097E6;
+  margin-top: 0px;
+}
+
 .searchBox form textarea {
   border: 4px solid #0097E6;
   width: 100%;
@@ -19611,6 +19641,28 @@ footer a:hover {
   color: white;
   height: 50px;
   width: 100%;
+}
+
+.searchBox form button a {
+  color: white;
+}
+
+#nextPage,
+#lastPage {
+  background-color: #0097E6;
+  text-align: center;
+  margin-top: 32px;
+  height: 44px;
+  width: 80px;
+  border: none;
+  color: white;
+}
+
+select {
+  width: 100%;
+  height: 50px;
+  border: 4px solid #0097E6;
+  margin-top: 20px;
 }
 
 .cars .topRow {
@@ -19711,6 +19763,7 @@ footer a:hover {
 .individualStat .col-sm-8 {
   background-color: black;
   margin-left: -2px;
+  height: 40px;
 }
 
 .individualStat .col-sm-8 p {
@@ -19718,7 +19771,22 @@ footer a:hover {
   font-family: "PT Sans", sans-serif;
   font-weight: bold;
   text-align: center;
-  padding-top: 8px;
+  padding-top: 9px;
+  font-size: 15px;
+}
+
+.shareIcons .shareButton {
+  float: right;
+  margin-top: 10px;
+}
+
+.shareIcons .shareButton i {
+  font-size: 45px;
+}
+
+.shareIcons #twitter,
+.shareIcons #star {
+  margin-right: 10px;
 }
 
 .individualCarInformation {
@@ -19765,6 +19833,33 @@ footer a:hover {
   border: 2px solid black;
   align-self: center;
   margin-left: 20px;
+}
+
+.individualCarInformation #finance input {
+  border: 4px solid #0097E6;
+  width: 100%;
+  font-size: 18px;
+  margin-bottom: 26px;
+  padding-left: 10px;
+}
+
+.individualCarInformation #finance select {
+  margin-top: 0px;
+  height: 36px;
+}
+
+.individualCarInformation #finance button {
+  text-decoration: none;
+  background-color: #0097E6;
+  border: 0px;
+  color: white;
+  height: 50px;
+  width: 100%;
+}
+
+.individualCarInformation #finance h5 {
+  text-align: center;
+  margin-top: 20px;
 }
 
 .contact,
@@ -20033,6 +20128,51 @@ footer a:hover {
   width: 138px;
 }
 
+#compareCars {
+  margin-bottom: 20px;
+}
+
+.linkCar {
+  width: 100%;
+  background-color: #0097E6;
+  height: 40px;
+}
+
+.linkCar a {
+  color: white;
+}
+
+.compare {
+  background-color: #0097E6;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 60px;
+  margin-bottom: 24px;
+}
+
+.compare h5 {
+  color: white;
+  font-size: 24px;
+  padding-top: 16px;
+  font-weight: bold;
+}
+
+.compare button {
+  color: black;
+  background-color: white;
+  padding: 8px 8px;
+  margin-left: auto;
+  margin-top: 10px;
+  border: 0px;
+  width: 138px;
+  float: right;
+}
+
+.compare #secondButton {
+  background-color: #FFA502;
+  color: white;
+}
+
 @media screen and (max-width: 580px) {
   .homeHeader .center {
     margin-right: auto;
@@ -20141,5 +20281,30 @@ body {
 
 .container {
   max-width: 1024px;
+}
+
+#cookieBanner {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  padding: 20px 0px 20px 0px;
+}
+
+#cookieBanner h4 {
+  padding-top: 6px;
+}
+
+#cookieBanner button {
+  background-color: #FFA502;
+  text-align: center;
+  width: 151px;
+  height: 42px;
+  border-radius: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "PT Sans", sans-serif;
+  font-weight: bold;
+  border: none;
 }
 

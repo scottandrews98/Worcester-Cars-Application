@@ -73,11 +73,15 @@
     </section>
 
     <div class="container">
-        <select id="orderBy">
-            <option>Lowest Price</option>
-            <option>Highest Price</option>
-            <option>Lowest Miles</option>
-        </select>
+        <div class="row">
+            <div class="col-sm-2">
+                <select id="orderBy">
+                    <option>Lowest Price</option>
+                    <option>Highest Price</option>
+                    <option>Lowest Miles</option>
+                </select>
+            </div>
+        </div>
     </div>
 
     <section class="cars" id="cars">

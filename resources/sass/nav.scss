@@ -13,6 +13,10 @@ $paragraphFont: Arial, Helvetica, sans-serif;
     .navbar-nav{
         a{
             color: black !important;
+
+            &:hover {
+                text-decoration: underline;
+            }
         }
 
         .active{

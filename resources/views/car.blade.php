@@ -32,11 +32,12 @@
             <div class="row">
                 <div class="col-sm-12 floatRight">
                     <!-- TODO place share icons and add car to favourites list if signed in -->
-                    <button class="shareButton" id="facebook"><i class="fas fa-facebook-square"></i></button>
-                    <button class="shareButton" id="twitter"><i class="fas fa-twitter-square"></i></button>
+                    <a class="shareButton" id="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://worcestercars.ands3-16.wbs.uni.worc.ac.uk/cars/{{$id}}" target="_blank"><i class="fab fa-facebook-square"></i></a>
+                    <a class="shareButton" id="twitter" href="http://twitter.com/share?text=Check Out This Great Car&url=https://worcestercars.ands3-16.wbs.uni.worc.ac.uk/cars/{{$id}}" target="_blank"><i class="fab fa-twitter-square"></i></a>
 
+                    <!-- Makes sure user is logged in before rendering button -->
                     @if (Auth::check())
-                        <button class="shareButton" data-carID="{{$id}}" id="star"><i class="fas fa-star"></i></button>
+                        <a class="shareButton" data-carID="{{$id}}" id="star"><i class="fas fa-star"></i></a>
                     @endif
                 </div>
             </div>

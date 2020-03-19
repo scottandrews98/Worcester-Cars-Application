@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans&display=swap');
 @import "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
 @import "node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
+@import "node_modules/@fortawesome/fontawesome-free/scss/brands.scss";
 @import "node_modules/lightbox2/dist/css/lightbox";
 @import 'node_modules/sweetalert2/src/sweetalert2.scss';
 
@@ -20,4 +21,30 @@ body{
 
 .container{
     max-width: 1024px;
+}
+
+// Cookie Consent Styles
+#cookieBanner{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    padding: 20px 0px 20px 0px;
+
+    h4{
+        padding-top: 6px;
+    }
+    
+    button{
+        background-color: #FFA502;
+        text-align: center;
+        width: 151px;
+        height: 42px;
+        border-radius: 4px;
+        margin-left: auto;
+        margin-right: auto;
+        font-family: $mainFont;
+        font-weight: bold;
+        border: none;
+    }
 }
