@@ -28,6 +28,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#userManagement" role="tab" data-toggle="tab">User Management</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#formEntries" role="tab" data-toggle="tab">Contact Form Entries</a>
+                </li>
             </ul>
                     
             <div class="tab-content">
@@ -109,6 +112,20 @@
                             <div class="col-sm-2">
                                 <button id="secondButton" class="staredButton" data-stared-user-id="{{ $users -> id }}">
                                     <a href="/viewStared/{{ $users -> id }}">View Stared Cars</a>
+                                </button>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <div role="tabpanel" class="tab-pane" id="formEntries">
+                    @foreach($formSubmissionData as $submissions)
+                        <div class="row carsForSale">
+                            <div class="col-sm-10">
+                                <h5>{{ $submissions -> name }}</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <button>
+                                    <a href="/viewMessage/{{ $submissions -> id }}">View Message</a>
                                 </button>
                             </div>
                         </div>

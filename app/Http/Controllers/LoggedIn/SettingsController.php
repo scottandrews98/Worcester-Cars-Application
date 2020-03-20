@@ -8,6 +8,7 @@ use Analytics;
 use Spatie\Analytics\Period;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use \Mailjet\Resources;
 
 class SettingsController extends Controller
 {
@@ -30,6 +31,9 @@ class SettingsController extends Controller
         $totalVisitorsAndPageViews = Analytics::fetchTotalVisitorsAndPageViews(Period::days(7));
         $mostVisitedPages = Analytics::fetchMostVisitedPages(Period::days(7), $maxResults = 5);
 
+        // Select All Form Submissions
+        $formSubmissionData = DB::select('SELECT * FROM contactFormSubmissions ORDER BY formSubmissionTime ASC');
+
         $totalPageViews = 0;
         $totalVisitors = 0;
 
@@ -39,11 +43,11 @@ class SettingsController extends Controller
         }
 
         if(count($siteSettingsData) == 0){
-            return view('loggedInPages.settings', compact('mostVisitedPages', 'siteUserData'))->withPageViews($totalPageViews)->withVisitors($totalVisitors);
+            return view('loggedInPages.settings', compact('mostVisitedPages', 'siteUserData', 'formSubmissionData'))->withPageViews($totalPageViews)->withVisitors($totalVisitors);
         }else{
             $lastUpdate = "(Last Updated At: " . date('d/m/Y H:i', strtotime($siteSettingsData[0]->{'updated_at'})) . ")";
 
-            return view('loggedInPages.settings', compact('mostVisitedPages', 'siteUserData', 'siteSettingsData'))->withPageViews($totalPageViews)->withVisitors($totalVisitors)->withLastUpdate($lastUpdate);
+            return view('loggedInPages.settings', compact('mostVisitedPages', 'siteUserData', 'siteSettingsData', 'formSubmissionData'))->withPageViews($totalPageViews)->withVisitors($totalVisitors)->withLastUpdate($lastUpdate);
         }
     }
 
@@ -109,5 +113,59 @@ class SettingsController extends Controller
         $userInformation = DB::select('SELECT * from users WHERE id = '.$id.'');
 
         return view('loggedInPages.viewUserProfile', compact('userInformation'));
+    }
+
+    // Load selected message
+    public function loadMessage($id){
+        $messageInformation = DB::select('SELECT * from contactFormSubmissions WHERE id = '.$id.'');
+        $messageReplies = DB::select('SELECT * from message_reply INNER JOIN users ON message_reply.users_id = users.id WHERE contactFormSubmissions_id = '.$id.'');
+
+        $messageSent = "Message Sent At: " . date('d/m/Y H:i', strtotime($messageInformation[0]->{'formSubmissionTime'}));
+
+        return view('loggedInPages.message', compact('messageInformation', 'messageReplies'))->withMessageTime($messageSent);
+    }
+
+    // Sends a new message from an admin to a user
+    public function sendMessage(Request $request){
+        $user = auth()->user();
+        $contactTable = array('messageReply' => $request->input('message'), 'contactFormSubmissions_id' => $request->input('messageID'), 'users_id' => $user->id);
+
+        // Inserts array into the message_reply table in the database
+        $insert = DB::table('message_reply')->insert($contactTable);
+
+        // Send message via email to customer who sent message
+        $sentUserInfo = DB::select('SELECT * FROM contactFormSubmissions WHERE id = '.$request->input('messageID').'');
+        $adminInfo = DB::select('SELECT * FROM users WHERE id = '.$user->id.'');
+        $toMessage = [];
+
+        foreach($sentUserInfo as $userInfo){
+            $toMessage[] = [ 
+                'From' => [
+                    'Email' => $adminInfo[0]->email,
+                    'Name' => "Worcester Cars"
+                ],
+                'To' => [
+                    [
+                        'Email' => $userInfo->email,  
+                        'Name' => $userInfo->name
+                    ]
+                ],
+                'ReplyTo' => [
+                    'Email' => $adminInfo[0]->email,
+                    'Name' => $adminInfo[0]->name
+                ],
+                'Subject' => "Replying To Enquiry",
+                'HTMLPart' => $request->input('message')
+            ];
+        } 
+
+        $mj = new \Mailjet\Client('a513843cbd376e6de6e6c79f2efc51d7','9fe7604278c5c3473fe317a28daff371',true,['version' => 'v3.1']);
+        $body = [
+            'Messages' => $toMessage,
+        ];
+
+        $response = $mj->post(Resources::$Email, ['body' => $body]);
+
+        return redirect('/viewMessage/'.$request->input('messageID').'');
     }
 }

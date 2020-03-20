@@ -56,7 +56,7 @@
                     
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="settings">
-                <div class="row">
+                    <div class="row">
                         <form class="adminAddNew" id="addNew" method="POST" action="/profile">
                             @csrf
                             

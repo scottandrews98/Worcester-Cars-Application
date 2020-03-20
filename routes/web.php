@@ -39,6 +39,8 @@ Route::post('/admin/delete', 'LoggedIn\LoggedInAdminController@deleteCar');
 Route::get('/settings', 'LoggedIn\SettingsController@index')->name('settings');
 Route::get('/viewStared/{id}', 'LoggedIn\SettingsController@loadStaredUser')->name('viewStared');
 Route::get('/viewProfile/{id}', 'LoggedIn\SettingsController@loadUserProfile')->name('adminViewProfile');
+Route::get('/viewMessage/{id}', 'LoggedIn\SettingsController@loadMessage')->name('adminViewMessage');
+Route::post('/viewMessage', 'LoggedIn\SettingsController@sendMessage')->name('adminSendMessage');
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
