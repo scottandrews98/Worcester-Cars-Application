@@ -57,14 +57,13 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="settings">
                     <div class="row">
-                        <form class="adminAddNew" id="addNew" method="POST" action="/profile">
+                        <form class="adminAddNew" id="messageChat" method="POST" action="/profile">
                             @csrf
-                            
                             <input type="text" placeholder="Name" name="name" value="{{ $userProfileData[0] -> name }}" required>
                             <input type="email" placeholder="Email" name="email" value="{{ $userProfileData[0] -> email }}" required>
                             <input type="number" placeholder="Phone" name="number" value="{{ $userProfileData[0] -> number }}" required>
-                            <input type="password" placeholder="Password (Must Be At Least 8 Characters)" class="@error('password') is-invalid @enderror" name="password">
-                            <input type="password" placeholder="Confirm Password" name="password_confirmation">
+                            <input type="password" autocomplete="new-password" placeholder="Password (Must Be At Least 8 Characters)" class="@error('password') is-invalid @enderror" name="password">
+                            <input type="password" autocomplete="new-password" placeholder="Confirm Password" name="password_confirmation">
 
                             <div class="row">
                                 <div class="col-sm-2">
@@ -75,7 +74,7 @@
                                 </div>
                             </div>
 
-                            <button type="submit" href="#">Update Profile</button>
+                            <button id="updateProfile" type="submit" href="#">Update Profile</button>
                         </form>
 
                         <!-- Option to remove profile -->

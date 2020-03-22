@@ -223,6 +223,15 @@ select{
     #twitter, #star{
         margin-right: 10px;
     }
+
+    #star{
+        text-shadow: 0px 0 5px #000;
+        color: white;
+    }
+
+    #star i{
+        font-size: 40px;
+    }
 }
 
 
@@ -359,6 +368,11 @@ select{
             width: 100%;
         }
     }
+
+    #errorMessage{
+        text-align: center;
+        margin-top: 20px;
+    }
 }
 
 // TODO https://benmarshall.me/responsive-iframes/ code from
@@ -460,6 +474,10 @@ select{
     #secondButton{
         background-color: #FFA502;
         color: white;
+    }
+
+    a{
+        color: black;
     }
 }
 
@@ -573,7 +591,7 @@ select{
         margin-left: auto;
         margin-top: 10px;
         border: 0px;
-        width: 138px;
+        width: 150px;
         float: right;
     }
 
@@ -581,4 +599,63 @@ select{
         background-color: #FFA502;
         color: white;
     }
+}
+
+// CSS for the settings page
+#googleAnalytics{
+    .row{
+        max-width: 910px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    h5{
+        font-size: 20px;
+    }
+
+    button{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: default;
+    }
+}
+
+// CSS for the edit profile page
+.adminAddNew{
+    label{
+        display: block;
+        text-align: right;
+        margin-top: 10px;
+    }
+}
+
+#updateProfile{
+    background-color: #0097E6;
+}
+
+#deleteProfile{
+    background-color: #FFA502;
+    border: 0px;
+    color: white;
+    height: 38px;
+    width: 138px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
+// CSS for the message view page
+
+#messageChat{
+    width: 100%;
+}
+
+.message{
+    background-color: white;
+}
+
+.reply{
+    background-color: #FFA502;
+    margin-top: 20px;
 }

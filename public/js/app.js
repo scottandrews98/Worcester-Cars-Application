@@ -40729,6 +40729,8 @@ __webpack_require__(/*! ./compareCars */ "./resources/js/compareCars.js");
 
 __webpack_require__(/*! ./cookieConsent */ "./resources/js/cookieConsent.js");
 
+__webpack_require__(/*! ./deleteMessage */ "./resources/js/deleteMessage.js");
+
 __webpack_require__(/*! lightbox2 */ "./node_modules/lightbox2/dist/js/lightbox.js"); // window.Vue = require('vue');
 // /**
 //  * The following block of code may be used to automatically register your
@@ -40815,22 +40817,49 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var elementExists = document.getElementById("star");
 
 if (elementExists) {
-  document.getElementById("star").addEventListener("click", likeCar); // TODO Check here for car that has already been liked
-}
+  document.getElementById("star").addEventListener("click", likeCar);
+  checkLikeCar();
+} // Function that is responsible for AJAX requesting to backend to like a car on behalf of a logged in user
+
 
 function likeCar() {
-  // Function that is responsible for AJAX requesting to backend to like a car on behalf of a logged in user
   var carID = document.getElementById("star").getAttribute('data-carID');
   var xhttp = new XMLHttpRequest();
 
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      console.log(this.responseText);
+      if (this.responseText == "Car Liked") {
+        // Apply styling to make button seem full
+        document.getElementById('star').style.color = 'black';
+      } else {
+        document.getElementById('star').style.color = 'white';
+      }
     }
   };
 
   var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
   xhttp.open("POST", "/car", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.setRequestHeader("X-CSRF-Token", CSRF_TOKEN);
+  xhttp.send("&carID=" + carID + "");
+} // Function that checks to see if the car is already liked on page load
+
+
+function checkLikeCar() {
+  var carID = document.getElementById("star").getAttribute('data-carID');
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      if (this.responseText == "Car Liked") {
+        // Apply styling to make button seem full
+        document.getElementById('star').style.color = 'black';
+      }
+    }
+  };
+
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+  xhttp.open("POST", "/carCheck", true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.setRequestHeader("X-CSRF-Token", CSRF_TOKEN);
   xhttp.send("&carID=" + carID + "");
@@ -40918,6 +40947,10 @@ function sendRequest(name, phone, message) {
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200 && this.responseText == "Message Sent") {
       document.getElementById("errorMessage").innerHTML = "Form Submitted";
+      document.getElementById("name").value = "";
+      document.getElementById("phone").value = "";
+      document.getElementById("message").value = "";
+      document.getElementById("email").value = "";
     }
   };
 
@@ -40973,8 +41006,6 @@ function acceptCookies() {
 // Code for deleting a car
 var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 
-function deleteCar(element) {}
-
 var elementExists = document.getElementById("deleteCar");
 
 if (elementExists) {
@@ -40997,7 +41028,7 @@ if (elementExists) {
 
           _this.parentNode.parentNode.parentNode.removeChild(_this.parentNode.parentNode);
 
-          Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+          Swal.fire('Deleted!', 'This car has been deleted.', 'success');
         }
       });
     });
@@ -41018,6 +41049,61 @@ function ajaxDeleteCar(id) {
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.setRequestHeader("X-CSRF-Token", CSRF_TOKEN);
   xhttp.send("&carID=" + id + "");
+}
+
+/***/ }),
+
+/***/ "./resources/js/deleteMessage.js":
+/*!***************************************!*\
+  !*** ./resources/js/deleteMessage.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Code for deleting a car
+var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+
+var elementExists = document.getElementById("deleteMessage");
+
+if (elementExists) {
+  document.querySelectorAll('#deleteMessage').forEach(function (item) {
+    item.addEventListener("click", function () {
+      var _this = this;
+
+      var id = this.getAttribute('data-message-id');
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to undo this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete this message!'
+      }).then(function (result) {
+        if (result.value) {
+          ajaxDeleteMessage(id);
+
+          _this.parentNode.parentNode.parentNode.parentNode.removeChild(_this.parentNode.parentNode.parentNode);
+
+          Swal.fire('Deleted!', 'Your message has been deleted.', 'success');
+        }
+      });
+    });
+  });
+}
+
+function ajaxDeleteMessage(id) {
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {}
+  };
+
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+  xhttp.open("POST", "/deleteMessage", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.setRequestHeader("X-CSRF-Token", CSRF_TOKEN);
+  xhttp.send("&messageID=" + id + "");
 }
 
 /***/ }),

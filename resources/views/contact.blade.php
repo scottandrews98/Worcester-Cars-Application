@@ -35,7 +35,7 @@
                         <button type="button" id="submitContactForm">Submit</button>
                     </form>
                     <div class="errorBox">
-                            <h4 id="errorMessage"></h4>
+                        <h4 id="errorMessage"></h4>
                     </div>
                 </div>
             </div>

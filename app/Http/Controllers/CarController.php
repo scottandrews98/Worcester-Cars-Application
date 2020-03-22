@@ -64,6 +64,20 @@ class CarController extends Controller
         }
     }
 
+    // Function to check to see if a user has a car liked already or not
+    public function likeCheck(Request $request)
+    {
+        $userID = auth()->user()->id;
+        $likedCar = DB::select('SELECT id FROM carsLiked WHERE cars_id = '.$request->input('carID').' AND users_id = '.$userID.'');
+
+        if (count($likedCar) == 0){
+            // Means that the car has not been liked before
+            return "Car Not Liked";
+        }else{
+            return "Car Liked";
+        }
+    }
+
     public function getCompareDetails(Request $request)
     {
         $compareDetails = DB::select('SELECT * FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id INNER JOIN bodyType ON cars.bodyType_id = bodyType.id INNER JOIN manufacturer ON cars.manufacturer_id = manufacturer.id WHERE cars.id IN ('.$request->input('id').','.$request->input('existingID').') ORDER BY FIELD(cars.id, '.$request->input('existingID').') DESC');

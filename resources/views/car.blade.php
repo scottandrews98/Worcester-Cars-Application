@@ -31,7 +31,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 floatRight">
-                    <!-- TODO place share icons and add car to favourites list if signed in -->
                     <a class="shareButton" id="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://worcestercars.ands3-16.wbs.uni.worc.ac.uk/cars/{{$id}}" target="_blank"><i class="fab fa-facebook-square"></i></a>
                     <a class="shareButton" id="twitter" href="http://twitter.com/share?text=Check Out This Great Car&url=https://worcestercars.ands3-16.wbs.uni.worc.ac.uk/cars/{{$id}}" target="_blank"><i class="fab fa-twitter-square"></i></a>
 

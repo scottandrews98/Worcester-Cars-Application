@@ -19789,6 +19789,15 @@ select {
   margin-right: 10px;
 }
 
+.shareIcons #star {
+  text-shadow: 0px 0 5px #000;
+  color: white;
+}
+
+.shareIcons #star i {
+  font-size: 40px;
+}
+
 .individualCarInformation {
   margin-top: 60px;
 }
@@ -19943,6 +19952,12 @@ select {
   width: 100%;
 }
 
+.contact #errorMessage,
+.signIn #errorMessage {
+  text-align: center;
+  margin-top: 20px;
+}
+
 .iframeContainer {
   overflow: hidden;
   padding-top: 95%;
@@ -20037,6 +20052,10 @@ select {
 .carsForSale #secondButton {
   background-color: #FFA502;
   color: white;
+}
+
+.carsForSale a {
+  color: black;
 }
 
 .adminAddNew {
@@ -20164,13 +20183,64 @@ select {
   margin-left: auto;
   margin-top: 10px;
   border: 0px;
-  width: 138px;
+  width: 150px;
   float: right;
 }
 
 .compare #secondButton {
   background-color: #FFA502;
   color: white;
+}
+
+#googleAnalytics .row {
+  max-width: 910px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#googleAnalytics h5 {
+  font-size: 20px;
+}
+
+#googleAnalytics button {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: default;
+}
+
+.adminAddNew label {
+  display: block;
+  text-align: right;
+  margin-top: 10px;
+}
+
+#updateProfile {
+  background-color: #0097E6;
+}
+
+#deleteProfile {
+  background-color: #FFA502;
+  border: 0px;
+  color: white;
+  height: 38px;
+  width: 138px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+}
+
+#messageChat {
+  width: 100%;
+}
+
+.message {
+  background-color: white;
+}
+
+.reply {
+  background-color: #FFA502;
+  margin-top: 20px;
 }
 
 @media screen and (max-width: 580px) {

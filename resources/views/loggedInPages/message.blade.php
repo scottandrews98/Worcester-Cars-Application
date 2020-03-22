@@ -58,13 +58,13 @@
                 <div role="tabpanel" class="tab-pane active" id="settings">
 
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-lg-4  message">
                         <h5>{{ $messageInformation[0] -> name }}</h5>
                         <h5>{{ $messageInformation[0] -> email }}</h5>
                         <h5>{{ $messageInformation[0] -> number }}</h5>
                     </div>
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-6">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-7  message">
                         <p>{{ $messageInformation[0] -> message }}</p>
                     </div>
                 </div>
@@ -72,10 +72,11 @@
                 <!-- Show Any Replies To Message Here -->
                 @foreach($messageReplies as $replies)
                     <div class="row">
-                        <div class="col-sm-8">
+                        <div class="col-lg-7 reply">
                             <p>{{ $replies -> messageReply }}</p>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-4 reply">
                             <h5>{{ $replies -> name }}</h5>
                         </div>
                     </div>
@@ -83,7 +84,7 @@
 
                 <!-- HTML for replying to message -->
                 <div class="row">
-                    <form class="adminAddNew" id="addNew" method="POST" action="/viewMessage">
+                    <form class="adminAddNew" id="messageChat" method="POST" action="/viewMessage">
                         @csrf
                         
                         <input type="text" placeholder="Reply Message" name="message" required>

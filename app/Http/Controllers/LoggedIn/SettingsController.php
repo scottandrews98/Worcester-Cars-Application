@@ -168,4 +168,12 @@ class SettingsController extends Controller
 
         return redirect('/viewMessage/'.$request->input('messageID').'');
     }
+
+    // Deletes selected message
+    public function deleteMessage(Request $request){
+        DB::delete('DELETE FROM message_reply WHERE contactFormSubmissions_id = '.$request->input('messageID').'');
+        DB::delete('DELETE FROM contactFormSubmissions WHERE id = '.$request->input('messageID').'');
+
+        return "Message Deleted";
+    }
 }

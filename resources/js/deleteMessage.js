@@ -1,12 +1,12 @@
 // Code for deleting a car
 var Swal = require('sweetalert2');
 
-var elementExists = document.getElementById("deleteCar");
+var elementExists = document.getElementById("deleteMessage");
 
 if(elementExists){
-    document.querySelectorAll('#secondButton').forEach(item => {
+    document.querySelectorAll('#deleteMessage').forEach(item => {
         item.addEventListener("click", function(){
-            var id = this.getAttribute('data-delete-id');
+            var id = this.getAttribute('data-message-id');
     
             Swal.fire({
                 title: 'Are you sure?',
@@ -15,14 +15,14 @@ if(elementExists){
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete this car!'
+                confirmButtonText: 'Yes, delete this message!'
             }).then((result) => {
                 if (result.value) {
-                    ajaxDeleteCar(id);
-                    this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+                    ajaxDeleteMessage(id);
+                    this.parentNode.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode.parentNode);
                     Swal.fire(
                         'Deleted!',
-                        'This car has been deleted.',
+                        'Your message has been deleted.',
                         'success'
                     )
                 }
@@ -31,18 +31,16 @@ if(elementExists){
     })
 }
 
-function ajaxDeleteCar(id){
+function ajaxDeleteMessage(id){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText);
-        // Remove From Screen
       }
     };
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
-    xhttp.open("POST", "/admin/delete", true);
+    xhttp.open("POST", "/deleteMessage", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.setRequestHeader("X-CSRF-Token", CSRF_TOKEN);
-    xhttp.send("&carID="+id+"");
+    xhttp.send("&messageID="+id+"");
 }

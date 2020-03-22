@@ -52,13 +52,13 @@
                                 <h5>{{ $cars -> name }}</h5>
                             </div>
                             <div class="col-sm-3">
-                                <button>
+                                <button onclick="location.href='admin/edit/{{ $cars -> id }}';">
                                     <a href="admin/edit/{{ $cars -> id }}">Edit</a>
                                 </button>
                             </div>
                             <div class="col-sm-3">
                                 <button data-delete-id="{{ $cars -> id }}" id="secondButton">
-                                    <a id="deleteCar" >Delete</a>
+                                    <a href="#" id="deleteCar">Delete</a>
                                 </button>
                             </div>
                         </div>
@@ -111,8 +111,6 @@
 
                             <!-- Car Pictures Section -->
                             <div class="row imageRow" id="imageRow">
-                               
-                                <!-- <img src="assets/images/bmwFront.jpg" class="img-responsive" id="carImage1" alt="BMW Front grill"> -->
                                 <div class="addNewImage">
                                     <i class="fas fa-plus" id="addNewImage2"></i>
                                 </div>

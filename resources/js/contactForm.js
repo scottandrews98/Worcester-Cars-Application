@@ -31,6 +31,10 @@ function sendRequest(name, phone, message){
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200 && this.responseText == "Message Sent") {
         document.getElementById("errorMessage").innerHTML = "Form Submitted";
+        document.getElementById("name").value = ""
+        document.getElementById("phone").value = ""
+        document.getElementById("message").value = ""
+        document.getElementById("email").value = ""
       }
     };
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');

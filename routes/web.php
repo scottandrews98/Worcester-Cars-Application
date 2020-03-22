@@ -41,12 +41,14 @@ Route::get('/viewStared/{id}', 'LoggedIn\SettingsController@loadStaredUser')->na
 Route::get('/viewProfile/{id}', 'LoggedIn\SettingsController@loadUserProfile')->name('adminViewProfile');
 Route::get('/viewMessage/{id}', 'LoggedIn\SettingsController@loadMessage')->name('adminViewMessage');
 Route::post('/viewMessage', 'LoggedIn\SettingsController@sendMessage')->name('adminSendMessage');
+Route::post('/deleteMessage', 'LoggedIn\SettingsController@deleteMessage')->name('adminDeleteMessage');
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 // Post Requests
 Route::post('/contact', 'ContactController@store');
 Route::post('/car', 'CarController@like');
+Route::post('/carCheck', 'CarController@likeCheck');
 Route::post('/settings', 'LoggedIn\SettingsController@saveSettings');
 Route::post('/admin/makeAndRemoveAdmins', 'LoggedIn\SettingsController@makeAndRemoveAdmins');
 Route::post('/profile', 'LoggedIn\ProfileController@updateProfile');

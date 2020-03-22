@@ -62,12 +62,10 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3>{{$pageViews}}</h3>
-                            <h5>Total Page View</h5>
+                            <h3>{{$pageViews}} : Total Page Views</h3>
                         </div>
                         <div class="col-sm-6">
-                            <h3>{{$visitors}}</h3>
-                            <h5>Total Site Visitors</h5>
+                            <h3>{{$visitors}} : Total Site Visitors</h3>
                         </div>
                     </div>
                     
@@ -118,10 +116,15 @@
                     @endforeach
                 </div>
                 <div role="tabpanel" class="tab-pane" id="formEntries">
-                    @foreach($formSubmissionData as $submissions)
+                    @forelse($formSubmissionData as $submissions)
                         <div class="row carsForSale">
-                            <div class="col-sm-10">
+                            <div class="col-sm-8">
                                 <h5>{{ $submissions -> name }}</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <button id="secondButton">
+                                    <a id="deleteMessage" data-message-id="{{ $submissions -> id }}" href="#">Delete Message</a>
+                                </button>
                             </div>
                             <div class="col-sm-2">
                                 <button>
@@ -129,7 +132,13 @@
                                 </button>
                             </div>
                         </div>
-                    @endforeach
+                        @empty
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h5>Sorry No Messages</h5>
+                                </div>
+                            </div>
+                        @endforelse
                 </div>
             </div>
         </div>
