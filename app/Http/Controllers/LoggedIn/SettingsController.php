@@ -89,7 +89,7 @@ class SettingsController extends Controller
 
     // Load selected user's stared cars
     public function loadStaredUser($id){
-        $likedCars = DB::select('SELECT cars.id, cars.name, cars.price, cars.mileage, transmission.transmissionType, cars.engineSize, fueltype.fuelTypeName, cars.topSpeed, cars.tax FROM carsLiked INNER JOIN cars ON carsLiked.cars_id = cars.id INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id WHERE carsLiked.users_id = '.$id.'');
+        $likedCars = DB::select('SELECT cars.id, cars.name, cars.price, cars.mileage, transmission.transmissionType, cars.engineSize, fuelType.fuelTypeName, cars.topSpeed, cars.tax FROM carsLiked INNER JOIN cars ON carsLiked.cars_id = cars.id INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id WHERE carsLiked.users_id = '.$id.'');
         $userInformation = DB::select('SELECT name from users WHERE id = '.$id.'');
 
         $carImageURL = array();

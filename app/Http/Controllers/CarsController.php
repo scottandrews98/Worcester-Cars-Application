@@ -24,10 +24,10 @@ class CarsController extends Controller
     public function index(Request $request)
     {
         if(isset($request['brand'])){
-            $allCars = DB::select('SELECT cars.id, cars.name, cars.price, cars.mileage, transmission.transmissionType, cars.engineSize, fueltype.fuelTypeName, cars.topSpeed, cars.tax FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id INNER JOIN manufacturer ON cars.manufacturer_id = manufacturer.id WHERE manufacturer.manufacturerName = "'.$request['brand'].'"');
+            $allCars = DB::select('SELECT cars.id, cars.name, cars.price, cars.mileage, transmission.transmissionType, cars.engineSize, fuelType.fuelTypeName, cars.topSpeed, cars.tax FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id INNER JOIN manufacturer ON cars.manufacturer_id = manufacturer.id WHERE manufacturer.manufacturerName = "'.$request['brand'].'"');
             $carBrandName = ": Made By ".$request['brand']."";
         }else{
-            $allCars = DB::select('SELECT cars.id, cars.name, cars.price, cars.mileage, transmission.transmissionType, cars.engineSize, fueltype.fuelTypeName, cars.topSpeed, cars.tax FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id ORDER BY price ASC LIMIT 3');
+            $allCars = DB::select('SELECT cars.id, cars.name, cars.price, cars.mileage, transmission.transmissionType, cars.engineSize, fuelType.fuelTypeName, cars.topSpeed, cars.tax FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id ORDER BY price ASC LIMIT 3');
             $carBrandName = "";
         }
  
@@ -57,7 +57,7 @@ class CarsController extends Controller
 
     public function searchCars(Request $request){
         $totalQueries = 0;
-        $searchQueryString = "SELECT cars.id, cars.name, cars.price, cars.mileage, transmission.transmissionType, cars.engineSize, fueltype.fuelTypeName, cars.topSpeed, cars.tax FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id INNER JOIN manufacturer ON cars.manufacturer_id = manufacturer.id ";
+        $searchQueryString = "SELECT cars.id, cars.name, cars.price, cars.mileage, transmission.transmissionType, cars.engineSize, fuelType.fuelTypeName, cars.topSpeed, cars.tax FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id INNER JOIN manufacturer ON cars.manufacturer_id = manufacturer.id ";
 
         // If statements to not check for values if user has selected an any dropdown
         if($request['manufacturers'] != "All Makes"){
