@@ -72,7 +72,8 @@ class ProfileController extends Controller
     public function deleteProfile(){
         $user = Auth::User();
 
-        DB::delete('DELETE FROM carsLiked WHERE id = '.$user->id.'');
+        DB::delete('DELETE FROM message_reply WHERE users_id = '.$user->id.'');
+        DB::delete('DELETE FROM carsLiked WHERE users_id = '.$user->id.'');
         DB::delete('DELETE FROM users WHERE id = '.$user->id.'');
 
         return "Deleted";

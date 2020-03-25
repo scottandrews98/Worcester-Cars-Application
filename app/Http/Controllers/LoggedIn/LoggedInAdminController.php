@@ -23,11 +23,6 @@ class LoggedInAdminController extends Controller
         $this->middleware('checkUserLevel');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
         $allMakes = DB::select('SELECT manufacturerName FROM manufacturer');
@@ -230,7 +225,6 @@ class LoggedInAdminController extends Controller
             // Remove all images associated with car
             self::deleteAllImages($id);
         }
-
         // Runs the store method above
         store("edit",$id,$request);
     }

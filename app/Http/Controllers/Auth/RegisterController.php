@@ -65,7 +65,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if($data['emailConsent'] == "on"){
+        if(isset($data['emailConsent'])){
             $consentValue = 1;
         }else{
             $consentValue = 0;
