@@ -19362,6 +19362,7 @@ body.swal2-toast-column .swal2-toast .swal2-validation-message {
 .secondaryHeader {
   background-color: #262626;
   padding: 10px 0px 40px 0px;
+  background: #262626;
 }
 
 .secondaryHeader h1,
@@ -19647,17 +19648,6 @@ footer a:hover {
   color: white;
 }
 
-#nextPage,
-#lastPage {
-  background-color: #0097E6;
-  text-align: center;
-  margin-top: 32px;
-  height: 44px;
-  width: 80px;
-  border: none;
-  color: white;
-}
-
 select {
   width: 100%;
   height: 50px;
@@ -19670,6 +19660,7 @@ select {
   margin-top: 42px;
   box-sizing: border-box;
   padding: 42px 42px 30px 42px;
+  margin-bottom: 42px;
 }
 
 .cars .topRow img {
@@ -19715,6 +19706,25 @@ select {
   width: 100%;
   border: none;
   color: white;
+}
+
+.buttonCenter a {
+  background-color: #0097E6;
+  width: 220px;
+  height: 54px;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-family: "PT Sans", sans-serif;
+  font-weight: bold;
+}
+
+.buttonCenter #nextPage {
+  float: right;
+}
+
+.buttonCenter #lastPage {
+  float: left;
 }
 
 .individualCars {
@@ -19950,6 +19960,11 @@ select {
   color: white;
   height: 50px;
   width: 100%;
+}
+
+.contact form #register,
+.signIn form #register {
+  margin-bottom: 26px;
 }
 
 .contact #errorMessage,
@@ -20262,6 +20277,7 @@ select {
     margin-top: 0px;
     margin-left: auto;
     margin-right: auto;
+    display: inherit;
   }
 
   .popularBrands {
@@ -20318,6 +20334,11 @@ select {
     text-align: center;
     padding-right: 0px;
   }
+
+  .buttonCenter a {
+    width: 100%;
+    margin-bottom: 15px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -20345,6 +20366,12 @@ select {
   }
 }
 
+@media screen and (max-width: 900px) {
+  .fourthSection .iframeContainer {
+    padding-top: 100%;
+  }
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -20359,6 +20386,7 @@ body {
   width: 100%;
   background-color: white;
   padding: 20px 0px 20px 0px;
+  z-index: 10;
 }
 
 #cookieBanner h4 {

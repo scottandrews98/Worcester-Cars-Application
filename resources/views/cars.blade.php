@@ -25,7 +25,6 @@
             <form id="searchForm">
                 <div class="row">
                     <div class="col-sm-4">
-                        <!-- <input type="text" list="manufacturers" placeholder="Manufacturers"> -->
                         <select id="manufacturers" placeholder="Manufacturers">
                             <option>All Makes</option>
                             @foreach($allMakes as $make)
@@ -34,10 +33,9 @@
                         </select>
                     </div>
                     <div class="col-sm-4">
-                        <input id="miles" type="number" placeholder="Miles">
+                        <input id="miles" type="number" placeholder="Maximum Car Miles">
                     </div>
                     <div class="col-sm-4">
-                        <!-- <input type="text" list="fuel" placeholder="Fuel Type"> -->
                         <select id="fuel">
                             <option>Any Fuel Type</option>
                             @foreach($allFuelType as $fuel)
@@ -48,7 +46,6 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <!-- <input type="text" list="gearbox" placeholder="Transmition"> -->
                         <select id="gearbox">
                             <option>All Transmission Types</option>
                             @foreach($allTransmissionType as $transmission)
@@ -57,15 +54,15 @@
                         </select>
                     </div>
                     <div class="col-sm-4">
-                        <input id="mpg" type="number" placeholder="Average Miles Per Gallon">
+                        <input id="mpg" type="number" placeholder="Minimum Miles Per Gallon">
                     </div>
                     <div class="col-sm-4">
-                        <input id="tax" type="number" placeholder="Tax Cost">
+                        <input id="tax" type="number" placeholder="Maximum Tax Cost">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <button type="button"><a href="#" id="search">Search</a></button>
+                        <button type="button" id="search"><a href="#">Search</a></button>
                     </div>
                 </div>
             </form>
@@ -190,10 +187,19 @@
             @endforeach
 
             <input hidden value="0" id="pageNumber">
-            <a id="nextPage" class="loadCarButton">
-                <button class="loadCarButton">Next Page</button>
-            </a>
-            
+
+            <!-- TODO change all features to 6 cars per page ready for release -->
+            @if($totalSearch > 3)
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="buttonCenter">
+                            <a id="nextPage" class="loadCarButton">
+                                Next Page
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </section>
 @endsection

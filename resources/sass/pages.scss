@@ -77,16 +77,6 @@ $paragraphFont: Arial, Helvetica, sans-serif;
     }
 }
 
-#nextPage, #lastPage{
-    background-color: #0097E6;
-    text-align: center;
-    margin-top: 32px;
-    height: 44px;
-    width: 80px;
-    border: none;
-    color: white;
-}
-
 // Styling for cars order by dropdown
 select{
     width: 100%;
@@ -101,6 +91,7 @@ select{
         margin-top: 42px;
         box-sizing: border-box;
         padding: 42px 42px 30px 42px;
+        margin-bottom: 42px;
 
         img{
             border: 2px solid black;
@@ -149,6 +140,27 @@ select{
     }
 }
 
+.buttonCenter{
+   
+    a{
+        background-color: #0097E6;
+        width: 220px;
+        height: 54px;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        font-family: "PT Sans", sans-serif;
+        font-weight: bold;
+    }
+
+    #nextPage{
+        float: right;
+    }
+
+    #lastPage{
+        float: left;
+    }
+}
 
 // Scss for individual car information
 .individualCars{
@@ -366,6 +378,10 @@ select{
             color: white;
             height: 50px;
             width: 100%;
+        }
+
+        #register{
+            margin-bottom: 26px;
         }
     }
 

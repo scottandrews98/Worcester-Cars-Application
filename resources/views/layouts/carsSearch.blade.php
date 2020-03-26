@@ -109,20 +109,28 @@
     @endif
 
     <input hidden value="{{ $pageNumber }}" id="pageNumber">
-    @if($hideNext == false)
-        <a id="nextPage" class="loadCarButton">
-    @else
-        <a id="nextPage" class="loadCarButton" style="display:none">
-    @endif
-            <button class="loadCarButton">Next Page</button>
-        </a>
-    
-
-    @if($pageNumber > 0)
-        <a id="lastPage" class="loadCarButton">
-            <button class="loadCarButton">Previous Page</button>
-        </a>
-    @endif
+    <div class="row">
+        <div class="col-sm">
+            @if($pageNumber > 0)
+                <div class="buttonCenter">
+                    <a id="lastPage" class="loadCarButton">
+                        Previous Page
+                    </a>
+                </div>
+            @endif
+        </div>
+        <div class="col-sm">
+            <div class="buttonCenter">
+            @if($hideNext == false)
+                <a id="nextPage" class="loadCarButton">
+            @else
+                <a id="nextPage" class="loadCarButton" style="display:none">
+            @endif
+                    Next Page
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- TODO Add in remove search parameters button -->

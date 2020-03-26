@@ -41461,11 +41461,14 @@ if (elementExists) {
     var response = calculatePage();
     searchCars(response);
   });
-  document.getElementById("nextPage").addEventListener("click", function () {
-    nextPage = "add";
-    var response = calculatePage();
-    searchCars(response);
-  });
+
+  if (document.getElementById("nextPage")) {
+    document.getElementById("nextPage").addEventListener("click", function () {
+      nextPage = "add";
+      var response = calculatePage();
+      searchCars(response);
+    });
+  }
 }
 
 function calculatePage() {

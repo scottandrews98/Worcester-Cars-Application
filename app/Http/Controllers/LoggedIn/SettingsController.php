@@ -32,7 +32,7 @@ class SettingsController extends Controller
         $mostVisitedPages = Analytics::fetchMostVisitedPages(Period::days(7), $maxResults = 5);
 
         // Select All Form Submissions
-        $formSubmissionData = DB::select('SELECT * FROM contactFormSubmissions ORDER BY formSubmissionTime ASC');
+        $formSubmissionData = DB::select('SELECT * FROM contactFormSubmissions ORDER BY formSubmissionTime DESC');
 
         $totalPageViews = 0;
         $totalVisitors = 0;
@@ -68,7 +68,7 @@ class SettingsController extends Controller
             DB::table('siteSettings')->where('id', 1)->update($siteSettingsTable);
         }
 
-        return redirect('/settings');
+        return redirect('/settings')->with('message', 'success');
     }
 
     public function makeAndRemoveAdmins(Request $request){

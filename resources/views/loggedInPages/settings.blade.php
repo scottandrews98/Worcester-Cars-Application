@@ -15,6 +15,23 @@
         </div>
     </header>
 
+    <!-- Displays a message if the settings section has updated -->
+    <section class="registerError">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    @if(session()->has('message'))
+                        <div class="card bg-success">
+                            <div class="card-body">
+                                Site Settings Updated
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="individualCarInformation">
         <div class="container">
 

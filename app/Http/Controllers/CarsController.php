@@ -23,11 +23,15 @@ class CarsController extends Controller
      */
     public function index(Request $request)
     {
+        
+
         if(isset($request['brand'])){
-            $allCars = DB::select('SELECT cars.id, cars.name, cars.price, cars.mileage, transmission.transmissionType, cars.engineSize, fuelType.fuelTypeName, cars.topSpeed, cars.tax FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id INNER JOIN manufacturer ON cars.manufacturer_id = manufacturer.id WHERE manufacturer.manufacturerName = "'.$request['brand'].'"');
+            $allCars = DB::select('SELECT cars.id, cars.name, cars.price, cars.mileage, transmission.transmissionType, cars.engineSize, fuelType.fuelTypeName, cars.topSpeed, cars.tax FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id INNER JOIN manufacturer ON cars.manufacturer_id = manufacturer.id WHERE manufacturer.manufacturerName = "'.$request['brand'].'" LIMIT 3');
+            $carsCount = count(DB::select('SELECT cars.id, cars.name, cars.price, cars.mileage, transmission.transmissionType, cars.engineSize, fuelType.fuelTypeName, cars.topSpeed, cars.tax FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id INNER JOIN manufacturer ON cars.manufacturer_id = manufacturer.id WHERE manufacturer.manufacturerName = "'.$request['brand'].'"'));
             $carBrandName = ": Made By ".$request['brand']."";
         }else{
             $allCars = DB::select('SELECT cars.id, cars.name, cars.price, cars.mileage, transmission.transmissionType, cars.engineSize, fuelType.fuelTypeName, cars.topSpeed, cars.tax FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id ORDER BY price ASC LIMIT 3');
+            $carsCount = count(DB::select('SELECT cars.id, cars.name, cars.price, cars.mileage, transmission.transmissionType, cars.engineSize, fuelType.fuelTypeName, cars.topSpeed, cars.tax FROM cars INNER JOIN transmission ON cars.transmission_id = transmission.id INNER JOIN fuelType ON cars.fuelType_id = fuelType.id ORDER BY price ASC'));
             $carBrandName = "";
         }
  
@@ -52,7 +56,7 @@ class CarsController extends Controller
         $allTransmissionType = DB::select('SELECT transmissionType FROM transmission');
         $allCarShapes = DB::select('SELECT bodyTypeName FROM bodyType');
 
-        return view('cars', compact('allCars', 'carImageURL', 'carAltText', 'carsPageMeta', 'allMakes', 'allFuelType', 'allTransmissionType', 'allCarShapes'))->withBrand($carBrandName);
+        return view('cars', compact('allCars', 'carImageURL', 'carAltText', 'carsPageMeta', 'allMakes', 'allFuelType', 'allTransmissionType', 'allCarShapes'))->withBrand($carBrandName)->withTotalSearch($carsCount);
     }
 
     public function searchCars(Request $request){
@@ -88,9 +92,9 @@ class CarsController extends Controller
         // If statements to filter out null values
         if($request['miles'] != null){
             if($totalQueries == 0){
-                $searchQueryString .= "WHERE mileage >= ".$request['miles']."";
+                $searchQueryString .= "WHERE mileage <= ".$request['miles']."";
             }else{
-                $searchQueryString .= " AND mileage >= ".$request['miles']."";
+                $searchQueryString .= " AND mileage <= ".$request['miles']."";
             }
             $totalQueries++;
         }

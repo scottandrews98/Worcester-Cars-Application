@@ -1,5 +1,5 @@
 // Home Page
-@media screen and (max-width: 580px) {
+@media screen and (max-width: 580px){
     .homeHeader{
 
         .center {
@@ -20,6 +20,7 @@
             margin-top: 0px;
             margin-left: auto;
             margin-right: auto;
+            display: inherit;
         }
     }
 
@@ -84,10 +85,17 @@
         }
     }   
 
+    .buttonCenter{
+        a{
+            width: 100%;
+            margin-bottom: 15px;
+        }
+    }
+
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px){
     .cars{
         .topRow{
     
@@ -114,5 +122,13 @@
             width: 100%;
             text-align: center;
         }
+    }
+}
+
+@media screen and (max-width: 900px){
+    .fourthSection{
+        .iframeContainer{
+            padding-top: 100%;
+        }    
     }
 }

@@ -31,8 +31,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 floatRight">
-                    <a class="shareButton" id="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://worcestercars.ands3-16.wbs.uni.worc.ac.uk/cars/{{$id}}" target="_blank"><i class="fab fa-facebook-square"></i></a>
-                    <a class="shareButton" id="twitter" href="http://twitter.com/share?text=Check Out This Great Car&url=https://worcestercars.ands3-16.wbs.uni.worc.ac.uk/cars/{{$id}}" target="_blank"><i class="fab fa-twitter-square"></i></a>
+                    <a class="shareButton" id="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://worcestercars.scottandrews.dev/cars/{{$id}}" target="_blank"><i class="fab fa-facebook-square"></i></a>
+                    <a class="shareButton" id="twitter" href="http://twitter.com/share?text=Check Out This Great Car&url=https://worcestercars.scottandrews.dev/cars/{{$id}}" target="_blank"><i class="fab fa-twitter-square"></i></a>
 
                     <!-- Makes sure user is logged in before rendering button -->
                     @if (Auth::check())

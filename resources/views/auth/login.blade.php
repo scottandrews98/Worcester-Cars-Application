@@ -48,7 +48,7 @@
 
                         <button type="submit"><a>Sign In</a></button>
 
-                        <a href="/register">Register</a>
+                        <a id="register" href="/register">Register</a>
 
                         <a href="/password/reset">Forgot Password</a>
                     </form>

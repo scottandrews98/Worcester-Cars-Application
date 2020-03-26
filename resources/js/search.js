@@ -16,11 +16,13 @@ if(elementExists){
         searchCars(response)
     });
 
-    document.getElementById("nextPage").addEventListener("click", function(){
-        nextPage = "add";
-        let response = calculatePage();
-        searchCars(response);
-    });
+    if(document.getElementById("nextPage")){
+        document.getElementById("nextPage").addEventListener("click", function(){
+            nextPage = "add";
+            let response = calculatePage();
+            searchCars(response);
+        });
+    }
 }
 
 function calculatePage(){

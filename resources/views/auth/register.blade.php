@@ -52,7 +52,7 @@
                                 <input type="checkbox" placeholder="Do You Wish To Revieve Email's Off Worcester Cars When A New Car Comes For Sale?" name="emailConsent">  
                             </div>
                             <div class="col-sm-10">
-                                <label for="emailConsent">Do You Wish To Revieve Email's Off Worcester Cars When A New Car Comes For Sale? </label><br>
+                                <label for="emailConsent">Do You Wish To Receive Emails Off Worcester Cars When A New Car Comes For Sale?</label><br>
                             </div>
                         </div>
         
