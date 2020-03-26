@@ -48,7 +48,7 @@
 
                             <textarea cols="40" rows="5" placeholder="Contact Page Meta" name="contactPageMeta">{{$siteSettingsData[0] -> contactPageMeta ?? ''}}</textarea>
 
-                            <input type="number" placeholder="Finance Interest Rate" name="interestRate" value="{{$siteSettingsData[0] -> interestRate ?? ''}}">
+                            <input type="number" placeholder="Finance Interest Rate" min="0" step="0.01" name="interestRate" value="{{$siteSettingsData[0] -> interestRate ?? ''}}">
 
                             <button type="submit" href="#">Update Settings</button>
                         </form>

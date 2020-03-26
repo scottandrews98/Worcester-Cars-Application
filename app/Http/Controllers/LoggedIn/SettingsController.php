@@ -58,7 +58,7 @@ class SettingsController extends Controller
             'siteTitle' => 'required'
         ]);
         
-        $siteSettingsTable = array('siteTitle' => $request->input('siteTitle'), 'homePageMeta' => $request->input('homePageMeta'), 'aboutPageMeta' => $request->input('aboutPageMeta'), 'carsPageMeta' => $request->input('carsPageMeta'), 'contactPageMeta' => $request->input('contactPageMeta'));
+        $siteSettingsTable = array('siteTitle' => $request->input('siteTitle'), 'homePageMeta' => $request->input('homePageMeta'), 'aboutPageMeta' => $request->input('aboutPageMeta'), 'carsPageMeta' => $request->input('carsPageMeta'), 'contactPageMeta' => $request->input('contactPageMeta'), 'interestRate' => $request->input('interestRate'));
         
         $firstPostTest = DB::select('SELECT * FROM siteSettings');
 
