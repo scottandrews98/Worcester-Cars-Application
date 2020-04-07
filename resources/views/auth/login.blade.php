@@ -48,6 +48,11 @@
 
                         <button type="submit"><a>Sign In</a></button>
 
+                        <a href="/google/redirect" role="button" style="text-transform:none; margin-bottom: 26px">
+                        <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+                            Sign In With Google
+                        </a>
+
                         <a id="register" href="/register">Register</a>
 
                         <a href="/password/reset">Forgot Password</a>

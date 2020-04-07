@@ -55,3 +55,7 @@ Route::post('/profile', 'LoggedIn\ProfileController@updateProfile');
 Route::post('/profile/delete', 'LoggedIn\ProfileController@deleteProfile');
 Route::post('/cars', 'CarsController@searchCars');
 Route::post('/getCompareDetails', 'CarController@getCompareDetails');
+
+// Google Single Sign In Routes
+Route::get('/google/redirect', 'Auth\GoogleAuthController@redirectToProvider');
+Route::get('/callback', 'Auth\GoogleAuthController@handleProviderCallback');

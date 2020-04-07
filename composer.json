@@ -13,6 +13,7 @@
         "guzzlehttp/guzzle": "~6.0",
         "intervention/image": "^2.5",
         "laravel/framework": "^6.2",
+        "laravel/socialite": "^4.3",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^1.1",
         "mailjet/mailjet-apiv3-php": "^1.4",
