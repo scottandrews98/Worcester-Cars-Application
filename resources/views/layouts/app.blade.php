@@ -145,7 +145,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm">
-                        <a href="/index">Home</a>
+                        <a href="/">Home</a>
                     </div>
                     <div class="col-sm">
                         <a href="/about">About</a>
