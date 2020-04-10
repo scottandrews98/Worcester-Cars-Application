@@ -41,15 +41,25 @@
                 <div class="col-md-12">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-                        <input type="text" placeholder="Name" name="name" value="{{ old('name') }}" required>
-                        <input type="email" class="@error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}" required>
-                        <input type="number" placeholder="Phone" name="number" value="{{ old('number') }}" required>
-                        <input type="password" placeholder="Password (Must Be At Least 8 Characters)" class="@error('password') is-invalid @enderror" name="password" required>
-                        <input type="password" placeholder="Confirm Password" name="password_confirmation" required>
+
+                        <label for="name" style="font-size: 0px">Name</label>
+                        <input type="text" placeholder="Name" name="name" value="{{ old('name') }}" id="name" required>
+
+                        <label for="email" style="font-size: 0px">Email</label>
+                        <input type="email" class="@error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}" id="email" required>
+
+                        <label for="phone" style="font-size: 0px">Phone Number</label>
+                        <input type="number" placeholder="Phone" name="number" value="{{ old('number') }}" id="phone" required>
+
+                        <label for="password" style="font-size: 0px">Password</label>
+                        <input type="password" placeholder="Password (Must Be At Least 8 Characters)" class="@error('password') is-invalid @enderror" name="password" id="password" required>
+
+                        <label for="confirmPassword" style="font-size: 0px">Confirm Password</label>
+                        <input type="password" placeholder="Confirm Password" name="password_confirmation" id="confirmPassword" required>
 
                         <div class="row">
                             <div class="col-sm-2">
-                                <input type="checkbox" placeholder="Do You Wish To Revieve Email's Off Worcester Cars When A New Car Comes For Sale?" name="emailConsent">  
+                                <input type="checkbox" placeholder="Do You Wish To Revieve Email's Off Worcester Cars When A New Car Comes For Sale?" name="emailConsent" id="emailConsent">  
                             </div>
                             <div class="col-sm-10">
                                 <label for="emailConsent">Do You Wish To Receive Emails Off Worcester Cars When A New Car Comes For Sale?</label><br>

@@ -31,6 +31,7 @@ if(elementExists){
     })
 }
 
+// Sends an ajax request to the database that removes a car from the database with the required id
 function ajaxDeleteCar(id){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {

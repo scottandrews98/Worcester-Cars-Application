@@ -25,6 +25,7 @@
             <form id="searchForm">
                 <div class="row">
                     <div class="col-sm-4">
+                        <label for="manufacturers" style="font-size: 0px">Manufacturers</label>
                         <select id="manufacturers" placeholder="Manufacturers">
                             <option>All Makes</option>
                             @foreach($allMakes as $make)
@@ -33,9 +34,11 @@
                         </select>
                     </div>
                     <div class="col-sm-4">
+                        <label for="miles" style="font-size: 0px">Maximum Car Miles</label>
                         <input id="miles" type="number" placeholder="Maximum Car Miles">
                     </div>
                     <div class="col-sm-4">
+                        <label for="fuel" style="font-size: 0px">Fuel Type</label>
                         <select id="fuel">
                             <option>Any Fuel Type</option>
                             @foreach($allFuelType as $fuel)
@@ -46,6 +49,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
+                        <label for="gearbox" style="font-size: 0px">Transmission Type</label>
                         <select id="gearbox">
                             <option>All Transmission Types</option>
                             @foreach($allTransmissionType as $transmission)
@@ -54,9 +58,11 @@
                         </select>
                     </div>
                     <div class="col-sm-4">
+                        <label for="mpg" style="font-size: 0px">Minimum Miles Per Gallon</label>
                         <input id="mpg" type="number" placeholder="Minimum Miles Per Gallon">
                     </div>
                     <div class="col-sm-4">
+                        <label for="tax" style="font-size: 0px">Minimum Tax Cost</label>
                         <input id="tax" type="number" placeholder="Maximum Tax Cost">
                     </div>
                 </div>
@@ -72,6 +78,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-2">
+                <label for="tax" style="font-size: 0px">Order By</label>
                 <select id="orderBy">
                     <option>Lowest Price</option>
                     <option>Highest Price</option>
@@ -188,7 +195,6 @@
 
             <input hidden value="0" id="pageNumber">
 
-            <!-- TODO change all features to 6 cars per page ready for release -->
             @if($totalSearch > 3)
                 <div class="row">
                     <div class="col-sm">

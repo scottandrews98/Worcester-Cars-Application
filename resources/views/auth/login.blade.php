@@ -42,9 +42,11 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        <input class="@error('email') is-invalid @enderror" type="email" value="{{ old('email') }}" placeholder="Email" name="email" required>
+                        <label for="email" style="font-size: 0px">Email</label>
+                        <input class="@error('email') is-invalid @enderror" type="email" value="{{ old('email') }}" placeholder="Email" name="email" id="email" required>
 
-                        <input class="@error('password') is-invalid @enderror" type="password" placeholder="Password" name="password" required>
+                        <label for="password" style="font-size: 0px">Password</label>
+                        <input class="@error('password') is-invalid @enderror" type="password" placeholder="Password" name="password" id="password" required>
 
                         <button type="submit"><a>Sign In</a></button>
 

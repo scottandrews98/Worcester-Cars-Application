@@ -70,7 +70,7 @@ class SettingsController extends Controller
 
         return redirect('/settings')->with('message', 'success');
     }
-
+    
     public function makeAndRemoveAdmins(Request $request){
         // Deal with making users admins and removing them depending on type
         $userID = $request->input('userID');

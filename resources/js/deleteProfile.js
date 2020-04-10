@@ -1,4 +1,4 @@
-// Code for deleting a car
+// Code for deleting a users profile
 var Swal = require('sweetalert2');
 
 var elementExists = document.getElementById("deleteProfile");
@@ -29,6 +29,7 @@ if(elementExists){
     });
 }
 
+// Deletes a users profile from the database with the required id
 function ajaxDeleteProfile(){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {

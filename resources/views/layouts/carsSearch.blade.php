@@ -132,5 +132,3 @@
         </div>
     </div>
 </div>
-
-<!-- TODO Add in remove search parameters button -->

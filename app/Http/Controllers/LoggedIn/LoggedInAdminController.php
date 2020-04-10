@@ -12,11 +12,7 @@ use Intervention\Image\Facades\Image as Image;
 
 class LoggedInAdminController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -31,10 +27,14 @@ class LoggedInAdminController extends Controller
         $allCarShapes = DB::select('SELECT bodyTypeName FROM bodyType');
 
         $allCars = DB::select('SELECT * FROM cars');
+        
+        // Gets current logged in user
+        $user = auth()->user();
 
-        return view('loggedInPages.admin', compact('allMakes', 'allFuelType', 'allTransmissionType', 'allCarShapes', 'allCars'));
+        return view('loggedInPages.admin', compact('allMakes', 'allFuelType', 'allTransmissionType', 'allCarShapes', 'allCars'))->withName($user->name);
     }
 
+    // Runs when a user adds a new car to the system
     public function store($type, $id, Request $request)
     {
         // An additional validator which makes sure form values match what is expected

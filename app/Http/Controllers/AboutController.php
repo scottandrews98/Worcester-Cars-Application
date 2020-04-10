@@ -7,20 +7,6 @@ use Illuminate\Support\Facades\DB;
 
 class AboutController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
         $aboutPageMeta = DB::select('SELECT aboutPageMeta FROM siteSettings');

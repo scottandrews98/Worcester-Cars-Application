@@ -23,7 +23,8 @@
             <form action="/cars" method="GET">
                 <div class="row">
                     <div class="col-sm-6">
-                        <select class="makerDropdown" name="brand">
+                        <label for="brandDropdown" style="font-size: 0px">Brand Dropdown</label>
+                        <select id="brandDropdown" class="makerDropdown" name="brand">
                             <option value="" disabled selected>Pick Manufacturer</option>
                             @foreach($allManufacturers as $index => $allMakes)
                                 <option value="{{ $allMakes -> manufacturerName }}">{{ $allMakes -> manufacturerName }}</option>
@@ -35,7 +36,7 @@
                             <p>Search</p>
                         </button>
                     </div>
-                </div>
+                </div>  
             </form>
         </div>
     </header>
@@ -69,7 +70,7 @@
                                 <h4>The Best Deals In Worcester</h4>
                             </div>
                             <div class="submitButton">
-                                <p>Discover</p>
+                                <a href="/cars">Discover</a>
                             </div>
                         </div>
                     </div>
@@ -82,7 +83,7 @@
                                 <h4>You Can Drive Away The Same Day</h4>
                             </div>
                             <div class="submitButton">
-                                <p>Visit Us</p>
+                                <a href="/about">Visit Us</a>
                             </div>
                         </div>
                     </div>
@@ -92,10 +93,10 @@
                         <div class="circle">
                             <i class="fas fa-thumbs-up"></i>
                             <div class="textContainer">
-                                <h4>The Best Deals In Worcester</h4>
+                                <h4>Friendly Staff On Hand</h4>
                             </div>
                             <div class="submitButton">
-                                <p>Discover</p>
+                                <a href="/contact">Come And Visit Us</a>
                             </div>
                         </div>
                     </div>

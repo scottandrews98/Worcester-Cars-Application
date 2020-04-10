@@ -1,4 +1,4 @@
-// Code for deleting a car
+// Code for adding and removing admins from the site
 var Swal = require('sweetalert2');
 
 function refreshUsers(){
@@ -60,6 +60,7 @@ function refreshUsers(){
     }
 }
 
+// Runs to make the suer into and admin
 function ajaxMakeAdmin(id, type){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {

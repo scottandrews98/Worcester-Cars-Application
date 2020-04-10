@@ -28,14 +28,22 @@
                 <div class="col-md-6">
                     <form>
                         @csrf
+                        <label for="name" style="font-size: 0px">Name</label>
                         <input type="text" id="name" placeholder="Name">
+
+                        <label for="email" style="font-size: 0px">Email</label>
                         <input type="email" id="email" placeholder="Email">
+
+                        <label for="number" style="font-size: 0px">Phone Number</label>
                         <input type="number" id="phone" placeholder="Phone">
+
+                        <label for="message" style="font-size: 0px">Message</label>
                         <textarea cols="40" rows="5" id="message" placeholder="Message"></textarea>
+
                         <button type="button" id="submitContactForm">Submit</button>
                     </form>
-                    <div class="errorBox">
-                        <h4 id="errorMessage"></h4>
+                    <div class="errorBox" id="errorContainer">
+
                     </div>
                 </div>
             </div>

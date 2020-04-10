@@ -26,6 +26,7 @@ class ProfileController extends Controller
         return view('loggedInPages.profile', compact('userProfileData'));
     }
 
+    // Updates the users profile information
     public function updateProfile(Request $request)
     {
         $user = Auth::User();

@@ -40698,11 +40698,7 @@ if (elementExists) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+// Pulls in all the JavaScript files that are required 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./imageUpload */ "./resources/js/imageUpload.js");
@@ -40731,26 +40727,7 @@ __webpack_require__(/*! ./cookieConsent */ "./resources/js/cookieConsent.js");
 
 __webpack_require__(/*! ./deleteMessage */ "./resources/js/deleteMessage.js");
 
-__webpack_require__(/*! lightbox2 */ "./node_modules/lightbox2/dist/js/lightbox.js"); // window.Vue = require('vue');
-// /**
-//  * The following block of code may be used to automatically register your
-//  * Vue components. It will recursively scan this directory for the Vue
-//  * components and automatically register them with their "basename".
-//  *
-//  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
-//  */
-// // const files = require.context('./', true, /\.vue$/i)
-// // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-// /**
-//  * Next, we will create a fresh Vue application instance and attach it to
-//  * the page. Then, you may begin adding components to this application
-//  * or customize the JavaScript scaffolding to fit your unique needs.
-//  */
-// const app = new Vue({
-//     el: '#app',
-// });
-// Additional Code
+__webpack_require__(/*! lightbox2 */ "./node_modules/lightbox2/dist/js/lightbox.js"); // Additional Code for the advanced search box
 
 
 $(document).ready(function () {
@@ -40926,19 +40903,28 @@ function submitContactForm() {
   var name = document.getElementById("name").value;
   var phone = document.getElementById("phone").value;
   var message = document.getElementById("message").value;
+  var errorMessage = "";
 
   if (emailValid == false) {
-    document.getElementById("errorMessage").innerHTML = "Please Enter A Valid Email Address";
+    errorMessage = "Please Enter A Valid Email Address";
   } else if (name == "") {
-    document.getElementById("errorMessage").innerHTML = "Please Enter A Value For Your Name";
+    errorMessage = "Please Enter A Value For Your Name";
   } else if (phone == "") {
-    document.getElementById("errorMessage").innerHTML = "Please Enter A Value For Your Phone Number";
+    errorMessage = "Please Enter A Value For Your Phone Number";
   } else if (message == "") {
-    document.getElementById("errorMessage").innerHTML = "Please Enter A Value For Your Message";
+    errorMessage = "Please Enter A Value For Your Message";
   } else {
     sendRequest(name, phone, message);
   }
-}
+
+  var errorContainer = document.getElementById("errorContainer");
+  errorContainer.removeChild(errorContainer.childNodes[0]);
+  var h4 = document.createElement("H4");
+  var text = document.createTextNode(errorMessage);
+  h4.appendChild(text);
+  errorContainer.appendChild(h4);
+} // Sends the contact form details to the backend of the site and awats the response
+
 
 function sendRequest(name, phone, message) {
   var email = document.getElementById("email").value;
@@ -40946,7 +40932,12 @@ function sendRequest(name, phone, message) {
 
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200 && this.responseText == "Message Sent") {
-      document.getElementById("errorMessage").innerHTML = "Form Submitted";
+      var errorContainer = document.getElementById("errorContainer");
+      errorContainer.removeChild(errorContainer.childNodes[0]);
+      var h4 = document.createElement("H4");
+      var text = document.createTextNode("Form Submitted");
+      h4.appendChild(text);
+      errorContainer.appendChild(h4);
       document.getElementById("name").value = "";
       document.getElementById("phone").value = "";
       document.getElementById("message").value = "";
@@ -40979,7 +40970,7 @@ function ValidateEmail(email) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-var elementExists = document.getElementById("acceptCookies");
+var elementExists = document.getElementById("acceptCookies"); // Checks to see if the user has accepted the cookie consent box. If they have then it will be hidden
 
 if (elementExists) {
   document.getElementById("acceptCookies").addEventListener("click", acceptCookies);
@@ -41033,7 +41024,8 @@ if (elementExists) {
       });
     });
   });
-}
+} // Sends an ajax request to the database that removes a car from the database with the required id
+
 
 function ajaxDeleteCar(id) {
   var xhttp = new XMLHttpRequest();
@@ -41060,7 +41052,7 @@ function ajaxDeleteCar(id) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-// Code for deleting a car
+// Code for deleting a users contact form message
 var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 
 var elementExists = document.getElementById("deleteMessage");
@@ -41090,7 +41082,8 @@ if (elementExists) {
       });
     });
   });
-}
+} // Deletes a users message from the database
+
 
 function ajaxDeleteMessage(id) {
   var xhttp = new XMLHttpRequest();
@@ -41115,7 +41108,7 @@ function ajaxDeleteMessage(id) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-// Code for deleting a car
+// Code for deleting a users profile
 var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 
 var elementExists = document.getElementById("deleteProfile");
@@ -41144,7 +41137,8 @@ if (elementExists) {
       }
     });
   });
-}
+} // Deletes a users profile from the database with the required id
+
 
 function ajaxDeleteProfile() {
   var xhttp = new XMLHttpRequest();
@@ -41175,7 +41169,8 @@ var elementExists = document.getElementById("finance");
 
 if (elementExists) {
   document.getElementById("calculate").addEventListener("click", calculateFinance);
-}
+} // Calculates how much a car would cost the user to pay back per month based on the current set interest rate
+
 
 function calculateFinance() {
   var price = document.getElementById("price").value;
@@ -41217,7 +41212,8 @@ var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/di
 function openDialog() {
   document.getElementsByClassName('fileid')[totalImages].click();
   document.getElementsByClassName('fileid')[totalImages].addEventListener("change", imageChange);
-}
+} // JavaScript code that's responsible for removing the image from the screen on click
+
 
 function removeImage() {
   var clickedID = this.getAttribute('data-imageID');
@@ -41237,8 +41233,7 @@ function loopClass(className, clickedID) {
       className[i].remove();
     }
   }
-} //var totalImages = 0
-
+}
 
 var totalImages = document.querySelectorAll('.altText').length;
 
@@ -41270,7 +41265,8 @@ function imageChange() {
     document.getElementById('imageRow').insertAdjacentHTML('beforebegin', '<input type="text" class="altText" data-imageID="' + totalImages + '" placeholder="Alt Text For Image Number ' + totalImages + '" name="altText[]" required>');
     totalImages++;
   }
-}
+} // On the page load apply click even listeners to the images already on the screen
+
 
 window.addEventListener('load', function () {
   var elementExists = document.getElementById("addNewImage2");
@@ -41279,7 +41275,6 @@ window.addEventListener('load', function () {
     elementExists.addEventListener('click', openDialog);
 
     if (document.getElementById('carImage1')) {
-      //document.getElementById('carImage1').addEventListener('click', removeImage);
       var existingImages = document.getElementsByClassName('imgUploaded');
 
       for (var i = 0; i < existingImages.length; i++) {
@@ -41287,8 +41282,7 @@ window.addEventListener('load', function () {
       }
     }
   }
-}); // Code for removing images when editing 
-// Controller could loop over alt text boxes and see if any are missing by their
+});
 
 /***/ }),
 
@@ -41334,7 +41328,7 @@ if (elementExists) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-// Code for deleting a car
+// Code for adding and removing admins from the site
 var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 
 function refreshUsers() {
@@ -41384,7 +41378,8 @@ function refreshUsers() {
       });
     });
   }
-}
+} // Runs to make the suer into and admin
+
 
 function ajaxMakeAdmin(id, type) {
   var xhttp = new XMLHttpRequest();

@@ -4,6 +4,7 @@ if(elementExists){
     document.getElementById("calculate").addEventListener("click", calculateFinance);
 }
 
+// Calculates how much a car would cost the user to pay back per month based on the current set interest rate
 function calculateFinance(){
     var price = document.getElementById("price").value;
     var deposit = document.getElementById("deposit").value;

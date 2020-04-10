@@ -31,13 +31,14 @@ class ContactController extends Controller
 
         $contactTable = array('name' => $request->input('name'), 'email' => $request->input('email'), 'number' => $request->input('number'), 'message' => $request->input('message'), 'formSubmissionTime' => $now);
 
-        // Inserts array into the cars table in the database
+        // Inserts contact form submission array into the form submissions table in the database
         $insert = DB::table('contactFormSubmissions')->insert($contactTable);
 
         // Send message via email to all site admins
         $allConsentUsers = DB::select('SELECT email, name FROM users WHERE userLevel_id = 1');
         $toMessage = [];
 
+        // Loop through all sites admins and compose email to each
         foreach($allConsentUsers as $consent){
             $toMessage[] = [ 
                 'From' => [

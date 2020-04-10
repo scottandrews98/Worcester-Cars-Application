@@ -6,13 +6,7 @@ use Closure;
 
 class AdminMiddleware
 {
-    /**
-     * Stops level 2 users accessing admin pages
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
+    // Stops level 2 users accessing admin pages
     public function handle($request, Closure $next){
         if ($request->User() && $request->User()->userLevel_id != 2){
             return $next($request);

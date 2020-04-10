@@ -44,7 +44,9 @@
                 <div class="col-md-12">
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf
-                        <input class="@error('email') is-invalid @enderror" type="email" value="{{ old('email') }}" placeholder="Email" name="email" required autocomplete="email" autofocus>
+
+                        <label for="email" style="font-size: 0px">Email</label>
+                        <input class="@error('email') is-invalid @enderror" type="email" value="{{ old('email') }}" placeholder="Email" name="email" required autocomplete="email" id="email" autofocus>
 
                         <button type="submit"><a>Send Password Reset Email</a></button>
                     </form>

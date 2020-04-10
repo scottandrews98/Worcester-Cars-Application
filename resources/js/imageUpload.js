@@ -7,6 +7,7 @@ function openDialog() {
     document.getElementsByClassName('fileid')[totalImages].addEventListener("change", imageChange);
 }
 
+// JavaScript code that's responsible for removing the image from the screen on click
 function removeImage(){
     var clickedID = this.getAttribute('data-imageID');
 
@@ -30,7 +31,6 @@ function loopClass(className, clickedID){
     }
 }
 
-//var totalImages = 0
 var totalImages = document.querySelectorAll('.altText').length;
 
 function imageChange(){
@@ -66,6 +66,7 @@ function imageChange(){
     }
 }
 
+// On the page load apply click even listeners to the images already on the screen
 window.addEventListener('load',function(){
     var elementExists = document.getElementById("addNewImage2");
 
@@ -73,7 +74,6 @@ window.addEventListener('load',function(){
         elementExists.addEventListener('click', openDialog);
 
         if(document.getElementById('carImage1')){
-            //document.getElementById('carImage1').addEventListener('click', removeImage);
             var existingImages = document.getElementsByClassName('imgUploaded');
 
             for (var i = 0; i < existingImages.length; i++) {
@@ -82,9 +82,3 @@ window.addEventListener('load',function(){
         }
     }
 });
-
-
-
-// Code for removing images when editing 
-
-// Controller could loop over alt text boxes and see if any are missing by their 

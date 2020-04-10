@@ -9,21 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 class LoggedInUserController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+    // Shows the users stared cars
     public function index()
     {
         // Select all of the users liked cars and display them on screen
@@ -45,6 +36,6 @@ class LoggedInUserController extends Controller
             }
         }
 
-        return view('loggedInPages.user', compact('likedCars', 'carImageURL', 'carAltText'));
+        return view('loggedInPages.user', compact('likedCars', 'carImageURL', 'carAltText'))->withName($user->name);;
     }
 }

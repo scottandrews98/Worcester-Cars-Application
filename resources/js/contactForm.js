@@ -10,27 +10,42 @@ function submitContactForm(){
     let name = document.getElementById("name").value;
     let phone = document.getElementById("phone").value;
     let message = document.getElementById("message").value;
+    var errorMessage = "";
 
     if(emailValid == false){
-        document.getElementById("errorMessage").innerHTML = "Please Enter A Valid Email Address";
+        errorMessage = "Please Enter A Valid Email Address";
     }else if(name == ""){
-        document.getElementById("errorMessage").innerHTML = "Please Enter A Value For Your Name";
+        errorMessage = "Please Enter A Value For Your Name";
     }else if(phone == ""){
-        document.getElementById("errorMessage").innerHTML = "Please Enter A Value For Your Phone Number";
+        errorMessage = "Please Enter A Value For Your Phone Number";
     }else if(message == ""){
-        document.getElementById("errorMessage").innerHTML = "Please Enter A Value For Your Message";
+        errorMessage = "Please Enter A Value For Your Message";
     }else{
         sendRequest(name, phone, message);
     }   
+
+    var errorContainer = document.getElementById("errorContainer");
+    errorContainer.removeChild(errorContainer.childNodes[0]);
+
+    var h4 = document.createElement("H4");
+    var text = document.createTextNode(errorMessage); 
+    h4.appendChild(text);
+    errorContainer.appendChild(h4);
 }
 
+// Sends the contact form details to the backend of the site and awats the response
 function sendRequest(name, phone, message){
     let email = document.getElementById("email").value;
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200 && this.responseText == "Message Sent") {
-        document.getElementById("errorMessage").innerHTML = "Form Submitted";
+        var errorContainer = document.getElementById("errorContainer");
+        errorContainer.removeChild(errorContainer.childNodes[0]);
+        var h4 = document.createElement("H4");
+        var text = document.createTextNode("Form Submitted"); 
+        h4.appendChild(text);
+        errorContainer.appendChild(h4);
         document.getElementById("name").value = ""
         document.getElementById("phone").value = ""
         document.getElementById("message").value = ""

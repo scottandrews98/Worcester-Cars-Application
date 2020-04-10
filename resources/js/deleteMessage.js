@@ -1,4 +1,4 @@
-// Code for deleting a car
+// Code for deleting a users contact form message
 var Swal = require('sweetalert2');
 
 var elementExists = document.getElementById("deleteMessage");
@@ -31,6 +31,7 @@ if(elementExists){
     })
 }
 
+// Deletes a users message from the database
 function ajaxDeleteMessage(id){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {

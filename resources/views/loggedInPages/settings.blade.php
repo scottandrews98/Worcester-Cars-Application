@@ -91,12 +91,12 @@
                             <div class="col-sm-6">
                                 <h5>{{ $pages['pageTitle'] }}</h5>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-lg-3">
                                 <button>
                                     {{ $pages['pageViews'] }} Views
                                 </button>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-lg-3">
                                 <button id="secondButton">
                                     URL: {{ $pages['url'] }}
                                 </button>
